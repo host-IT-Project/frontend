@@ -3,7 +3,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-// import TagArray from "./TagArray";
+import TagArray from "./TagArray";
 
 const ProductCard = ({ image, alt, title, description, tags }) => (
   <Card sx={{ maxWidth: 345 }}>
@@ -16,7 +16,7 @@ const ProductCard = ({ image, alt, title, description, tags }) => (
         {description}
       </Typography>
     </CardContent>
-    {/* <TagArray tags={tags} /> */}
+    <TagArray tags={tags} />
   </Card>
 );
 
@@ -25,7 +25,18 @@ ProductCard.defaultProps = {
   alt: "비어있는 이미지",
   title: "프로젝트 제목",
   description: "설명",
-  tags: ["개발", "React"],
+  tags: [
+    {
+      key: 0,
+      label: "태그1",
+      href: "#",
+    },
+    {
+      key: 1,
+      label: "태그2",
+      href: "#",
+    },
+  ],
 };
 
 export default ProductCard;
