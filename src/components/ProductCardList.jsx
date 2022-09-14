@@ -39,7 +39,7 @@ const ProductCardList = ({ cardData }) => (
 ProductCardList.defaultProps = {
   cardData: [
     {
-      image: "https://via.placeholder.com/345x140",
+      image: "https://via.placeholder.com/345x200",
       alt: "비어있는 이미지",
       title: "프로젝트 제목",
       description: "설명",
@@ -57,7 +57,7 @@ ProductCardList.defaultProps = {
       ],
     },
     {
-      image: "https://via.placeholder.com/345x140",
+      image: "https://via.placeholder.com/345x200",
       alt: "비어있는 이미지",
       title: "프로젝트 제목",
       description: "설명",

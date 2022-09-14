@@ -6,8 +6,8 @@ import Typography from "@mui/material/Typography";
 import TagArray from "./TagArray";
 
 const ProductCard = ({ image, alt, title, description, tags }) => (
-  <Card sx={{ maxWidth: 345 }}>
-    <CardMedia component="img" alt={alt} height="140" image={image} />
+  <Card sx={{ maxWidth: 345, borderRadius: "15px" }}>
+    <CardMedia component="img" alt={alt} height="200" image={image} />
     <CardContent>
       <Typography gutterBottom variant="h5" component="div">
         {title}
@@ -21,7 +21,7 @@ const ProductCard = ({ image, alt, title, description, tags }) => (
 );
 
 ProductCard.defaultProps = {
-  image: "https://via.placeholder.com/345x140",
+  image: "https://via.placeholder.com/345x200",
   alt: "비어있는 이미지",
   title: "프로젝트 제목",
   description: "설명",
