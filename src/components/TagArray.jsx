@@ -22,7 +22,6 @@ const TagArray = ({ tags }) => (
       // data : { key: 0, label: "Angular", href: "src" },
       return (
         <ListItem key={data.key}>
-          {console.log(data.key)}
           <Chip label={data.label} component="a" href={data.href} clickable />
         </ListItem>
       );

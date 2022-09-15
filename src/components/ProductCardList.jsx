@@ -22,7 +22,6 @@ const ProductCardList = ({ cardData }) => (
     {cardData.map((data) => {
       return (
         <ListItem key={data.key}>
-          {console.log(data.key)}
           <ProductCard
             image={data.image}
             alt={data.alt}
