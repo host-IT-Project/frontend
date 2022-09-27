@@ -15,6 +15,7 @@ import { Box } from '@mui/system';
 import MenuIcon from '@mui/icons-material/Menu';
 import React from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 const StyledHeader = styled.div`
     width: 100%;
@@ -23,11 +24,16 @@ const StyledHeader = styled.div`
 `;
 
 const drawerWidth = 240;
-const navItems = ['공모전', '아카이브'];
+const navItems = [
+    { name: '공모전', url: '/contest' },
+    { name: '아카이브', url: '/archive' },
+    { name: '마이페이지', url: '/mypage' },
+];
 
 const Header = (props) => {
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
+    const navigate = useNavigate();
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
@@ -41,9 +47,15 @@ const Header = (props) => {
             <Divider />
             <List>
                 {navItems.map((item) => (
-                    <ListItem key={item} disablePadding>
+                    <ListItem
+                        key={Math.random() + Date.now()}
+                        onClick={() => {
+                            navigate(`${item.url}`);
+                        }}
+                        disablePadding
+                    >
                         <ListItemButton sx={{ textAlign: 'center' }}>
-                            <ListItemText primary={item} />
+                            <ListItemText primary={item.name} />
                         </ListItemButton>
                     </ListItem>
                 ))}
@@ -87,8 +99,14 @@ const Header = (props) => {
                         }}
                     >
                         {navItems.map((item) => (
-                            <Button key={item} sx={{ color: '#fff' }}>
-                                {item}
+                            <Button
+                                key={Math.random() + Date.now()}
+                                sx={{ color: '#fff' }}
+                                onClick={() => {
+                                    navigate(`${item.url}`);
+                                }}
+                            >
+                                {item.name}
                             </Button>
                         ))}
                     </Box>
