@@ -50,7 +50,7 @@ const Header = (props) => {
                     <ListItem
                         key={Math.random() + Date.now()}
                         onClick={() => {
-                            navigate(`${item.url}`);
+                            navigate(item.url);
                         }}
                         disablePadding
                     >
@@ -84,15 +84,22 @@ const Header = (props) => {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography
-                        variant="h6"
-                        component="div"
-                        sx={{
-                            flexGrow: 1,
-                        }}
-                    >
-                        호잇
-                    </Typography>
+                    <div style={{ flexGrow: 1 }}>
+                        <Typography
+                            variant="h6"
+                            sx={{
+                                width: '3rem',
+                                '&:hover': {
+                                    cursor: 'pointer',
+                                },
+                            }}
+                            onClick={() => {
+                                navigate('/home');
+                            }}
+                        >
+                            호잇
+                        </Typography>
+                    </div>
                     <Box
                         sx={{
                             display: { xs: 'none', sm: 'block' },
