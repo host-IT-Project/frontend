@@ -7,11 +7,11 @@ import { http } from './http';
  * @param {string} [keyword]
  * @param {Array<string>} [hashtag]
  */
-export const getArticles = ({ page, order, keyword, hashtag }) => {
-    checkType(page, 'number');
-    checkType(order, 'string');
-    checkType(keyword, 'string');
-    checkType(hashtag, 'object');
+export const getArticles = ({ page, order, keyword, hashtag } = {}) => {
+    page && checkType(page, 'number');
+    order && checkType(order, 'string');
+    keyword && checkType(keyword, 'string');
+    hashtag && checkType(hashtag, 'object');
     return http.get(`/api/board/1/articles`, {
         page,
         order,
@@ -32,11 +32,11 @@ export const postArticle = ({
     content,
     articleCategory,
     hashtagList,
-}) => {
-    checkType(title, 'string');
-    checkType(content, 'string');
-    checkType(articleCategory, 'string');
-    checkType(hashtagList, 'object');
+} = {}) => {
+    title && checkType(title, 'string');
+    content && checkType(content, 'string');
+    articleCategory && checkType(articleCategory, 'string');
+    hashtagList && checkType(hashtagList, 'object');
     return http.post(`/api/board/1/article`, {
         title,
         content,
@@ -50,7 +50,7 @@ export const postArticle = ({
  * @param {string} articleId
  */
 export const deleteArticle = (articleId) => {
-    checkType(articleId, 'string');
+    articleId && checkType(articleId, 'string');
     return http.delete(`/api/article/${articleId}`);
 };
 
@@ -64,13 +64,13 @@ export const deleteArticle = (articleId) => {
  */
 export const patchArticle = (
     articleId,
-    { title, content, articleCategory, hashtagList }
+    { title, content, articleCategory, hashtagList } = {}
 ) => {
-    checkType(articleId, 'string');
-    checkType(title, 'string');
-    checkType(content, 'string');
-    checkType(articleCategory, 'string');
-    checkType(hashtagList, 'object');
+    articleId && checkType(articleId, 'string');
+    title && checkType(title, 'string');
+    content && checkType(content, 'string');
+    articleCategory && checkType(articleCategory, 'string');
+    hashtagList && checkType(hashtagList, 'object');
     return http.patch(`/api/article/${articleId}`, {
         title,
         content,
