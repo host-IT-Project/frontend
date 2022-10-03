@@ -1,4 +1,4 @@
-const calcRem = (size) => `${size / 16}rem`;
+const calcRem = (size) => `${size / 10}rem`;
 
 const fontSizes = {
   small: calcRem(14),
@@ -76,7 +76,6 @@ const style = {
   margins,
   interval,
   verticalInterval,
-  gradient,
 };
 
 export default style;
