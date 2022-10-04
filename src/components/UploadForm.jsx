@@ -44,6 +44,7 @@ const UploadProject = (props) => {
   // 프로젝트 제목 혹은 소개 input 발생 시 저장 버튼 활성화
   const handleClickUpload = (event) => {
     event.preventDefault();
+
     if (isUploadActive) {
       if (checkValid() === "valid") {
         alert("저장되었습니다.");
@@ -101,6 +102,8 @@ const UploadProject = (props) => {
         </Typography>
         <TextField
           placeholder="프로젝트 제목"
+          error={titleError.error}
+          helperText={titleError.message}
           id="text-title"
           variant="standard"
           margin="normal"
@@ -118,6 +121,8 @@ const UploadProject = (props) => {
         </Typography>
         <TextField
           label="프로젝트 소개"
+          error={contentsError.error}
+          helperText={contentsError.message}
           placeholder="프로젝트를 멋지게 소개해보세요. (20자 이상 작성)"
           id="text-intro"
           variant="outlined"
