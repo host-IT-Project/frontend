@@ -64,28 +64,34 @@ const UploadProject = (props) => {
   // 유효성 검사
   const checkValid = (event) => {
     // 타이틀 길이 2자 이상, 프로젝트 소개 20자 이상인가?
-    const isTitleValid = title.length > 2;
-    const isContentsValid = contents.length > 20;
+    const isTitleValid = title.length >= 2;
+    const isContentsValid = contents.length >= 20;
     // titleError, contentsError State에 덮어씌울 복제
     const newTitleError = titleError;
     const newContentsError = contentsError;
+    let result = null;
 
     if (isTitleValid && isContentsValid) {
-      setTitleError(titleError);
-      setContentsError("");
-      return "valid";
-    }
-    if (!isTitleValid) {
-      newTitleError.error = true;
-      newTitleError.message = "제목을 2글자 이상 작성해주세요.";
+      newTitleError.error = false;
+      newTitleError.message = "";
+      newContentsError.error = false;
+      newContentsError.message = "";
+      result = "valid";
+    } else {
+      if (!isTitleValid) {
+        newTitleError.error = true;
+        newTitleError.message = "제목을 2글자 이상 작성해주세요.";
+      }
+      if (!isContentsValid) {
+        newContentsError.error = true;
+        newContentsError.message = "소개를 20글자 이상 작성해주세요.";
+      }
+
       setTitleError(newTitleError);
-    }
-    if (!isContentsValid) {
-      newContentsError.error = true;
-      newContentsError.message = "소개를 20글자 이상 작성해주세요.";
       setContentsError(newContentsError);
+      result = "invalid";
     }
-    return "invalid";
+    return result;
   };
 
   return (
