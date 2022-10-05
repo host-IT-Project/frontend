@@ -42,33 +42,40 @@ const UploadProject = (props) => {
   };
 
   // 프로젝트 제목 혹은 소개 input 발생 시 저장 버튼 활성화
-  const handleClickUpload = (event) => {
-    event.preventDefault();
-
-    if (isUploadActive) {
-      if (checkValid() === "valid") {
-        alert("저장되었습니다.");
-        // 이후 디테일페이지 혹은 메인페이지로 이동
-      } else {
-        alert("작성된 내용이 올바르지 않습니다.");
-      }
-    }
-  };
-
   const handleButtonActive = (event) => {
     title.length > 0 && contents.length > 0
       ? setIsUploadActive(true)
       : setIsUploadActive(false);
   };
 
+  // 저장 버튼 누르면 유효성검사 실행
+  const handleClickUpload = (event) => {
+    event.preventDefault();
+
+    if (isUploadActive) {
+      if (checkValid() === "valid") {
+        // 저장하는 코드
+        alert("저장되었습니다.");
+        // 이후 디테일페이지 혹은 메인페이지로 이동
+        return;
+      } else {
+        alert("작성된 내용이 올바르지 않습니다.");
+        return;
+      }
+    }
+  };
+
   // 유효성 검사
   const checkValid = (event) => {
-    // 타이틀 길이 2자 이상, 프로젝트 소개 20자 이상인가?
-    const isTitleValid = title.length >= 2;
-    const isContentsValid = contents.length >= 20;
+    // 프로젝트 제목, 소개 최소길이
+    const TITLE_MIN_LENGTH = 2;
+    const CONTENTS_MIN_LENGTH = 20;
+
+    const isTitleValid = title.length >= TITLE_MIN_LENGTH;
+    const isContentsValid = contents.length >= CONTENTS_MIN_LENGTH;
     // titleError, contentsError State에 덮어씌울 복제
-    const newTitleError = titleError;
-    const newContentsError = contentsError;
+    const newTitleError = { ...titleError };
+    const newContentsError = { ...contentsError }; // 스프레드 연산자
     let result = null;
 
     if (isTitleValid && isContentsValid) {
@@ -108,17 +115,17 @@ const UploadProject = (props) => {
         </Typography>
         <TextField
           placeholder="프로젝트 제목"
-          error={titleError.error}
-          helperText={titleError.message}
           id="text-title"
           variant="standard"
           margin="normal"
-          fullWidth
-          required
-          inputProps={{ style: { fontSize: textSize.title }, maxLength: 40 }}
           sx={{
             mb: 3,
           }}
+          fullWidth
+          required
+          error={titleError.error}
+          helperText={titleError.message}
+          inputProps={{ style: { fontSize: textSize.title }, maxLength: 40 }}
           onKeyUp={handleButtonActive}
           onInput={handleTitleInput}
         />
@@ -127,16 +134,16 @@ const UploadProject = (props) => {
         </Typography>
         <TextField
           label="프로젝트 소개"
-          error={contentsError.error}
-          helperText={contentsError.message}
           placeholder="프로젝트를 멋지게 소개해보세요. (20자 이상 작성)"
           id="text-intro"
+          required
           variant="outlined"
           margin="normal"
           fullWidth
           multiline
           rows={5}
-          required
+          error={contentsError.error}
+          helperText={contentsError.message}
           inputProps={{ style: { fontSize: textSize.base }, maxLength: 500 }}
           onKeyUp={handleButtonActive}
           onInput={handleContentsInput}
