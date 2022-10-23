@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import style from "../styles/style.js";
 import {
   Button,
@@ -18,13 +18,77 @@ const textSize = {
 };
 
 const UploadForm = (props) => {
+  // 프로젝트 제목 및 소개 최소길이
+  const TITLE_MIN_LENGTH = 1;
+  const INTRO_MIN_LENGTH = 20;
+
   // Editor DOM 선택용
   const introRef = useRef();
 
+  const [title, setTitle] = useState("");
+  const [titleError, setTitleError] = useState({
+    error: false,
+    message: "",
+  });
+
+  // 프로젝트 소개 텍스트 에디터 placeholder DOM
+  const introPlaceholderHTML = introRef.current?.getInstance().getHTML();
+
+  // 프로젝트 제목 유효성 검사
+  const checkTitleValid = () => {
+    const newTitleError = { ...titleError };
+    let result = "invalid";
+
+    if (title.length < TITLE_MIN_LENGTH) {
+      newTitleError.error = true;
+      newTitleError.message = "제목을 1글자 이상 작성해주세요.";
+    } else {
+      newTitleError.error = false;
+      newTitleError.message = "";
+      result = "valid";
+    }
+    setTitleError(newTitleError);
+    return result;
+  };
+
+  // 프로젝트 소개 유효성 검사
+  const checkIntroValid = () => {
+    const curruntIntroHTML = introRef.current?.getInstance().getHTML();
+    let result = "invalid";
+
+    if (curruntIntroHTML !== introPlaceholderHTML) {
+      // curruntIntroHTML을 DOM 객체로 변형 후 텍스트만 추출
+      const introText = new DOMParser()
+        .parseFromString(curruntIntroHTML, "text/html")
+        .querySelector("body").innerText;
+
+      if (introText.length >= INTRO_MIN_LENGTH) {
+        result = "valid";
+      }
+    }
+
+    if (result === "invalid") {
+      alert("프로젝트 소개를 20자 이상 작성해주세요.");
+    }
+
+    return result;
+  };
+
   // 등록 버튼 핸들러
   const handleRegisterButton = () => {
-    // 입력창에 입력한 내용을 HTML 태그 형태로 취득
-    console.log(introRef.current?.getInstance().getHTML());
+    if (checkTitleValid() === "valid" && checkIntroValid() === "valid") {
+      // DB에 업로드
+      alert("저장되었습니다.");
+      // 이후 디테일페이지 혹은 메인페이지로 이동
+      return;
+    }
+  };
+
+  // 프로젝트 제목 input 핸들러
+  const handleTitleInput = (event) => {
+    const value = event.target.value;
+    setTitle(value);
+    checkTitleValid();
   };
 
   return (
@@ -50,12 +114,13 @@ const UploadForm = (props) => {
             }}
             fullWidth
             required
-            // error={titleError.error}
-            // helperText={titleError.message}
+            error={titleError.error}
+            helperText={titleError.message}
             inputProps={{
               style: { fontSize: textSize.title },
               maxLength: 40,
             }}
+            onInput={handleTitleInput}
           />
         </Box>
         <Box>
@@ -105,7 +170,7 @@ const UploadForm = (props) => {
             sx={{ fontSize: textSize.base }}
             onClick={handleRegisterButton}
           >
-            저장
+            등록
           </Button>
         </Box>
       </FormControl>
