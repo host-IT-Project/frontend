@@ -12,6 +12,13 @@ const ContentWrapper = styled.div`
   margin: 0 auto;
 `;
 
+const ContentsContainer = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`;
+
 const PageTemplate = ({ children }) => (
   <PageTemplateContainer>
     <Header />

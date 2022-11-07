@@ -10,7 +10,7 @@ import {
 import React from 'react';
 import { useState } from 'react';
 
-const SearchFilter = ({
+const OptionSearch = ({
     isRow,
 
     // 18번줄은 지역변수로 테스트하기 위해 주석처리함
@@ -82,4 +82,4 @@ const SearchFilter = ({
     );
 };
 
-export default SearchFilter;
+export default OptionSearch;
