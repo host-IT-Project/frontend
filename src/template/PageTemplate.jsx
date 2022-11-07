@@ -1,15 +1,10 @@
-import React from "react";
-import Header from "../components/Header";
-import styled from "styled-components";
+import React from 'react';
+import Header from '../components/Header';
+import styled from 'styled-components';
 
 const PageTemplateContainer = styled.div`
-  width: 100%;
-  min-height: 100vh;
-`;
-
-const ContentWrapper = styled.div`
-  max-width: 860px;
-  margin: 0 auto;
+    width: 100%;
+    height: 100%;
 `;
 
 const ContentsContainer = styled.div`
@@ -20,10 +15,12 @@ const ContentsContainer = styled.div`
 `;
 
 const PageTemplate = ({ children }) => (
-  <PageTemplateContainer>
-    <Header />
-    <ContentWrapper>{children}</ContentWrapper>
-  </PageTemplateContainer>
+    <PageTemplateContainer>
+        <ContentsContainer>
+            <Header />
+            {children}
+        </ContentsContainer>
+    </PageTemplateContainer>
 );
 
 export default PageTemplate;
