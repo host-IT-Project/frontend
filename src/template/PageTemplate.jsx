@@ -7,10 +7,19 @@ const PageTemplateContainer = styled.div`
     height: 100%;
 `;
 
+const ContentsContainer = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`;
+
 const PageTemplate = ({ children }) => (
     <PageTemplateContainer>
-        <Header />
-        {children}
+        <ContentsContainer>
+            <Header />
+            {children}
+        </ContentsContainer>
     </PageTemplateContainer>
 );
 
