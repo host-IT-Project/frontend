@@ -1,21 +1,22 @@
 const theme = {
-  light: {
-    id: "T_001",
-    name: "Light",
-    colors: {
-      body: "#fff",
-      text: "#000",
-      button: {
-        text: "#FFFFFF",
-        background: "#000000",
-      },
-      link: {
-        text: "teal",
-        opacity: 1,
-      },
+    light: {
+        id: 'T_001',
+        name: 'Light',
+        colors: {
+            body: '#fff',
+            text: '#000',
+            background: '#fff',
+            button: {
+                text: '#FFFFFF',
+                background: '#000000',
+            },
+            link: {
+                text: 'teal',
+                opacity: 1,
+            },
+        },
+        font: 'SpoqaHanSansNeo, system-ui, -apple-system, BlinkMacSystemFont, Roboto, sans-serif;',
     },
-    font: "SpoqaHanSansNeo, system-ui, -apple-system, BlinkMacSystemFont, Roboto, sans-serif;",
-  },
 };
 
 /**

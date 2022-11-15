@@ -7,23 +7,14 @@ import {
     List,
     ListItem,
     ListItemButton,
-    ListItemText,
-    Toolbar,
-    Typography,
 } from '@mui/material';
 import { Box } from '@mui/system';
 import MenuIcon from '@mui/icons-material/Menu';
 import React from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import logo from '../assets/img/logo.png';
 
-const StyledHeader = styled.div`
-    width: 100%;
-    height: 64px;
-    background-color: ${({ theme }) => theme.colors.text};
-`;
-
-const drawerWidth = 240;
 const navItems = [
     { name: '공모전', url: '/contest' },
     { name: '아카이브', url: '/archive' },
@@ -40,10 +31,20 @@ const Header = (props) => {
     };
 
     const drawer = (
-        <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
-            <Typography variant="h6" sx={{ my: 2 }}>
-                호잇
-            </Typography>
+        <StyledDrawer
+            onClick={handleDrawerToggle}
+            sx={{
+                textAlign: 'center',
+            }}
+        >
+            <Logo
+                onClick={() => {
+                    navigate('/home');
+                }}
+                style={{ margin: '2rem auto' }}
+            >
+                <img src={logo} alt="호잇" />
+            </Logo>
             <Divider />
             <List>
                 {navItems.map((item) => (
@@ -54,13 +55,18 @@ const Header = (props) => {
                         }}
                         disablePadding
                     >
-                        <ListItemButton sx={{ textAlign: 'center' }}>
-                            <ListItemText primary={item.name} />
+                        <ListItemButton>
+                            <span className="drawer-nav">{item.name}</span>
                         </ListItemButton>
                     </ListItem>
                 ))}
+                <ListItem disablePadding>
+                    <ListItemButton>
+                        <span className="drawer-nav">로그인</span>
+                    </ListItemButton>
+                </ListItem>
             </List>
-        </Box>
+        </StyledDrawer>
     );
 
     const container =
@@ -68,57 +74,57 @@ const Header = (props) => {
 
     return (
         <StyledHeader>
-            <AppBar component="nav">
-                <Toolbar>
-                    <IconButton
-                        color="inherit"
-                        aria-label="open drawer"
-                        edge="start"
-                        onClick={handleDrawerToggle}
-                        sx={{
-                            mr: 2,
-                            display: {
-                                sm: 'none',
-                            },
-                        }}
-                    >
-                        <MenuIcon />
-                    </IconButton>
-                    <div style={{ flexGrow: 1 }}>
-                        <Typography
-                            variant="h6"
-                            sx={{
-                                width: '3rem',
-                                '&:hover': {
-                                    cursor: 'pointer',
-                                },
-                            }}
+            <StyledAppBar component="nav">
+                <IconButton
+                    color="inherit"
+                    aria-label="open drawer"
+                    onClick={handleDrawerToggle}
+                    sx={{
+                        ml: 1,
+                        display: {
+                            sm: 'none',
+                        },
+                    }}
+                    size="large"
+                >
+                    <MenuIcon fontSize="inherit" />
+                </IconButton>
+                <Logo
+                    onClick={() => {
+                        navigate('/home');
+                    }}
+                >
+                    <img src={logo} alt="호잇" />
+                </Logo>
+                <Box
+                    sx={{
+                        display: { xs: 'none', sm: 'block' },
+                        flexGrow: 1,
+                    }}
+                >
+                    {navItems.map((item) => (
+                        <NavButton
+                            key={Math.random() + Date.now()}
                             onClick={() => {
-                                navigate('/home');
+                                navigate(`${item.url}`);
                             }}
                         >
-                            호잇
-                        </Typography>
-                    </div>
-                    <Box
-                        sx={{
-                            display: { xs: 'none', sm: 'block' },
-                        }}
-                    >
-                        {navItems.map((item) => (
-                            <Button
-                                key={Math.random() + Date.now()}
-                                sx={{ color: '#fff' }}
-                                onClick={() => {
-                                    navigate(`${item.url}`);
-                                }}
-                            >
-                                {item.name}
-                            </Button>
-                        ))}
-                    </Box>
-                </Toolbar>
-            </AppBar>
+                            {item.name}
+                        </NavButton>
+                    ))}
+                </Box>
+                <NavButton
+                    style={{
+                        fontSize: '0.8em',
+                        fontWeight: 'lighter',
+                    }}
+                    sx={{
+                        display: { xs: 'none', sm: 'inline-block' },
+                    }}
+                >
+                    로그인
+                </NavButton>
+            </StyledAppBar>
             <Box component="nav">
                 <Drawer
                     container={container}
@@ -135,7 +141,7 @@ const Header = (props) => {
                         display: { xs: 'block', sm: 'none' },
                         '& .MuiDrawer-paper': {
                             boxSizing: 'border-box',
-                            width: drawerWidth,
+                            width: 240,
                         },
                     }}
                 >
@@ -145,5 +151,56 @@ const Header = (props) => {
         </StyledHeader>
     );
 };
+
+const StyledHeader = styled.div`
+    width: 100%;
+    height: 64px;
+    min-height: 80px;
+    background-color: white;
+    color: ${({ theme }) => theme.colors.text};
+    font-size: 1.6em;
+    font-weight: bold;
+`;
+
+const StyledAppBar = styled(AppBar)`
+    background-color: ${({ theme }) => theme.colors.background};
+    color: inherit;
+    box-shadow: none;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 16px;
+    padding-right: 16px;
+    min-height: inherit;
+`;
+
+const NavButton = styled(Button)`
+    color: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+`;
+
+const Logo = styled.div`
+    margin: 0 2em;
+    width: 7rem;
+    &:hover {
+        cursor: pointer;
+    }
+    img {
+        width: 100%;
+        height: 100%;
+    }
+`;
+
+const StyledDrawer = styled(Box)`
+    .drawer-nav {
+        margin: 1.5rem auto;
+        color: ${({ theme }) => theme.colors.text};
+        font-size: 1.6em;
+        font-weight: bold;
+    }
+`;
 
 export default Header;
