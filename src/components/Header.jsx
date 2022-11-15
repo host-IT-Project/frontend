@@ -163,9 +163,9 @@ const StyledHeader = styled.div`
 `;
 
 const StyledAppBar = styled(AppBar)`
-    background-color: ${({ theme }) => theme.colors.background};
+    background-color: ${({ theme }) => theme.colors.body};
     color: inherit;
-    box-shadow: none;
+    box-shadow: 0 2px 4px 0 hsl(0deg 0% 81% / 50%);
     position: relative;
     display: flex;
     flex-direction: row;

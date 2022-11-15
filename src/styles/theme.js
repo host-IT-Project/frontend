@@ -5,7 +5,7 @@ const theme = {
         colors: {
             body: '#fff',
             text: '#000',
-            background: '#fff',
+            background: 'rgb(249,249,249)',
             button: {
                 text: '#FFFFFF',
                 background: '#000000',
