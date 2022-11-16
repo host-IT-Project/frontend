@@ -133,7 +133,6 @@ const UploadForm = (props) => {
           </Typography>
           <TextEditor
             ref={editorRef} // DOM 선택용 useRef
-            initialValue=" "
           ></TextEditor>
         </Box>
         <Box
