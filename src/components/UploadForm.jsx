@@ -8,8 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
-import { Editor } from "@toast-ui/react-editor";
-import "@toast-ui/editor/dist/toastui-editor.css";
+import TextEditor from "./TextEditor.jsx";
 
 // 사용하는 폰트 사이즈
 const textSize = {
@@ -23,7 +22,7 @@ const UploadForm = (props) => {
   const INTRO_MIN_LENGTH = 20;
 
   // Editor DOM 선택용
-  const introRef = useRef();
+  const editorRef = useRef();
 
   const [title, setTitle] = useState("");
   const [titleError, setTitleError] = useState({
@@ -31,8 +30,8 @@ const UploadForm = (props) => {
     message: "",
   });
 
-  // 프로젝트 소개 텍스트 에디터 placeholder DOM
-  const introPlaceholderHTML = introRef.current?.getInstance().getHTML();
+  // 텍스트 에디터 placeholder DOM
+  const introPlaceholderHTML = editorRef.current?.getInstance().getHTML();
 
   // 프로젝트 제목 유효성 검사
   const checkTitleValid = () => {
@@ -51,15 +50,15 @@ const UploadForm = (props) => {
     return result;
   };
 
-  // 프로젝트 소개 유효성 검사
-  const checkIntroValid = () => {
-    const curruntIntroHTML = introRef.current?.getInstance().getHTML();
+  // 텍스트 에디터 콘텐츠 유효성 검사
+  const checkContentValid = () => {
+    const curruntContentHTML = editorRef.current?.getInstance().getHTML();
     let result = "invalid";
 
-    if (curruntIntroHTML !== introPlaceholderHTML) {
-      // curruntIntroHTML을 DOM 객체로 변형 후 텍스트만 추출
+    if (curruntContentHTML !== introPlaceholderHTML) {
+      // curruntContentHTML을 DOM 객체로 변형 후 텍스트만 추출
       const introText = new DOMParser()
-        .parseFromString(curruntIntroHTML, "text/html")
+        .parseFromString(curruntContentHTML, "text/html")
         .querySelector("body").innerText;
 
       if (introText.length >= INTRO_MIN_LENGTH) {
@@ -76,7 +75,7 @@ const UploadForm = (props) => {
 
   // 등록 버튼 핸들러
   const handleRegisterButton = () => {
-    if (checkTitleValid() === "valid" && checkIntroValid() === "valid") {
+    if (checkTitleValid() === "valid" && checkContentValid() === "valid") {
       // DB에 업로드
       alert("저장되었습니다.");
       // 이후 디테일페이지 혹은 메인페이지로 이동
@@ -132,23 +131,10 @@ const UploadForm = (props) => {
             핵심 기능, 개발 중 마주친 문제들과 해결한 과정 등을 자유롭게
             소개해보세요.
           </Typography>
-          <Editor
-            ref={introRef} // DOM 선택용 useRef
+          <TextEditor
+            ref={editorRef} // DOM 선택용 useRef
             initialValue=" "
-            placeholder="프로젝트를 멋지게 소개해보세요. (20자 이상 작성)"
-            previewStyle="tab" // 미리보기 스타일 지정
-            height="300px" // 에디터 창 높이
-            initialEditType="wysiwyg" //
-            toolbarItems={[
-              // 툴바 옵션 설정
-              ["bold", "italic", "strike"],
-              ["quote", "code", "codeblock"],
-              ["ul", "ol"],
-              ["table", "image", "link"],
-            ]}
-            language="ko"
-            useCommandShortcut={false} // 키보드 입력 컨트롤 방지
-          ></Editor>
+          ></TextEditor>
         </Box>
         <Box
           mt={3}
