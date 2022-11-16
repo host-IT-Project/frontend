@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import uploadImage from "../api/uploadImage";
 
 // Toast UI Editor Import
 import { Editor } from "@toast-ui/react-editor";
@@ -26,11 +27,8 @@ const settings = {
 };
 
 const onUploadImage = async (blob, callback) => {
-  // @TODO: File 객체를 받아와 이미지 서버에 저장한 뒤, 주소를 callback 함수에게 넘겨줌
-  // 1) blob인자로 받은 첨부 이미지를  base64 인코딩한다.
-  // 2) 콜백함수를 호출시키면서 img 태그의 src에 인코딩된 이미지 데이터를 주입하고,
-  // 3) 아래의 description으로 입력받은 text를 alt에 주입한다.
-  // 4) 완성된 img태그를 화면에 삽입하여 표시한다.
+  const res = await uploadImage(blob);
+  callback(res.url, "alt text");
 };
 
 const TextEditor = (props) => {
