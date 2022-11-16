@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import APITest from '../api/APITest';
 import BannerCarousel from '../components/BannerCarousel';
 import ProductCardList from '../components/ProductCardList';
 import SearchForm from '../components/search/SearchForm';
@@ -8,7 +7,6 @@ import PageTemplate from '../template/PageTemplate';
 
 const HomePage = (props) => (
     <PageTemplate>
-        <APITest />
         <BannerCarousel />
         <StyledHomePage>
             <SearchForm />

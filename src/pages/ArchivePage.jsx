@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getArticles } from '../api/article';
-import ProductCardList from '../components/ProductCardList';
+import ProductCardList, { cardDemoData } from '../components/ProductCardList';
 import PageTemplate from '../template/PageTemplate';
 import SearchForm from '../components/search/SearchForm';
 
@@ -13,14 +13,24 @@ const ArchivePage = (props) => {
 
     useEffect(() => {
         (async function fetchData() {
-            const fetchedArticles = await getArticles();
-            setArticles((oldArticles) => {
-                const newArticles = {
-                    ...oldArticles,
-                    articles: fetchedArticles.data,
-                };
-                return newArticles;
-            });
+            try {
+                const fetchedArticles = await getArticles();
+                setArticles((oldArticles) => {
+                    const newArticles = {
+                        ...oldArticles,
+                        articles: fetchedArticles.data,
+                    };
+                    return newArticles;
+                });
+            } catch (e) {
+                setArticles((oldArticles) => {
+                    const newArticles = {
+                        ...oldArticles,
+                        articles: cardDemoData,
+                    };
+                    return newArticles;
+                });
+            }
         })();
     }, []);
 

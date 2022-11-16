@@ -7,6 +7,104 @@ const ListItem = styled('li')(({ theme }) => ({
     margin: theme.spacing(0.8),
 }));
 
+export const cardDemoData = [
+    {
+        id: '1',
+        image: 'https://via.placeholder.com/345x200',
+        alt: '비어있는 이미지',
+        title: '프로젝트 제목',
+        description: '설명',
+        tags: [
+            {
+                key: 0,
+                label: '태그1',
+                href: '#',
+            },
+            {
+                key: 1,
+                label: '태그2',
+                href: '#',
+            },
+        ],
+    },
+    {
+        id: '2',
+        image: 'https://via.placeholder.com/345x200',
+        alt: '비어있는 이미지',
+        title: '프로젝트 제목',
+        description: '설명',
+        tags: [
+            {
+                key: 0,
+                label: '태그1',
+                href: '#',
+            },
+            {
+                key: 1,
+                label: '태그2',
+                href: '#',
+            },
+        ],
+    },
+    {
+        id: '3',
+        image: 'https://via.placeholder.com/345x200',
+        alt: '비어있는 이미지',
+        title: '프로젝트 제목',
+        description: '설명',
+        tags: [
+            {
+                key: 0,
+                label: '태그1',
+                href: '#',
+            },
+            {
+                key: 1,
+                label: '태그2',
+                href: '#',
+            },
+        ],
+    },
+    {
+        id: '4',
+        image: 'https://via.placeholder.com/345x200',
+        alt: '비어있는 이미지',
+        title: '프로젝트 제목',
+        description: '설명',
+        tags: [
+            {
+                key: 0,
+                label: '태그1',
+                href: '#',
+            },
+            {
+                key: 1,
+                label: '태그2',
+                href: '#',
+            },
+        ],
+    },
+    {
+        id: '5',
+        image: 'https://via.placeholder.com/345x200',
+        alt: '비어있는 이미지',
+        title: '프로젝트 제목',
+        description: '설명',
+        tags: [
+            {
+                key: 0,
+                label: '태그1',
+                href: '#',
+            },
+            {
+                key: 1,
+                label: '태그2',
+                href: '#',
+            },
+        ],
+    },
+];
+
 const ProductCardList = ({ cardData }) => (
     <Paper
         elevation={0}
@@ -45,103 +143,7 @@ const ProductCardList = ({ cardData }) => (
 );
 
 ProductCardList.defaultProps = {
-    cardData: [
-        {
-            id: '1',
-            image: 'https://via.placeholder.com/345x200',
-            alt: '비어있는 이미지',
-            title: '프로젝트 제목',
-            description: '설명',
-            tags: [
-                {
-                    key: 0,
-                    label: '태그1',
-                    href: '#',
-                },
-                {
-                    key: 1,
-                    label: '태그2',
-                    href: '#',
-                },
-            ],
-        },
-        {
-            id: '2',
-            image: 'https://via.placeholder.com/345x200',
-            alt: '비어있는 이미지',
-            title: '프로젝트 제목',
-            description: '설명',
-            tags: [
-                {
-                    key: 0,
-                    label: '태그1',
-                    href: '#',
-                },
-                {
-                    key: 1,
-                    label: '태그2',
-                    href: '#',
-                },
-            ],
-        },
-        {
-            id: '3',
-            image: 'https://via.placeholder.com/345x200',
-            alt: '비어있는 이미지',
-            title: '프로젝트 제목',
-            description: '설명',
-            tags: [
-                {
-                    key: 0,
-                    label: '태그1',
-                    href: '#',
-                },
-                {
-                    key: 1,
-                    label: '태그2',
-                    href: '#',
-                },
-            ],
-        },
-        {
-            id: '4',
-            image: 'https://via.placeholder.com/345x200',
-            alt: '비어있는 이미지',
-            title: '프로젝트 제목',
-            description: '설명',
-            tags: [
-                {
-                    key: 0,
-                    label: '태그1',
-                    href: '#',
-                },
-                {
-                    key: 1,
-                    label: '태그2',
-                    href: '#',
-                },
-            ],
-        },
-        {
-            id: '5',
-            image: 'https://via.placeholder.com/345x200',
-            alt: '비어있는 이미지',
-            title: '프로젝트 제목',
-            description: '설명',
-            tags: [
-                {
-                    key: 0,
-                    label: '태그1',
-                    href: '#',
-                },
-                {
-                    key: 1,
-                    label: '태그2',
-                    href: '#',
-                },
-            ],
-        },
-    ],
+    cardData: cardDemoData,
 };
 
 export default ProductCardList;
