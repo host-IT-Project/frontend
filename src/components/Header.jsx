@@ -60,7 +60,12 @@ const Header = (props) => {
                         </ListItemButton>
                     </ListItem>
                 ))}
-                <ListItem disablePadding>
+                <ListItem
+                    disablePadding
+                    onClick={() => {
+                        navigate('/login');
+                    }}
+                >
                     <ListItemButton>
                         <span className="drawer-nav">로그인</span>
                     </ListItemButton>
@@ -120,6 +125,9 @@ const Header = (props) => {
                     }}
                     sx={{
                         display: { xs: 'none', sm: 'inline-block' },
+                    }}
+                    onClick={() => {
+                        navigate('/login');
                     }}
                 >
                     로그인
