@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { getArticles } from '../api/article';
-import ProductCardList, { cardDemoData } from '../components/ProductCardList';
+import { cardDemoData } from '../components/ProductCardList';
 import PageTemplate from '../template/PageTemplate';
 import SearchForm from '../components/search/SearchForm';
 import BannerCarousel, {
     itemsForArchivePage,
 } from '../components/BannerCarousel';
+import ListWithTabs from '../components/ListWithTabs';
 
 const ArchivePage = (props) => {
     const [articles, setArticles] = useState({
@@ -105,6 +106,7 @@ const ArchivePage = (props) => {
                         onSubmitInput={handleSubmitInput}
                         onSubmitTag={handleSubmitTag}
                     />
+                    {/* <ListWithTabs /> */}
                     {articles.filteredArticles.length === 0 &&
                         articles.searchWord !== null && (
                             <h3>
@@ -114,9 +116,9 @@ const ArchivePage = (props) => {
                             </h3>
                         )}
                     {articles.filteredArticles.length !== 0 ? (
-                        <ProductCardList cardData={articles.filteredArticles} />
+                        <ListWithTabs cardData={articles.filteredArticles} />
                     ) : (
-                        <ProductCardList cardData={articles.articles} />
+                        <ListWithTabs cardData={articles.articles} />
                     )}
                 </>
             }
