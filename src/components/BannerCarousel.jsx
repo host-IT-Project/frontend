@@ -3,29 +3,27 @@ import styled from 'styled-components';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import banner from '../assets/img/banner-lg.png';
+import bannerLg from '../assets/img/banner-lg.png';
+import bannerSm from '../assets/img/banner-sm.png';
 
 // 캐러셀에 들어갈 배너 정보가 담긴 더미데이터입니다.
 // 이 정보를 api를 통해 가져오는 코드가 필요합니다.
-const items = [
+export const itemsForHomePage = [
     {
-        url: 'https://admin.donde.co/wp-content/uploads/2019/02/Banner-Foto-04.png',
-        name: 'image1',
-        description: '설명',
-    },
-    {
-        url: 'https://admin.donde.co/wp-content/uploads/2019/02/Imagen-para-Head-eventos-Home-Dónde-fixed.jpg',
+        url: bannerLg,
         name: 'image2',
         description: '설명',
     },
+];
+export const itemsForArchivePage = [
     {
-        url: banner,
+        url: bannerSm,
         name: 'image2',
         description: '설명',
     },
 ];
 
-const BannerCarousel = (props) => {
+const BannerCarousel = ({ items }) => {
     return (
         <StyledSlider {...bannerSettings}>
             {items.map((step) => (

@@ -8,15 +8,24 @@ const PageTemplateContainer = styled.div`
     background: ${({ theme }) => theme.colors.background};
 `;
 
-const ContentWrapper = styled.div`
+const ChildrenWrapper = styled.div`
     margin: 0 auto;
 `;
 
-const PageTemplate = ({ children }) => (
-    <PageTemplateContainer>
-        <Header />
-        <ContentWrapper>{children}</ContentWrapper>
-    </PageTemplateContainer>
-);
+const ContentsWrapper = styled.div`
+    width: 90%;
+    max-width: 1100px;
+    margin: 3rem auto;
+`;
+
+const PageTemplate = ({ children, contents }) => {
+    return (
+        <PageTemplateContainer>
+            <Header />
+            <ChildrenWrapper>{children}</ChildrenWrapper>
+            <ContentsWrapper>{contents}</ContentsWrapper>
+        </PageTemplateContainer>
+    );
+};
 
 export default PageTemplate;

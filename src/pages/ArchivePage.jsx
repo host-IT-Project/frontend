@@ -3,6 +3,9 @@ import { getArticles } from '../api/article';
 import ProductCardList, { cardDemoData } from '../components/ProductCardList';
 import PageTemplate from '../template/PageTemplate';
 import SearchForm from '../components/search/SearchForm';
+import BannerCarousel, {
+    itemsForArchivePage,
+} from '../components/BannerCarousel';
 
 const ArchivePage = (props) => {
     const [articles, setArticles] = useState({
@@ -93,25 +96,32 @@ const ArchivePage = (props) => {
     };
 
     return (
-        <PageTemplate>
-            <SearchForm
-                articles={articles.articles}
-                tagList={['컴퓨터공학과', '태그1', '태그2']}
-                onSubmitInput={handleSubmitInput}
-                onSubmitTag={handleSubmitTag}
-            />
-            {articles.filteredArticles.length === 0 &&
-                articles.searchWord !== null && (
-                    <h3>
-                        '{articles.searchWord}'와(과) 일치하는 검색결과가
-                        없습니다. 아래의 게시물들은 어떠신가요?
-                    </h3>
-                )}
-            {articles.filteredArticles.length !== 0 ? (
-                <ProductCardList cardData={articles.filteredArticles} />
-            ) : (
-                <ProductCardList cardData={articles.articles} />
-            )}
+        <PageTemplate
+            contents={
+                <>
+                    <SearchForm
+                        articles={articles.articles}
+                        tagList={['컴퓨터공학과', '태그1', '태그2']}
+                        onSubmitInput={handleSubmitInput}
+                        onSubmitTag={handleSubmitTag}
+                    />
+                    {articles.filteredArticles.length === 0 &&
+                        articles.searchWord !== null && (
+                            <h3>
+                                '{articles.searchWord}'와(과) 일치하는
+                                검색결과가 없습니다. 아래의 게시물들은
+                                어떠신가요?
+                            </h3>
+                        )}
+                    {articles.filteredArticles.length !== 0 ? (
+                        <ProductCardList cardData={articles.filteredArticles} />
+                    ) : (
+                        <ProductCardList cardData={articles.articles} />
+                    )}
+                </>
+            }
+        >
+            <BannerCarousel items={itemsForArchivePage} />
         </PageTemplate>
     );
 };

@@ -10,14 +10,14 @@ const SearchForm = ({
     onSubmitTag,
 }) => {
     return (
-        <SearchFromContainer>
+        <SearchFormContainer>
             <TitleSearch onSubmitInput={onSubmitInput} />
             <TagSearch tagList={tagList} onSubmitTag={onSubmitTag} />
-        </SearchFromContainer>
+        </SearchFormContainer>
     );
 };
 
-const SearchFromContainer = styled.div`
+const SearchFormContainer = styled.div`
     margin: 30px auto;
     width: 50%;
     display: flex;

@@ -1,41 +1,41 @@
 import React from 'react';
 import styled from 'styled-components';
-import BannerCarousel from '../components/BannerCarousel';
+import BannerCarousel, { itemsForHomePage } from '../components/BannerCarousel';
 import ProductCardList from '../components/ProductCardList';
 import SearchForm from '../components/search/SearchForm';
 import PageTemplate from '../template/PageTemplate';
 
 const HomePage = (props) => (
-    <PageTemplate>
-        <BannerCarousel />
-        <StyledHomePage>
-            <SearchForm />
-            <div className="ScollList-container">
-                <h1 className={'title'}>지금 가장 조회수가 높은 👀</h1>
-                <ScrollList>
-                    <ProductCardList />
-                </ScrollList>
-            </div>
-            <div className="ScollList-container">
-                <h1 className={'title'}>가장 많이 사용된 스택 C#</h1>
-                <ScrollList>
-                    <ProductCardList />
-                </ScrollList>
-            </div>
-            <div className="ScollList-container">
-                <h1 className={'title'}>지금 막 올라왔어요 🆕</h1>
-                <ScrollList>
-                    <ProductCardList />
-                </ScrollList>
-            </div>
-        </StyledHomePage>
+    <PageTemplate
+        contents={
+            <StyledHomePage>
+                <SearchForm />
+                <div className="ScollList-container">
+                    <h1 className={'title'}>지금 가장 조회수가 높은 👀</h1>
+                    <ScrollList>
+                        <ProductCardList />
+                    </ScrollList>
+                </div>
+                <div className="ScollList-container">
+                    <h1 className={'title'}>가장 많이 사용된 스택 C#</h1>
+                    <ScrollList>
+                        <ProductCardList />
+                    </ScrollList>
+                </div>
+                <div className="ScollList-container">
+                    <h1 className={'title'}>지금 막 올라왔어요 🆕</h1>
+                    <ScrollList>
+                        <ProductCardList />
+                    </ScrollList>
+                </div>
+            </StyledHomePage>
+        }
+    >
+        <BannerCarousel items={itemsForHomePage} />
     </PageTemplate>
 );
 
 const StyledHomePage = styled.div`
-    width: 90%;
-    max-width: 1100px;
-    margin: 3rem auto;
     .title {
         font-size: 2.5em;
         font-weight: bolder;
