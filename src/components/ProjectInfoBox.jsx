@@ -57,10 +57,14 @@ const ProjectInfoBox = ({ article }) => {
 };
 
 const InfoContainer = styled.div`
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+
   display: flex;
   justify-content: space-between;
+
   .title {
-    margin-bottom: 1.2rem;
+    margin-bottom: 1.4rem;
     font-weight: bold;
     font-size: 2.5rem;
   }
