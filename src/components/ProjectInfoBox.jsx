@@ -3,25 +3,9 @@ import { Box } from "@mui/system";
 import React from "react";
 import styled from "styled-components";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import PersonIcon from "@mui/icons-material/Person";
 
 const ProjectInfoBox = ({ article }) => {
-  // 더미데이터
-  article = {
-    id: 2,
-    title: "게시글2 제목입니다!!",
-    content: "게겍게겍ㄲ",
-    likesCount: 5,
-    dislikesCount: 0,
-    articleCategory: "잡담",
-    createdAt: "2022-10-14T05:21:13",
-    user: {
-      id: 1,
-      username: "게시글 작성자",
-      profileImgUrl: "tester photo",
-    },
-    hashtagList: ["C#", "팀플"],
-  };
-
   const date = {
     year: article.createdAt.substr(0, 4),
     month: article.createdAt.substr(5, 2),
@@ -32,11 +16,15 @@ const ProjectInfoBox = ({ article }) => {
     <InfoContainer>
       <Box>
         <h1 className={"title"}>{article.title}</h1>
-        <p className="date">
+        <p className="info-text">
+          <PersonIcon fontSize="large" sx={{ mr: 0.7 }} />{" "}
+          {article.user.username}
+        </p>
+        <p className="info-text">
           <CalendarMonthIcon fontSize="large" sx={{ mr: 0.7 }} /> {date.year}.{" "}
           {date.month}. {date.day}
         </p>
-        <ul className="tags">
+        <ul className="info-tags">
           {article.hashtagList.map((data) => (
             <li key={data}>
               <Chip size="middle" variant="outlined" label={data} />
@@ -57,25 +45,25 @@ const ProjectInfoBox = ({ article }) => {
 };
 
 const InfoContainer = styled.div`
-  padding-top: 2.5rem;
-  padding-bottom: 2.5rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 
   display: flex;
   justify-content: space-between;
 
   .title {
-    margin-bottom: 1.4rem;
+    margin-bottom: 1.6rem;
     font-weight: bold;
     font-size: 2.5rem;
   }
-  .date {
-    display: inline-flex;
+  .info-text {
+    display: flex;
     align-items: center;
     margin-bottom: 1rem;
     font-size: 1.6rem;
     color: #555;
   }
-  .tags {
+  .info-tags {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
