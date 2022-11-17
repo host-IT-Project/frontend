@@ -76,10 +76,10 @@ const onUploadImage = async (blob, callback) => {
   callback(res.url, "alt text");
 };
 
-const TextEditor = ({ ref }) => {
+const TextEditor = ({ editorRef }) => {
   return (
     <Editor
-      ref={ref} // DOM 선택용 useRef
+      ref={editorRef} // DOM 선택용 useRef
       placeholder="프로젝트를 멋지게 소개해보세요. (20자 이상 작성)"
       hooks={{
         addImageBlobHook: onUploadImage,
