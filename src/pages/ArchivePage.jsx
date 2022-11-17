@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { getArticles } from '../api/article';
-import { cardDemoData } from '../components/ProductCardList';
 import PageTemplate from '../template/PageTemplate';
 import SearchForm from '../components/search/SearchForm';
 import BannerCarousel, {
@@ -17,26 +16,16 @@ const ArchivePage = (props) => {
 
     useEffect(() => {
         (async function fetchData() {
-            try {
-                const fetchedArticles = await getArticles();
-                setArticles((oldArticles) => {
-                    const newArticles = {
-                        ...oldArticles,
-                        articles: fetchedArticles.data,
-                    };
-                    return newArticles;
-                });
-            } catch (e) {
-                setArticles((oldArticles) => {
-                    const newArticles = {
-                        ...oldArticles,
-                        articles: cardDemoData,
-                    };
-                    return newArticles;
-                });
-            }
+            const fetchedArticles = await getArticles();
+            setArticles((oldArticles) => {
+                const newArticles = {
+                    ...oldArticles,
+                    articles: fetchedArticles.data,
+                };
+                return newArticles;
+            });
         })();
-    }, []);
+    }, [setArticles]);
 
     const handleSubmitInput = (newInputValue) => {
         const filteredArticles = articles.articles.filter(({ title }) =>
