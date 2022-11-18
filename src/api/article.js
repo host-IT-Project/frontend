@@ -30,6 +30,20 @@ export const getArticles = ({ page, order, keyword, hashtag } = {}) => {
 
 /**
  *
+ * @param {string} articleId
+ */
+export const getArticle = (articleId) => {
+  articleId && checkType(articleId, "string");
+  return http.get(`/api/article/${articleId}`, articleId).catch((error) => {
+    console.log(error.response.data);
+    console.log(error.response.status);
+    console.log(error.response.headers);
+    window.alert("게시물 불러오기에 실패했습니다.");
+  });
+};
+
+/**
+ *
  * @param {string} title
  * @param {string} content
  * @param {string} [articleCategory='질문']
