@@ -37,12 +37,7 @@ const ProjectDetailPage = (props) => {
   };
 
   return (
-    <PageTemplate contents={<MainContents article={article} />}>
-      <ThumbnailImage
-        src="https://via.placeholder.com/700x400"
-        alt="post-thumbnail"
-      />
-    </PageTemplate>
+    <PageTemplate contents={<MainContents article={article} />}></PageTemplate>
   );
 };
 
@@ -93,6 +88,10 @@ const MainContents = ({ article }) => {
 
   return (
     <>
+      <ThumbnailImage
+        src="https://via.placeholder.com/690x400"
+        alt="post-thumbnail"
+      />
       <ProjectInfoBox article={article} />
       <Paper elevation={5} sx={{ mt: 3, mb: 8, p: 5, borderRadius: 8 }}>
         <TextViewer data={initialContent} />

@@ -45,6 +45,7 @@ const ProjectInfoBox = ({ article }) => {
 };
 
 const InfoContainer = styled.div`
+  margin-top: 2rem;
   padding-top: 1rem;
   padding-bottom: 1rem;
 
