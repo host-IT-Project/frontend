@@ -20,10 +20,12 @@ const ProjectDetailPage = (props) => {
       const result = response.data.article;
       setArticle(result);
     })();
-  }, [article, id, setArticle]);
+  }, [id]);
 
   return (
-    <PageTemplate contents={<MainContents article={article} />}></PageTemplate>
+    <PageTemplate
+      contents={article && <MainContents article={article} />}
+    ></PageTemplate>
   );
 };
 
