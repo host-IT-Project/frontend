@@ -1,9 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const StyledForm = ({ children }) => <StyledFrom_>{children}</StyledFrom_>;
+const StyledForm = (props) => {
+    const transformedProps = { ...props };
+    delete transformedProps.children;
+    return <StyledForm_ {...transformedProps}>{props.children}</StyledForm_>;
+};
 
-const StyledFrom_ = styled.form`
+const StyledForm_ = styled.form`
     width: 350px;
     border-radius: 30px;
     .MuiFormControl-root,
