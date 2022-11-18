@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import logoHostIt from "../assets/img/logo-host-it.png";
 import logoDepartment from "../assets/img/logo-department.png";
+import style from "../styles/style.js";
 
 const Footer = (props) => (
   <StyledFooter>
@@ -22,13 +23,13 @@ const Footer = (props) => (
     <ul className="footer-logoList">
       <li>
         <img
-          width={270}
+          className="logo-department"
           src={logoDepartment}
           alt="부산외국어대학교 컴퓨터공학과"
         />
       </li>
       <li>
-        <img width={120} src={logoHostIt} alt="Host-it" />
+        <img className="logo-hostit" src={logoHostIt} alt="Host-it" />
       </li>
     </ul>
     <div className="footer-info">
@@ -50,7 +51,11 @@ const Footer = (props) => (
   </StyledFooter>
 );
 const StyledFooter = styled.footer`
-  padding: 0.5rem 1.2rem 1rem;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 1.5rem 1.2rem 1rem;
   background-color: #414141;
 
   .footer-linklist {
@@ -64,13 +69,20 @@ const StyledFooter = styled.footer`
     color: ${({ theme }) => theme.colors.lightgray};
 
     li {
-      padding: 1rem 0;
+      padding-bottom: 1rem;
     }
   }
   .footer-logoList {
     margin-bottom: 1rem;
     display: flex;
     gap: 1rem;
+
+    .logo-department {
+      width: 270px;
+    }
+    .logo-hostit {
+      width: 120px;
+    }
   }
   .footer-info {
     overflow: hidden;
@@ -80,6 +92,10 @@ const StyledFooter = styled.footer`
     line-height: 2.3rem;
     color: ${({ theme }) => theme.colors.middlegray};
 
+    p {
+      display: flex;
+      flex-wrap: wrap;
+    }
     p:nth-child(2) {
       small:not(:last-of-type)::after {
         content: " ";
@@ -89,6 +105,19 @@ const StyledFooter = styled.footer`
         height: 1.5rem;
         vertical-align: top;
         background-color: ${({ theme }) => theme.colors.darkgray};
+      }
+    }
+  }
+
+  @media ${style.device.mobileL} {
+    .footer-linklist {
+      display: none;
+    }
+    .footer-logoList {
+      .logo-department,
+      .logo-hostit {
+        width: auto;
+        max-height: 50px;
       }
     }
   }
