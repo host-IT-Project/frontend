@@ -16,7 +16,7 @@ const textSize = {
   title: style.fontSizes.xxl,
 };
 
-const EditForm = (props) => {
+const EditForm = ({ editMode, initialArticle }) => {
   // 프로젝트 제목 및 소개 최소길이
   const TITLE_MIN_LENGTH = 1;
   const INTRO_MIN_LENGTH = 20;
@@ -119,6 +119,7 @@ const EditForm = (props) => {
               style: { fontSize: textSize.title },
               maxLength: 40,
             }}
+            defaultValue={initialArticle && initialArticle.title}
             onInput={handleTitleInput}
           />
         </Box>
@@ -133,6 +134,7 @@ const EditForm = (props) => {
           </Typography>
           <TextEditor
             ref={editorRef} // DOM 선택용 useRef
+            initialContent={initialArticle && initialArticle.content}
           ></TextEditor>
         </Box>
         <Box
@@ -148,7 +150,7 @@ const EditForm = (props) => {
             variant="text"
             sx={{ mr: 1, fontSize: textSize.base }}
           >
-            임시저장
+            취소
           </Button>
           <Button
             variant="contained"
