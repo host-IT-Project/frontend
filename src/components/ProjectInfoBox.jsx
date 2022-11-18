@@ -82,6 +82,24 @@ const InfoContainer = styled.div`
   }
 `;
 
+ProjectInfoBox.defaultProps = {
+  article: {
+    id: 1,
+    title: "로딩중...",
+    content: "로딩중...",
+    likesCount: 5,
+    dislikesCount: 0,
+    articleCategory: "잡담",
+    createdAt: "2022-10-14T05:21:13",
+    user: {
+      id: 1,
+      username: "로딩중...",
+      profileImgUrl: "tester photo",
+    },
+    hashtagList: ["로딩중..."],
+  },
+};
+
 const ColoredButton = styled(Button)`
   background-color: ${({ theme }) => theme.colors.primary};
 `;
