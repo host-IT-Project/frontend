@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, Navigate, useParams } from "react-router-dom";
 import { getArticles } from "../api/article";
 import ProjectInfoBox from "../components/ProjectInfoBox";
 import TextViewer from "../components/TextViewer";
 import PageTemplate from "../template/PageTemplate";
-import { Paper } from "@mui/material";
+import { Button, Paper } from "@mui/material";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import styled from "styled-components";
 
 const ProjectDetailPage = (props) => {
@@ -37,12 +38,7 @@ const ProjectDetailPage = (props) => {
   };
 
   return (
-    <PageTemplate contents={<MainContents article={article} />}>
-      <ThumbnailImage
-        src="https://via.placeholder.com/700x400"
-        alt="post-thumbnail"
-      />
-    </PageTemplate>
+    <PageTemplate contents={<MainContents article={article} />}></PageTemplate>
   );
 };
 
@@ -93,6 +89,15 @@ const MainContents = ({ article }) => {
 
   return (
     <>
+      <Link to="/archive">
+        <BackButton variant="text" startIcon={<ArrowBackIcon />}>
+          목록으로 돌아가기
+        </BackButton>
+      </Link>
+      <ThumbnailImage
+        src="https://via.placeholder.com/690x400"
+        alt="post-thumbnail"
+      />
       <ProjectInfoBox article={article} />
       <Paper elevation={5} sx={{ mt: 3, mb: 8, p: 5, borderRadius: 8 }}>
         <TextViewer data={initialContent} />
@@ -108,6 +113,19 @@ const ThumbnailImage = styled.img`
   height: auto;
   object-fit: contain;
   display: block;
+`;
+
+const BackButton = styled(Button)`
+  /* display: flex; */
+  /* align-items: center; */
+  margin-bottom: 1rem;
+  transition: all 0.5s;
+  font-size: 1.4rem;
+  color: ${({ theme }) => theme.colors.darkgray};
+
+  &:hover {
+    transform: scale(1.05);
+  }
 `;
 
 export default ProjectDetailPage;

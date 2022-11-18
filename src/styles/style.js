@@ -47,18 +47,6 @@ const deviceSizes = {
   tabletL: "1024px",
 };
 
-const colors = {
-  primary: "#2f51cf",
-  secondary: "#9aaae6",
-  error: "#eb5757",
-  black: "#000000",
-  darkgray: "#767676",
-  middlegray: "#c4c4c4",
-  lightgray: "#dbdbdb",
-  whitegray: "#f2f2f2",
-  white: "#FFFFFF",
-};
-
 const device = {
   mobileS: `only screen and (max-width: ${deviceSizes.mobileS})`,
   mobileM: `only screen and (max-width: ${deviceSizes.mobileM})`,
@@ -69,7 +57,6 @@ const device = {
 
 const style = {
   fontSizes,
-  colors,
   deviceSizes,
   device,
   paddings,

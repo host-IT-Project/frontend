@@ -33,21 +33,27 @@ const ProjectInfoBox = ({ article }) => {
         </ul>
       </Box>
       <Box>
-        <Button className="button" variant="outlined" sx={{ mr: 1 }}>
+        <Button className="button" variant="outlined" disabled sx={{ mr: 1 }}>
           작가에게 연락하기
         </Button>
-        <Button className="button" variant="contained" sx={{ boxShadow: 0 }}>
+        <ColoredButton
+          className="button"
+          variant="contained"
+          sx={{ boxShadow: 0 }}
+        >
           수정하기
-        </Button>
+        </ColoredButton>
       </Box>
     </InfoContainer>
   );
 };
 
 const InfoContainer = styled.div`
+  margin-top: 2rem;
   padding-top: 1rem;
   padding-bottom: 1rem;
 
+  color: ${({ theme }) => theme.colors.text};
   display: flex;
   justify-content: space-between;
 
@@ -61,7 +67,7 @@ const InfoContainer = styled.div`
     align-items: center;
     margin-bottom: 1rem;
     font-size: 1.6rem;
-    color: #555;
+    color: ${({ theme }) => theme.colors.darkgray};
   }
   .info-tags {
     display: flex;
@@ -74,6 +80,10 @@ const InfoContainer = styled.div`
   .button {
     font-size: 1.4rem;
   }
+`;
+
+const ColoredButton = styled(Button)`
+  background-color: ${({ theme }) => theme.colors.primary};
 `;
 
 export default ProjectInfoBox;
