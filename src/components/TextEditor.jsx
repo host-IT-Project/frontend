@@ -18,7 +18,7 @@ const TextEditor = ({ editorRef, initialContent }) => {
   // 에디터 설정
   const settings = {
     previewStyle: "tab", // 미리보기 스타일
-    height: "500px", // 에디터 창 높이
+    height: "auto",
     initialEditType: "wysiwyg",
     language: "ko",
     useCommandShortcut: false, // 키보드 입력 컨트롤 방지
