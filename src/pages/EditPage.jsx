@@ -24,9 +24,6 @@ const EditPage = () => {
 
   return (
     <PageTemplate>
-      EditPage
-      <div>id: {id}</div>
-      <div>editMode: {editMode}</div>
       {editMode === "post" ? (
         <EditForm editMode={editMode} />
       ) : (
