@@ -16,7 +16,7 @@ const textSize = {
   title: style.fontSizes.xxl,
 };
 
-const UploadForm = (props) => {
+const EditForm = (props) => {
   // 프로젝트 제목 및 소개 최소길이
   const TITLE_MIN_LENGTH = 1;
   const INTRO_MIN_LENGTH = 20;
@@ -163,4 +163,4 @@ const UploadForm = (props) => {
   );
 };
 
-export default UploadForm;
+export default EditForm;
