@@ -5,7 +5,13 @@ import styled from "styled-components";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import PersonIcon from "@mui/icons-material/Person";
 
-const ProjectInfoBox = ({ article }) => {
+const ProjectInfoBox = ({ article, user }) => {
+  /**
+   * @Todo 유저 식별 -> 작성자일 경우 수정하기 버튼 활성화
+   * // const isAuthor = user == article.username;
+   */
+  const isAuthor = true;
+
   const date = {
     year: article.createdAt.substr(0, 4),
     month: article.createdAt.substr(5, 2),
@@ -36,13 +42,15 @@ const ProjectInfoBox = ({ article }) => {
         <Button className="button" variant="outlined" disabled sx={{ mr: 1 }}>
           작가에게 연락하기
         </Button>
-        <ColoredButton
-          className="button"
-          variant="contained"
-          sx={{ boxShadow: 0 }}
-        >
-          수정하기
-        </ColoredButton>
+        {isAuthor && (
+          <ColoredButton
+            className="button"
+            variant="contained"
+            sx={{ boxShadow: 0 }}
+          >
+            수정하기
+          </ColoredButton>
+        )}
       </Box>
     </InfoContainer>
   );
