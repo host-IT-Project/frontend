@@ -1,3 +1,5 @@
+import { Suspense } from 'react';
+import { RecoilRoot } from 'recoil';
 import { ThemeProvider } from 'styled-components';
 import './App.css';
 import Routes from './pages/Routes';
@@ -6,12 +8,16 @@ import theme from './styles/theme';
 
 function App() {
     return (
-        <ThemeProvider theme={theme.light}>
-            <GlobalStyles />
-            <div className="App">
-                <Routes />
-            </div>
-        </ThemeProvider>
+        <RecoilRoot>
+            <Suspense fallback={<div>Loading...</div>}>
+                <ThemeProvider theme={theme.light}>
+                    <GlobalStyles />
+                    <div className="App">
+                        <Routes />
+                    </div>
+                </ThemeProvider>
+            </Suspense>
+        </RecoilRoot>
     );
 }
 
