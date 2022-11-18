@@ -51,10 +51,9 @@ const Footer = (props) => (
   </StyledFooter>
 );
 const StyledFooter = styled.footer`
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  height: 210px;
+  position: relative;
+  transform: translateY(-230px);
   padding: 1.5rem 1.2rem 1rem;
   background-color: #414141;
 

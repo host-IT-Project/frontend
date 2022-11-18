@@ -4,10 +4,10 @@ import styled from "styled-components";
 import Footer from "../components/Footer";
 
 const PageTemplateContainer = styled.div`
-  position: relative;
+  box-sizing: border-box;
+  padding-bottom: 230px;
   width: 100%;
   min-height: 100vh;
-  padding-bottom: 230px;
   background: ${({ theme }) => theme.colors.background};
 `;
 
@@ -23,12 +23,14 @@ const ContentsWrapper = styled.div`
 
 const PageTemplate = ({ children, contents }) => {
   return (
-    <PageTemplateContainer>
-      <Header />
-      <ChildrenWrapper>{children}</ChildrenWrapper>
-      <ContentsWrapper>{contents}</ContentsWrapper>
+    <>
+      <PageTemplateContainer>
+        <Header />
+        {children && <ChildrenWrapper>{children}</ChildrenWrapper>}
+        {contents && <ContentsWrapper>{contents}</ContentsWrapper>}
+      </PageTemplateContainer>
       <Footer />
-    </PageTemplateContainer>
+    </>
   );
 };
 
