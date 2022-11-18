@@ -5,21 +5,19 @@ import EditPage from './EditPage';
 import ArchivePage from './ArchivePage';
 import ContestPage from './ContestPage';
 import MyPage from './MyPage';
-import LoginPage from './LoginPage';
 
 const Routes = () => {
-    return (
-        <ReactRouterRoutes>
-            <Route path="/home" element={<HomePage />} />
-            <Route path="/archive" element={<ArchivePage />} />
-            <Route path="/contest" element={<ContestPage />} />
-            <Route path="/project:id" element={<ProjectDetailPage />} />
-            <Route path="/edit" element={<EditPage />} />
-            <Route path="/mypage" element={<MyPage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="*" element={<Navigate replace to="/home" />} />
-        </ReactRouterRoutes>
-    );
+  return (
+    <ReactRouterRoutes>
+      <Route path="/home" element={<HomePage />} />
+      <Route path="/archive" element={<ArchivePage />} />
+      <Route path="/contest" element={<ContestPage />} />
+      <Route path="/project/:id" element={<ProjectDetailPage />} />
+      <Route path="/edit" element={<EditPage />} />
+      <Route path="/mypage" element={<MyPage />} />
+      <Route path="*" element={<Navigate replace to="/home" />} />
+    </ReactRouterRoutes>
+  );
 };
 
 export default Routes;

@@ -1,11 +1,7 @@
 import Axios from 'axios';
 
-/**
- * @TODO
- * baseURL 숨김 처리
- */
 const axios = Axios.create({
-    baseURL: 'https://31970935-739c-4289-9eda-04fb30cc0da0.mock.pstmn.io/',
+    baseURL: `${process.env.REACT_APP_BASE_URL}`,
 });
 
 export const http = {
