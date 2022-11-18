@@ -14,7 +14,6 @@ const ProjectDetailPage = (props) => {
   let { id } = useParams();
   const [article, setArticle] = useState();
 
-  console.log("parm: ", id);
   useEffect(() => {
     (async function _getArticles() {
       const response = await getArticle(id.toString());
