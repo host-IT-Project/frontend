@@ -44,7 +44,6 @@ const MainContents = ({ article }) => (
     <Paper elevation={5} sx={{ mt: 3, mb: 8, p: 5, borderRadius: 8 }}>
       <TextViewer data={article.content} />
     </Paper>
-    footer
   </>
 );
 
