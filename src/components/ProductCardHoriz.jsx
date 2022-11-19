@@ -8,6 +8,7 @@ import { Link } from "@mui/material";
 import styled from "styled-components";
 import MoreMenu from "./MoreMenu";
 import { Box } from "@mui/system";
+import { useNavigate } from "react-router-dom";
 
 const StyledCard = styled(Card)`
   display: flex;
@@ -74,10 +75,15 @@ const ProductCardHoriz = ({
     month: createdAt.substr(5, 2),
     day: createdAt.substr(8, 2),
   };
+  const navigate = useNavigate();
 
   return (
     <StyledCard sx={{ display: "flex" }}>
-      <StyledLink to={`/project/${id}`}>
+      <StyledLink
+        onClick={() => {
+          navigate(`/project/${id}`);
+        }}
+      >
         <CardMedia component="img" image={image} alt={alt} />
       </StyledLink>
       <StyledCardContent>
