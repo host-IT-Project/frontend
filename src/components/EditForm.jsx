@@ -172,13 +172,13 @@ const EditForm = ({ editMode, initialArticle }) => {
     ) {
       const data = createStateMap();
       // DB에 업로드
-      const articleId = sendAPIRequestByEditMode(
-        editMode,
-        data,
-        initialArticle && initialArticle.id
-      );
+      // const articleId = sendAPIRequestByEditMode(
+      //   editMode,
+      //   data,
+      //   initialArticle && initialArticle.id
+      // );
       window.alert("저장되었습니다.");
-      navigate(`/proejct/${articleId}`);
+      // navigate(`/proejct/${articleId}`);
     } else {
       console.log("업로드할 수 없습니다");
       console.log(
