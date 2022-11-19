@@ -15,6 +15,7 @@ import {
   checkTagListValid,
   checkThumbnailValid,
 } from "./EditFormValidator";
+import { Link } from "react-router-dom";
 
 // component
 const InputField = ({ title, desc, children }) => (
@@ -252,9 +253,11 @@ const EditForm = ({ editMode, initialArticle }) => {
           />
         </InputField>
         <ButtonArray>
-          <Button variant="text" className="button-cancel">
-            취소
-          </Button>
+          <Link to="/archive">
+            <Button variant="text" className="button-cancel">
+              취소
+            </Button>
+          </Link>
           <Button variant="contained" onClick={handleSubmit}>
             등록
           </Button>
