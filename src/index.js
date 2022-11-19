@@ -5,13 +5,19 @@ import './global.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import { StyledEngineProvider } from '@mui/styled-engine';
+import { Suspense } from 'react';
+import { RecoilRoot } from 'recoil';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
       <StyledEngineProvider injectFirst>
-        <App />
+        <RecoilRoot>
+          <Suspense fallback={<div>Loading...</div>}>
+            <App />
+          </Suspense>
+        </RecoilRoot>
       </StyledEngineProvider>
     </BrowserRouter>
   </React.StrictMode>
