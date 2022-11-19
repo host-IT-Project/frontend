@@ -1,11 +1,16 @@
 import React, { useRef, useState, useEffect } from "react";
-import { Button, Paper, TextField } from "@mui/material";
+import styled from "styled-components";
+import { useNavigate, Link } from "react-router-dom";
+
 import TextEditor from "./TextEditor.jsx";
 import TagInput from "./TagInput.jsx";
-import styled from "styled-components";
+import { Button, Paper, TextField } from "@mui/material";
 
-// 이미지 업로드 api
+// 이미지 업로드 API
 import uploadImage from "../api/uploadImage.js";
+
+// article API
+import { patchArticle, postArticle } from "../api/article.js";
 
 // 유효성검사 함수 import
 import {
@@ -15,7 +20,6 @@ import {
   checkTagListValid,
   checkThumbnailValid,
 } from "./EditFormValidator";
-import { Link } from "react-router-dom";
 
 // component
 const InputField = ({ title, desc, children }) => (
@@ -85,6 +89,8 @@ const EditForm = ({ editMode, initialArticle }) => {
   // Editor DOM 선택용
   const editorRef = useRef();
 
+  const navigate = useNavigate();
+
   // states
   const [title, setTitle] = useState("");
   const [titleError, setTitleError] = useState({
@@ -100,14 +106,16 @@ const EditForm = ({ editMode, initialArticle }) => {
   const [tagList, setTagList] = useState([{ key: 0, label: "컴공 전시회" }]);
 
   // 수정모드에서 기존값으로 state set
+  /**
+   * @Todo Article 데이터구조 수정되면 주석 해제
+   */
   const setInitialContent = () => {
-    console.log(initialArticle);
     const initialTagList = initialArticle.hashtagList.map((tagName, index) => {
       return { key: index, label: tagName };
     });
     setTitle(initialArticle.title);
-    setDescription(initialArticle.title);
-    setThumbnailURL();
+    // setDescription(initialArticle.description);
+    // setThumbnailURL(initialArticle.thumbnail);
     setTagList(initialTagList);
   };
 
@@ -117,7 +125,30 @@ const EditForm = ({ editMode, initialArticle }) => {
     }
   }, []);
 
+  // state들로 구성된 객체 반환
+  const createStateMap = () => {
+    return {
+      title: title,
+      description: description,
+      content: editorRef.current?.getInstance().getMarkdown(),
+      hashtagList: tagList.map((tag) => tag.label),
+      thumbnail: thumbnailURL,
+    };
+  };
+
+  // editMode에 따라 API request 요청
+  const updateArticle = async (editMode, data, id) => {
+    const response =
+      editMode === "post"
+        ? await postArticle(data)
+        : await patchArticle(id, data);
+    return response.data.articleId;
+  };
+
   // 등록 버튼 핸들러
+  /**
+   * @Todo Article 데이터구조 수정되면 주석 해제
+   */
   const handleSubmit = () => {
     const isTitleValid = checkTitleValid(title, titleError, setTitleError);
     const isDescriptionValid = checkDescriptionValid(
@@ -136,10 +167,17 @@ const EditForm = ({ editMode, initialArticle }) => {
       isTagListValid &&
       isThumbnailValid
     ) {
+      const data = createStateMap();
       // DB에 업로드
+      // const articleId = updateArticle(
+      //   editMode,
+      //   data,
+      //   initialArticle && initialArticle.id
+      // );
       window.alert("저장되었습니다.");
-      // 작품 상세페이지로 navigate
+      // navigate(`/proejct/${articleId}`);
     } else {
+      console.log("업로드할 수 없습니다");
       console.log(
         isTitleValid,
         isDescriptionValid,
@@ -147,8 +185,8 @@ const EditForm = ({ editMode, initialArticle }) => {
         isTagListValid,
         isThumbnailValid
       );
-      return;
     }
+    return;
   };
 
   // 프로젝트 제목 input 핸들러
