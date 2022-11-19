@@ -18,7 +18,7 @@ import { useRecoilValue } from 'recoil';
 import { userSelector } from '../atom/userAtom';
 
 const navItems = [
-  { name: '공모전', url: '/contest' },
+  // { name: '공모전', url: '/contest' },
   { name: '아카이브', url: '/archive' },
   { name: '마이페이지', url: '/mypage' },
 ];
@@ -66,7 +66,11 @@ const Header = (props) => {
         <ListItem
           disablePadding
           onClick={() => {
-            navigate('/login');
+            if (!user.isLogin) {
+              navigate('/login');
+            } else {
+              navigate('/logout');
+            }
           }}
         >
           <ListItemButton>

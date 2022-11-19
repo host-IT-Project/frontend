@@ -34,11 +34,27 @@ export const getArticles = ({ page, order, keyword, hashtag } = {}) => {
  */
 export const getArticle = (articleId) => {
   articleId && checkType(articleId, 'string');
-  return http.get(`/api/article/${articleId}`, articleId).catch((error) => {
+  return http.get(`/api/article/${articleId}`).catch((error) => {
     console.log(error.response.data);
     console.log(error.response.status);
     console.log(error.response.headers);
-    window.alert('게시물 불러오기에 실패했습니다.');
+    return {
+      article: {
+        id: 1,
+        title: '게시글1 제목입니다!!',
+        content: '게겍게겍ㄲ',
+        likesCount: 10,
+        dislikesCount: 0,
+        articleCategory: '잡담',
+        createdAt: '2022-10-14T05:21:13',
+        user: {
+          id: 1,
+          username: '게시글 작성자',
+          profileImgUrl: 'tester photo',
+        },
+        hashtagList: [],
+      },
+    };
   });
 };
 

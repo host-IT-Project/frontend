@@ -1,26 +1,20 @@
-import React, { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
-import { getArticle } from "../api/article";
-import styled from "styled-components";
+import React from 'react';
+import { Link, useParams } from 'react-router-dom';
+import styled from 'styled-components';
 
 // components import
-import PageTemplate from "../template/PageTemplate";
-import ProjectInfoBox from "../components/ProjectInfoBox";
-import TextViewer from "../components/TextViewer";
-import { Paper } from "@mui/material";
-import BackButton from "../components/BackButton";
+import PageTemplate from '../template/PageTemplate';
+import ProjectInfoBox from '../components/ProjectInfoBox';
+import TextViewer from '../components/TextViewer';
+import { Paper } from '@mui/material';
+import BackButton from '../components/BackButton';
+import { useRecoilValue } from 'recoil';
+import { selectedArticleSelector } from '../atom/articleAtom.js';
 
 const ProjectDetailPage = (props) => {
   let { id } = useParams();
-  const [article, setArticle] = useState();
 
-  useEffect(() => {
-    (async function _getArticles() {
-      const response = await getArticle(id.toString());
-      const result = response.data.article;
-      setArticle(result);
-    })();
-  }, [id]);
+  const article = useRecoilValue(selectedArticleSelector(id));
 
   return (
     <PageTemplate
