@@ -137,7 +137,7 @@ const EditForm = ({ editMode, initialArticle }) => {
   };
 
   // editMode에 따라 API request 요청
-  const sendAPIRequestByEditMode = async (editMode, data, id) => {
+  const updateArticle = async (editMode, data, id) => {
     const response =
       editMode === "post"
         ? await postArticle(data)
@@ -169,7 +169,7 @@ const EditForm = ({ editMode, initialArticle }) => {
     ) {
       const data = createStateMap();
       // DB에 업로드
-      // const articleId = sendAPIRequestByEditMode(
+      // const articleId = updateArticle(
       //   editMode,
       //   data,
       //   initialArticle && initialArticle.id
