@@ -12,6 +12,7 @@ import {
   checkThumbnailValid,
 } from "./EditFormValidator";
 import uploadImage from "../api/uploadImage.js";
+import { useEffect } from "react";
 
 // component
 const InputField = ({ title, desc, children }) => (
@@ -80,14 +81,6 @@ const EditForm = ({ editMode, initialArticle }) => {
   // Editor DOM 선택용
   const editorRef = useRef();
 
-  // { key: 0, label: "string" },
-  const initialTagList =
-    editMode === "update"
-      ? initialArticle.hashtagList.map((tagName, index) => {
-          return { key: index, label: tagName };
-        })
-      : [{ key: 0, label: "컴공 전시회" }];
-
   // states
   const [title, setTitle] = useState("");
   const [titleError, setTitleError] = useState({
@@ -100,7 +93,25 @@ const EditForm = ({ editMode, initialArticle }) => {
     message: "",
   });
   const [thumbnailURL, setThumbnailURL] = useState();
-  const [tagList, setTagList] = useState(initialTagList);
+  const [tagList, setTagList] = useState([{ key: 0, label: "컴공 전시회" }]);
+
+  // 수정모드에서 기존값으로 state set
+  const setInitialContent = () => {
+    console.log(initialArticle);
+    const initialTagList = initialArticle.hashtagList.map((tagName, index) => {
+      return { key: index, label: tagName };
+    });
+    setTitle(initialArticle.title);
+    setDescription(initialArticle.title);
+    setThumbnailURL();
+    setTagList(initialTagList);
+  };
+
+  useEffect(() => {
+    if (editMode === "patch") {
+      setInitialContent();
+    }
+  }, []);
 
   // 등록 버튼 핸들러
   const handleSubmit = () => {
@@ -115,12 +126,20 @@ const EditForm = ({ editMode, initialArticle }) => {
 
     if (
       isTitleValid &&
-      isContentValid &&
       isDescriptionValid &&
+      isContentValid &&
       isThumbnailValid
     ) {
       // DB에 업로드
-      alert("저장되었습니다.");
+      window.alert("저장되었습니다.");
+      return;
+    } else {
+      console.log(
+        isTitleValid,
+        isDescriptionValid,
+        isContentValid,
+        isThumbnailValid
+      );
       return;
     }
   };
