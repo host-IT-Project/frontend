@@ -15,6 +15,7 @@ import {
 import uploadImage from "../api/uploadImage.js";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { patchArticle, postArticle } from "../api/article.js";
 
 // component
 const InputField = ({ title, desc, children }) => (
@@ -120,6 +121,33 @@ const EditForm = ({ editMode, initialArticle }) => {
     }
   }, []);
 
+  // state들로 구성된 객체 반환
+  const createStateMap = () => {
+    return {
+      title: title,
+      description: description,
+      content: editorRef.current?.getInstance().getMarkdown(),
+      hashtagList: tagList.map((tag) => tag.label),
+      thumbnail: thumbnailURL,
+    };
+  };
+
+  // editMode에 따라 API request 요청
+  const sendAPIRequestByEditMode = (editMode, data, id) => {
+    async function _postArticle() {
+      const response = await postArticle(data);
+      return response.data.articleId;
+    }
+    async function _patchArticle() {
+      const response = await patchArticle(id, data);
+      return response.data.articleId;
+    }
+
+    const articleId = editMode === "post" ? _postArticle() : _patchArticle();
+
+    return articleId;
+  };
+
   // 등록 버튼 핸들러
   /**
    * @Todo Article 데이터구조 수정되면 주석 해제
@@ -142,10 +170,17 @@ const EditForm = ({ editMode, initialArticle }) => {
       isTagListValid &&
       isThumbnailValid
     ) {
+      const data = createStateMap();
       // DB에 업로드
+      const articleId = sendAPIRequestByEditMode(
+        editMode,
+        data,
+        initialArticle && initialArticle.id
+      );
       window.alert("저장되었습니다.");
-      // navigate(`/proejct/${articleId}`);
+      navigate(`/proejct/${articleId}`);
     } else {
+      console.log("업로드할 수 없습니다");
       console.log(
         isTitleValid,
         isDescriptionValid,
@@ -153,8 +188,8 @@ const EditForm = ({ editMode, initialArticle }) => {
         isTagListValid,
         isThumbnailValid
       );
-      return;
     }
+    return;
   };
 
   // 프로젝트 제목 input 핸들러
