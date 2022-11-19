@@ -2,6 +2,7 @@ import React from 'react';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import ProductCard from './ProductCard';
+import { useNavigate } from 'react-router-dom';
 
 const ListItem = styled('li')(({ theme }) => ({
   margin: theme.spacing(0.8),
@@ -100,42 +101,52 @@ export const cardDemoData = [
   },
 ];
 
-const ProductCardList = ({ cardData }) => (
-  <Paper
-    elevation={0}
-    className={'ProductCardList-root'}
-    sx={{
-      display: 'flex',
-      flexWrap: 'wrap',
-      justifyContent: 'center',
-      listStyle: 'none',
-      p: 0.5,
-      m: 0,
-      background: 'rgb(249,249,249)',
-    }}
-    component="ul"
-  >
-    {cardData.map((data) => {
-      return (
-        <ListItem
-          key={data.id}
-          sx={{
-            minWidth: '345px',
-            height: '320px',
-          }}
-        >
-          <ProductCard
-            image={data.image}
-            alt={data.alt}
-            title={data.title}
-            description={data.description}
-            tags={data.tags}
-          />
-        </ListItem>
-      );
-    })}
-  </Paper>
-);
+const ProductCardList = ({ cardData }) => {
+  const navigate = useNavigate();
+
+  return (
+    <Paper
+      elevation={0}
+      className={'ProductCardList-root'}
+      sx={{
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        listStyle: 'none',
+        p: 0.5,
+        m: 0,
+        background: 'rgb(249,249,249)',
+      }}
+      component="ul"
+    >
+      {cardData.map((data) => {
+        return (
+          <ListItem
+            key={data.id}
+            sx={{
+              minWidth: '345px',
+              height: '320px',
+              '&:hover': {
+                cursor: 'pointer',
+              },
+            }}
+            onClick={() => {
+              navigate(`/project/${data.id}`);
+            }}
+          >
+            <ProductCard
+              image={data.image}
+              alt={data.alt}
+              title={data.title}
+              description={data.description}
+              tags={data.tags}
+            />
+          </ListItem>
+        );
+      })}
+    </Paper>
+  );
+};
 
 ProductCardList.defaultProps = {
   cardData: cardDemoData,
