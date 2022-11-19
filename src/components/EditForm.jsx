@@ -133,19 +133,12 @@ const EditForm = ({ editMode, initialArticle }) => {
   };
 
   // editMode에 따라 API request 요청
-  const sendAPIRequestByEditMode = (editMode, data, id) => {
-    async function _postArticle() {
-      const response = await postArticle(data);
-      return response.data.articleId;
-    }
-    async function _patchArticle() {
-      const response = await patchArticle(id, data);
-      return response.data.articleId;
-    }
-
-    const articleId = editMode === "post" ? _postArticle() : _patchArticle();
-
-    return articleId;
+  const sendAPIRequestByEditMode = async (editMode, data, id) => {
+    const response =
+      editMode === "post"
+        ? await postArticle(data)
+        : await patchArticle(id, data);
+    return response.data.articleId;
   };
 
   // 등록 버튼 핸들러
