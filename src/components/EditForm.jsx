@@ -1,84 +1,150 @@
 import React, { useRef, useState } from "react";
-import style from "../styles/style.js";
-import {
-  Button,
-  FormControl,
-  Paper,
-  TextField,
-  Typography,
-} from "@mui/material";
-import { Box } from "@mui/system";
+import { Button, Paper, TextField } from "@mui/material";
 import TextEditor from "./TextEditor.jsx";
+import TagInput from "./TagInput.jsx";
+import styled from "styled-components";
 
-// 사용하는 폰트 사이즈
-const textSize = {
-  base: style.fontSizes.base,
-  title: style.fontSizes.xxl,
-};
+// 유효성검사 함수 import
+import {
+  checkTitleValid,
+  checkContentValid,
+  checkDescriptionValid,
+  checkTagListValid,
+  checkThumbnailValid,
+} from "./EditFormValidator";
+import uploadImage from "../api/uploadImage.js";
+import { useEffect } from "react";
+
+// component
+const InputField = ({ title, desc, children }) => (
+  <StyledInputField>
+    <fieldset>
+      <h2 className="input-title">{title}</h2>
+      {desc && <p className="input-description">{desc}</p>}
+      {children}
+    </fieldset>
+  </StyledInputField>
+);
+
+// styled components
+const StyledInputField = styled.div`
+  color: ${({ theme }) => theme.colors.text};
+  font-size: 1.6rem;
+  margin-bottom: 25px;
+
+  .input-title {
+    margin-top: 15px;
+    font-size: 1.8rem;
+    font-family: ${({ theme }) => theme.font.gmarketSans};
+  }
+
+  .input-description {
+    margin: 10px 0 20px;
+    font-size: 1.4rem;
+    line-height: 2rem;
+    font-weight: 300;
+    font-family: ${({ theme }) => theme.font.gmarketSans};
+    color: ${({ theme }) => theme.colors.darkgray};
+  }
+
+  .input-file {
+    font-size: 1.4rem;
+    &::file-selector-button {
+      margin-right: 20px;
+      width: 150px;
+      height: 30px;
+      background: #fff;
+      border: 1px solid rgb(77, 77, 77);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+      &:hover {
+        background: rgb(77, 77, 77);
+        color: #fff;
+      }
+    }
+  }
+`;
+
+const ButtonArray = styled.div`
+  margin-top: 80px;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  font-size: 1.4rem;
+
+  Button {
+    margin-right: 10px;
+    font-size: 1.6rem;
+  }
+`;
 
 const EditForm = ({ editMode, initialArticle }) => {
-  // 프로젝트 제목 및 소개 최소길이
-  const TITLE_MIN_LENGTH = 1;
-  const INTRO_MIN_LENGTH = 20;
-
   // Editor DOM 선택용
   const editorRef = useRef();
 
+  // states
   const [title, setTitle] = useState("");
   const [titleError, setTitleError] = useState({
     error: false,
     message: "",
   });
+  const [description, setDescription] = useState("");
+  const [descriptionError, setDescriptionError] = useState({
+    error: false,
+    message: "",
+  });
+  const [thumbnailURL, setThumbnailURL] = useState();
+  const [tagList, setTagList] = useState([{ key: 0, label: "컴공 전시회" }]);
 
-  // 텍스트 에디터 placeholder DOM
-  const introPlaceholderHTML = editorRef.current?.getInstance().getHTML();
-
-  // 프로젝트 제목 유효성 검사
-  const checkTitleValid = () => {
-    const newTitleError = { ...titleError };
-    let result = "invalid";
-
-    if (title.length < TITLE_MIN_LENGTH) {
-      newTitleError.error = true;
-      newTitleError.message = "제목을 1글자 이상 작성해주세요.";
-    } else {
-      newTitleError.error = false;
-      newTitleError.message = "";
-      result = "valid";
-    }
-    setTitleError(newTitleError);
-    return result;
+  // 수정모드에서 기존값으로 state set
+  const setInitialContent = () => {
+    console.log(initialArticle);
+    const initialTagList = initialArticle.hashtagList.map((tagName, index) => {
+      return { key: index, label: tagName };
+    });
+    setTitle(initialArticle.title);
+    setDescription(initialArticle.title);
+    setThumbnailURL();
+    setTagList(initialTagList);
   };
 
-  // 텍스트 에디터 콘텐츠 유효성 검사
-  const checkContentValid = () => {
-    const curruntContentHTML = editorRef.current?.getInstance().getHTML();
-    let result = "invalid";
-
-    if (curruntContentHTML !== introPlaceholderHTML) {
-      // curruntContentHTML을 DOM 객체로 변형 후 텍스트만 추출
-      const introText = new DOMParser()
-        .parseFromString(curruntContentHTML, "text/html")
-        .querySelector("body").innerText;
-
-      if (introText.length >= INTRO_MIN_LENGTH) {
-        result = "valid";
-      }
+  useEffect(() => {
+    if (editMode === "patch") {
+      setInitialContent();
     }
-
-    if (result === "invalid") {
-      alert("프로젝트 소개를 20자 이상 작성해주세요.");
-    }
-
-    return result;
-  };
+  }, []);
 
   // 등록 버튼 핸들러
-  const handleRegisterButton = () => {
-    if (checkTitleValid() === "valid" && checkContentValid() === "valid") {
+  const handleSubmit = () => {
+    const isTitleValid = checkTitleValid(title, titleError, setTitleError);
+    const isDescriptionValid = checkDescriptionValid(
+      description,
+      descriptionError,
+      setDescriptionError
+    );
+    const isContentValid = checkContentValid(editorRef);
+    const isTagListValid = checkTagListValid(tagList);
+    const isThumbnailValid = checkThumbnailValid(thumbnailURL);
+
+    if (
+      isTitleValid &&
+      isDescriptionValid &&
+      isContentValid &&
+      isTagListValid &&
+      isThumbnailValid
+    ) {
       // DB에 업로드
-      alert("저장되었습니다.");
-      // 이후 디테일페이지 혹은 메인페이지로 이동
+      window.alert("저장되었습니다.");
+      // 작품 상세페이지로 navigate
+    } else {
+      console.log(
+        isTitleValid,
+        isDescriptionValid,
+        isContentValid,
+        isTagListValid,
+        isThumbnailValid
+      );
       return;
     }
   };
@@ -87,80 +153,112 @@ const EditForm = ({ editMode, initialArticle }) => {
   const handleTitleInput = (event) => {
     const value = event.target.value;
     setTitle(value);
-    checkTitleValid();
+    checkTitleValid(title, titleError, setTitleError);
+  };
+
+  // 프로젝트 한줄소개 input 핸들러
+  const handleDescriptionInput = (event) => {
+    const value = event.target.value;
+    setDescription(value);
+    checkDescriptionValid(description, descriptionError, setDescriptionError);
+  };
+
+  // 썸네일 input 핸들러
+  const handleThumbnailInput = (event) => {
+    if (event.target.files && event.target.files[0]) {
+      const image = event.target.files[0];
+      (async function _uploadImage() {
+        const res = await uploadImage(image);
+        console.log(res.url);
+        setThumbnailURL(res.url);
+      })();
+    }
   };
 
   return (
     <Paper sx={{ p: 2, pl: 3, pr: 3 }}>
-      <FormControl
-        sx={{
-          width: "100%",
-        }}
-        component="fieldset"
-        variant="standard"
-      >
-        <Box mb={2}>
-          <Typography variant="h4" component={"h2"} className="a11y-hidden">
-            프로젝트 제목
-          </Typography>
+      <form>
+        <TextField
+          placeholder="프로젝트 제목"
+          variant="standard"
+          margin="normal"
+          fullWidth
+          required
+          error={titleError.error}
+          helperText={titleError.message}
+          inputProps={{
+            style: {
+              fontSize: 36,
+              fontFamily: `${({ theme }) => theme.font.gmarketSans}`,
+            },
+            maxLength: 40,
+          }}
+          sx={{ mb: 4 }}
+          defaultValue={initialArticle && initialArticle.title}
+          onInput={handleTitleInput}
+        />
+        <InputField
+          title={"한 줄 소개"}
+          desc={"프로젝트를 한줄로 간략하게 나타내보세요."}
+        >
           <TextField
-            placeholder="프로젝트 제목"
-            id="text-title"
-            variant="standard"
-            margin="normal"
-            sx={{
-              mb: 3,
-            }}
+            placeholder="예) 개발 프로젝트 아카이빙 플랫폼, 호잇"
+            variant="filled"
+            hiddenLabel
             fullWidth
             required
-            error={titleError.error}
-            helperText={titleError.message}
-            inputProps={{
-              style: { fontSize: textSize.title },
-              maxLength: 40,
-            }}
+            error={descriptionError.error}
+            helperText={descriptionError.message}
             defaultValue={initialArticle && initialArticle.title}
-            onInput={handleTitleInput}
+            inputProps={{
+              style: {
+                fontSize: 16,
+                fontFamily: `${({ theme }) => theme.font.gmarketSans}`,
+                backgroundColor: "#f7f9fc",
+              },
+              maxLength: 60,
+            }}
+            onInput={handleDescriptionInput}
           />
-        </Box>
-        <Box>
-          <Typography variant="h4" component={"h2"} mb={1}>
-            프로젝트 소개
-          </Typography>
-          <Typography variant="h6" component={"p"} mb={2}>
-            프로젝트에 대한 한줄 소개, 팀 소개, 사용한 기술 스택, 프로젝트 구조,
-            핵심 기능, 개발 중 마주친 문제들과 해결한 과정 등을 자유롭게
-            소개해보세요.
-          </Typography>
+        </InputField>
+        <InputField
+          title={"프로젝트 소개"}
+          desc={
+            "프로젝트에 대한 한줄 소개, 팀 소개, 사용한 기술 스택, 프로젝트 구조, 핵심 기능, 개발 중 마주친 문제들과 해결한 과정 등을 자유롭게 소개해보세요."
+          }
+        >
           <TextEditor
-            ref={editorRef} // DOM 선택용 useRef
+            editorRef={editorRef} // DOM 선택용 useRef
             initialContent={initialArticle && initialArticle.content}
           ></TextEditor>
-        </Box>
-        <Box
-          mt={3}
-          mb={1}
-          sx={{
-            display: "flex",
-            justifyContent: "flex-end",
-          }}
+        </InputField>
+        <InputField
+          title={"해시태그"}
+          desc={"프로젝트에 사용된 기술스택을 태그로 등록해보세요."}
         >
-          <Button
-            id="save"
-            variant="text"
-            sx={{ mr: 1, fontSize: textSize.base }}
-          >
+          <TagInput tagList={tagList} setTagList={setTagList} />
+        </InputField>
+        <InputField
+          title={"썸네일 이미지"}
+          desc={"프로젝트를 대표하는 이미지를 첨부해주세요."}
+        >
+          <input
+            type={"file"}
+            className={"input-file"}
+            required
+            onChange={handleThumbnailInput}
+            accept="image/gif, image/jpeg, image/jpg, image/png, image/webp"
+          />
+        </InputField>
+        <ButtonArray>
+          <Button variant="text" className="button-cancel">
             취소
           </Button>
-          <Button
-            variant="contained"
-            sx={{ fontSize: textSize.base }}
-            onClick={handleRegisterButton}
-          >
+          <Button variant="contained" onClick={handleSubmit}>
             등록
           </Button>
-        </Box>
-      </FormControl>
+        </ButtonArray>
+      </form>
     </Paper>
   );
 };
