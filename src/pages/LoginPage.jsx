@@ -1,15 +1,15 @@
-import React from 'react';
-import styled from 'styled-components';
-import kakaoLogin from '../assets/img/login/message-circle.png';
-import naverLogin from '../assets/img/login/btnG_아이콘사각.png';
-import googleLogin from '../assets/img/login/Google__G__Logo 1.png';
-import logo from '../assets/img/logo.png';
+import React from "react";
+import styled from "styled-components";
+import kakaoLogin from "../assets/img/login/message-circle.png";
+import naverLogin from "../assets/img/login/btnG_아이콘사각.png";
+import googleLogin from "../assets/img/login/Google__G__Logo 1.png";
+import logo from "../assets/img/logo.png";
 
-import PageTemplate from '../template/PageTemplate';
-import { Button } from '@mui/material';
+import PageTemplate from "../template/PageTemplate";
+import { Button } from "@mui/material";
 
 const LoginPage = (props) => {
-  const socialType = 'kakao';
+  const socialType = "kakao";
   // const REDIRECT_URI = `http://localhost:3000/oauth/redirect`;
   // const REDIRECT_URI = `${process.env.REACT_APP_BASE_URL}/oauth/redirect`;
   // const REDIRECT_URI = `https://www.spadeworker.site/oauth/redirect`;
@@ -23,24 +23,24 @@ const LoginPage = (props) => {
   return (
     <PageTemplate>
       <StyledLoginPage>
-        <div className={'LoginButton-container'}>
-          <img className={'logo'} src={logo} alt="호잇" />
+        <div className={"LoginButton-container"}>
+          <img className={"logo"} src={logo} alt="호잇" />
           <LoginButton
-            className={'kakaoLogin'}
+            className={"kakaoLogin"}
             href={
               // `${process.env.REACT_APP_BASE_URL}/oauth2/authorization/${socialType}?redirect_uri=${REDIRECT_URI}`
               `${BACKEND_URL}/oauth2/authorization/${socialType}?redirect_uri=${REDIRECT_URI}`
             }
           >
-            <img className={'login'} src={kakaoLogin} alt="카카오로그인" />
+            <img className={"login"} src={kakaoLogin} alt="카카오로그인" />
             <span>카카오톡 계정으로 로그인</span>
           </LoginButton>
-          <LoginButton className={'naverLogin'}>
-            <img className={'login'} src={naverLogin} alt="네이버로그인" />
+          <LoginButton className={"naverLogin"}>
+            <img className={"login"} src={naverLogin} alt="네이버로그인" />
             <span>네이버 계정으로 로그인</span>
           </LoginButton>
-          <LoginButton className={'googleLogin'}>
-            <img className={'login'} src={googleLogin} alt="구글로그인" />
+          <LoginButton className={"googleLogin"}>
+            <img className={"login"} src={googleLogin} alt="구글로그인" />
             <span>구글 계정으로 로그인</span>
           </LoginButton>
         </div>
@@ -58,7 +58,7 @@ const StyledLoginPage = styled.div`
     width: 100%;
     max-width: 40rem;
     height: 60vh;
-    margin: 3rem auto 0 auto;
+    margin: 3rem auto;
     box-shadow: 0 2px 4px 0 hsl(0deg 0% 81% / 50%);
     display: flex;
     flex-direction: column;
