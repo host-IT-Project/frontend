@@ -23,14 +23,18 @@ const EditPage = () => {
   }, [id]);
 
   return (
-    <PageTemplate>
-      {editMode === "post" ? (
-        <EditForm editMode={editMode} />
-      ) : (
-        article && <EditForm editMode={editMode} initialArticle={article} />
-      )}
-    </PageTemplate>
+    <PageTemplate
+      contents={<EditPageContents editMode={editMode} article={article} />}
+    ></PageTemplate>
   );
+};
+
+const EditPageContents = ({ editMode, article }) => {
+  if (editMode === "post") {
+    return <EditForm editMode={editMode} />;
+  } else {
+    return <EditForm editMode={editMode} initialArticle={article} />;
+  }
 };
 
 export default EditPage;
