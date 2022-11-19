@@ -14,6 +14,7 @@ import {
 } from "./EditFormValidator";
 import uploadImage from "../api/uploadImage.js";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 // component
 const InputField = ({ title, desc, children }) => (
@@ -83,6 +84,8 @@ const EditForm = ({ editMode, initialArticle }) => {
   // Editor DOM 선택용
   const editorRef = useRef();
 
+  const navigate = useNavigate();
+
   // states
   const [title, setTitle] = useState("");
   const [titleError, setTitleError] = useState({
@@ -98,14 +101,16 @@ const EditForm = ({ editMode, initialArticle }) => {
   const [tagList, setTagList] = useState([{ key: 0, label: "컴공 전시회" }]);
 
   // 수정모드에서 기존값으로 state set
+  /**
+   * @Todo Article 데이터구조 수정되면 주석 해제
+   */
   const setInitialContent = () => {
-    console.log(initialArticle);
     const initialTagList = initialArticle.hashtagList.map((tagName, index) => {
       return { key: index, label: tagName };
     });
     setTitle(initialArticle.title);
-    setDescription(initialArticle.title);
-    setThumbnailURL();
+    // setDescription(initialArticle.description);
+    // setThumbnailURL(initialArticle.thumbnail);
     setTagList(initialTagList);
   };
 
@@ -116,6 +121,9 @@ const EditForm = ({ editMode, initialArticle }) => {
   }, []);
 
   // 등록 버튼 핸들러
+  /**
+   * @Todo Article 데이터구조 수정되면 주석 해제
+   */
   const handleSubmit = () => {
     const isTitleValid = checkTitleValid(title, titleError, setTitleError);
     const isDescriptionValid = checkDescriptionValid(
@@ -136,7 +144,7 @@ const EditForm = ({ editMode, initialArticle }) => {
     ) {
       // DB에 업로드
       window.alert("저장되었습니다.");
-      // 작품 상세페이지로 navigate
+      // navigate(`/proejct/${articleId}`);
     } else {
       console.log(
         isTitleValid,
