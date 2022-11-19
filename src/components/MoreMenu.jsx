@@ -51,7 +51,7 @@ const StyledMenu = styled((props) => (
   },
 }));
 
-const MoreMenu = ({ id }) => {
+const MoreMenu = ({ articleId }) => {
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -66,7 +66,7 @@ const MoreMenu = ({ id }) => {
 
   const handleEdit = () => {
     handleClose();
-    navigate(`/edit?id=${id}`);
+    navigate(`/edit?id=${articleId}`);
   };
 
   const handleDelete = () => {
@@ -75,7 +75,7 @@ const MoreMenu = ({ id }) => {
     );
     if (confirmDelete === true) {
       (async function _deleteArticle() {
-        await deleteArticle(id);
+        await deleteArticle(articleId);
       })();
       window.alert("삭제되었습니다.");
       window.location.replace("/mypage");
@@ -84,7 +84,7 @@ const MoreMenu = ({ id }) => {
   };
 
   return (
-    <div>
+    <>
       <IconButton
         aria-label="more"
         id="more-horiz"
@@ -113,7 +113,7 @@ const MoreMenu = ({ id }) => {
           삭제
         </MenuItem>
       </StyledMenu>
-    </div>
+    </>
   );
 };
 
