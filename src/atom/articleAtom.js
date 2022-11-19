@@ -1,6 +1,7 @@
 import { atom, selector } from 'recoil';
 import { v1 } from 'uuid';
 import { getArticles } from '../api/article';
+import { cardDemoData } from '../components/ProductCardList';
 
 export const articleAtom = atom({
   key: `articleAtom/${v1()}`,
@@ -22,6 +23,7 @@ export const articleSelector = selector({
   get: async ({ get }) => {
     const { data } = await getArticles();
     console.log('selector is called');
-    return data;
+    if (!data) return cardDemoData;
+    else return data;
   },
 });
