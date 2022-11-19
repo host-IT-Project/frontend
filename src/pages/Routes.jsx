@@ -6,6 +6,7 @@ import ArchivePage from './ArchivePage';
 import ContestPage from './ContestPage';
 import MyPage from './MyPage';
 import LoginPage from './LoginPage';
+import LogoutPage from './LogoutPage';
 
 const Routes = () => {
   return (
@@ -17,6 +18,7 @@ const Routes = () => {
       <Route path="/edit" element={<EditPage />} />
       <Route path="/mypage" element={<MyPage />} />
       <Route path="/login" element={<LoginPage />} />
+      <Route path="/logout" element={<LogoutPage />} />
       <Route path="*" element={<Navigate replace to="/home" />} />
     </ReactRouterRoutes>
   );

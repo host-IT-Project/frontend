@@ -20,7 +20,7 @@ const userSelector = selector({
   get: ({ get }) => {
     return get(userAtom);
   },
-  set: ({ set }) => {
+  set: ({ set }, { isLogin }) => {
     // 추후 api.getUser(token)의 response로 변경될 예정입니다.
     const tmpUserInfo = {
       userId: 'hoit',
@@ -31,7 +31,7 @@ const userSelector = selector({
       providerType: '',
       roleType: '',
     };
-    set(userAtom, { isLogin: true, ...tmpUserInfo });
+    set(userAtom, { isLogin, ...tmpUserInfo });
   },
 });
 
