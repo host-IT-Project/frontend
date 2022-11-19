@@ -7,13 +7,14 @@ const ListItem = styled("li")(({ theme }) => ({
   margin: theme.spacing(0.5),
 }));
 
-const TagArray = ({ tags }) => (
+const TagArray = ({ tags, p = 0.5, elevation }) => (
   <Paper
+    elevation={elevation}
     sx={{
       display: "flex",
       flexWrap: "wrap",
       listStyle: "none",
-      p: 0.5,
+      p: p,
       m: 0,
     }}
     component="ul"
