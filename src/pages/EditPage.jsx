@@ -31,9 +31,9 @@ const EditPageContents = ({ editMode, article }) => {
 
   return (
     <>
-      <Link to="/archive">
-        <BackButton />
-      </Link>
+      {/* <Link to="/archive"> */}
+      <BackButton />
+      {/* </Link> */}
       <EditForm editMode={editMode} initialArticle={article} />
     </>
   );
