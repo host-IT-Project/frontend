@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { getArticle } from "../api/article";
+import BackButton from "../components/BackButton";
 import EditForm from "../components/EditForm";
 
 import PageTemplate from "../template/PageTemplate";
@@ -30,11 +31,22 @@ const EditPage = () => {
 };
 
 const EditPageContents = ({ editMode, article }) => {
-  if (editMode === "post") {
-    return <EditForm editMode={editMode} />;
-  } else {
-    return <EditForm editMode={editMode} initialArticle={article} />;
+  const formSetting = {
+    editMode: editMode,
+  };
+
+  if (editMode === "patch") {
+    formSetting.article = article;
   }
+
+  return (
+    <>
+      <Link to="/archive">
+        <BackButton />
+      </Link>
+      <EditForm editMode={editMode} />
+    </>
+  );
 };
 
 export default EditPage;
