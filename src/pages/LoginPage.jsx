@@ -17,7 +17,8 @@ const LoginPage = (props) => {
   const BACKEND_URL = `https://spadeworker.site`;
   const FRONTEND_PORT = 3000;
   // process.env.FRONTEND_PORT === null ? '' : `:${process.env.FRONTEND_PORT}`;
-  const REDIRECT_URI = `${window.location.protocol}//${window.location.hostname}:${FRONTEND_PORT}/oauth/redirect`;
+  // const REDIRECT_URI = `${window.location.protocol}//${window.location.hostname}:${FRONTEND_PORT}/oauth/redirect`;
+  const REDIRECT_URI = `http://localhost:3000/redirectKakao`;
 
   return (
     <PageTemplate>
@@ -26,28 +27,13 @@ const LoginPage = (props) => {
           <img className={'logo'} src={logo} alt="호잇" />
           <LoginButton
             className={'kakaoLogin'}
-            // onClick={(e) => {
-            //   axios.post(
-            //     `/api/v1/auth`,
-            //     {
-            //       id: 'abc',
-            //       password: ' abc',
-            //     }
-            //     // appendAuth(config)
-            //   );
-            //   // .then(handler.handle(success))
-            //   // .catch(fail)
-            // }}
+            href={
+              // `${process.env.REACT_APP_BASE_URL}/oauth2/authorization/${socialType}?redirect_uri=${REDIRECT_URI}`
+              `${BACKEND_URL}/oauth2/authorization/${socialType}?redirect_uri=${REDIRECT_URI}`
+            }
           >
-            <a
-              href={
-                // `${process.env.REACT_APP_BASE_URL}/oauth2/authorization/${socialType}?redirect_uri=${REDIRECT_URI}`
-                `${BACKEND_URL}/oauth2/authorization/${socialType}?redirect_uri=${REDIRECT_URI}`
-              }
-            >
-              <img className={'login'} src={kakaoLogin} alt="카카오로그인" />
-              <span>카카오톡 계정으로 로그인</span>
-            </a>
+            <img className={'login'} src={kakaoLogin} alt="카카오로그인" />
+            <span>카카오톡 계정으로 로그인</span>
           </LoginButton>
           <LoginButton className={'naverLogin'}>
             <img className={'login'} src={naverLogin} alt="네이버로그인" />
