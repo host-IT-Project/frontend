@@ -9,6 +9,7 @@ import {
   checkTitleValid,
   checkContentValid,
   checkDescriptionValid,
+  checkTagListValid,
   checkThumbnailValid,
 } from "./EditFormValidator";
 import uploadImage from "../api/uploadImage.js";
@@ -123,22 +124,25 @@ const EditForm = ({ editMode, initialArticle }) => {
       setDescriptionError
     );
     const isContentValid = checkContentValid(editorRef);
+    const isTagListValid = checkTagListValid(tagList);
     const isThumbnailValid = checkThumbnailValid(thumbnailURL);
 
     if (
       isTitleValid &&
       isDescriptionValid &&
       isContentValid &&
+      isTagListValid &&
       isThumbnailValid
     ) {
       // DB에 업로드
       window.alert("저장되었습니다.");
-      return;
+      // 작품 상세페이지로 navigate
     } else {
       console.log(
         isTitleValid,
         isDescriptionValid,
         isContentValid,
+        isTagListValid,
         isThumbnailValid
       );
       return;

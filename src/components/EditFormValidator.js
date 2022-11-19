@@ -55,6 +55,15 @@ export const checkContentValid = (editorRef) => {
   return true;
 };
 
+// 해시태그 유효성 검사
+export const checkTagListValid = (tagList) => {
+  if (tagList.length < 1) {
+    alert("해시태그를 1개 이상 등록해주세요.");
+    return false;
+  }
+  return true;
+};
+
 // 썸네일 이미지 유효성 검사
 export const checkThumbnailValid = (thumbnailURL) => {
   if (thumbnailURL) {
