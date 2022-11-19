@@ -1,8 +1,11 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Button, Paper, TextField } from "@mui/material";
 import TextEditor from "./TextEditor.jsx";
 import TagInput from "./TagInput.jsx";
 import styled from "styled-components";
+
+// 이미지 업로드 api
+import uploadImage from "../api/uploadImage.js";
 
 // 유효성검사 함수 import
 import {
@@ -12,8 +15,6 @@ import {
   checkTagListValid,
   checkThumbnailValid,
 } from "./EditFormValidator";
-import uploadImage from "../api/uploadImage.js";
-import { useEffect } from "react";
 
 // component
 const InputField = ({ title, desc, children }) => (
