@@ -8,7 +8,6 @@ import { Link } from "@mui/material";
 import styled from "styled-components";
 import MoreMenu from "./MoreMenu";
 import { Box } from "@mui/system";
-import style from "../styles/style.js";
 
 const StyledCard = styled(Card)`
   display: flex;
@@ -16,11 +15,15 @@ const StyledCard = styled(Card)`
   img {
     padding: 20px;
     border-radius: 30px;
-    width: 100%;
+    max-width: 250px;
   }
 
-  @media ${style.device.mobileL} {
+  @media only screen and (max-width: 600px) {
     flex-direction: column;
+
+    img {
+      max-width: 100%;
+    }
   }
 `;
 
@@ -80,13 +83,13 @@ const ProductCardHoriz = ({
       <StyledCardContent>
         <StyledBox>
           <Box>
-            <Typography gutterBottom variant="h5" component="h3">
+            <Typography gutterBottom variant="h4" component="h3">
               <StyledLink to={`/project/${id}`}>{title}</StyledLink>
             </Typography>
             <Typography
               variant="h6"
               component="p"
-              mb={2}
+              mb={1}
               color="text.secondary"
             >
               {date.year}.{date.month}. {date.day}

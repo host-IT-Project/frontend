@@ -1,5 +1,4 @@
 import React from "react";
-import MoreMenu from "../components/MoreMenu";
 import ProductCardHorizontal from "../components/ProductCardHoriz";
 import PageTemplate from "../template/PageTemplate";
 
