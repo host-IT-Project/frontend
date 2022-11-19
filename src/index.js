@@ -8,11 +8,11 @@ import { StyledEngineProvider } from '@mui/styled-engine';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <React.StrictMode>
-        <BrowserRouter>
-            <StyledEngineProvider injectFirst>
-                <App />
-            </StyledEngineProvider>
-        </BrowserRouter>
-    </React.StrictMode>
+  <React.StrictMode>
+    <BrowserRouter>
+      <StyledEngineProvider injectFirst>
+        <App />
+      </StyledEngineProvider>
+    </BrowserRouter>
+  </React.StrictMode>
 );

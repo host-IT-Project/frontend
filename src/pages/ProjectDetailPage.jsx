@@ -7,8 +7,8 @@ import styled from "styled-components";
 import PageTemplate from "../template/PageTemplate";
 import ProjectInfoBox from "../components/ProjectInfoBox";
 import TextViewer from "../components/TextViewer";
-import { Button, Paper } from "@mui/material";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { Paper } from "@mui/material";
+import BackButton from "../components/BackButton";
 
 const ProjectDetailPage = (props) => {
   let { id } = useParams();
@@ -32,9 +32,7 @@ const ProjectDetailPage = (props) => {
 const MainContents = ({ article }) => (
   <>
     <Link to="/archive">
-      <BackButton variant="text" startIcon={<ArrowBackIcon />}>
-        목록으로 돌아가기
-      </BackButton>
+      <BackButton />
     </Link>
     <ThumbnailImage
       src="https://via.placeholder.com/690x400"
@@ -48,22 +46,10 @@ const MainContents = ({ article }) => (
 );
 
 const ThumbnailImage = styled.img`
-  width: 100%;
+  max-width: 100%;
   margin: 0px auto 0px;
-  height: auto;
   object-fit: contain;
   display: block;
-`;
-
-const BackButton = styled(Button)`
-  margin-bottom: 1rem;
-  transition: all 0.5s;
-  font-size: 1.4rem;
-  color: ${({ theme }) => theme.colors.darkgray};
-
-  &:hover {
-    transform: scale(1.05);
-  }
 `;
 
 export default ProjectDetailPage;

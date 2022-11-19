@@ -1,8 +1,11 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Button, Paper, TextField } from "@mui/material";
 import TextEditor from "./TextEditor.jsx";
 import TagInput from "./TagInput.jsx";
 import styled from "styled-components";
+
+// 이미지 업로드 api
+import uploadImage from "../api/uploadImage.js";
 
 // 유효성검사 함수 import
 import {
@@ -16,6 +19,7 @@ import uploadImage from "../api/uploadImage.js";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { patchArticle, postArticle } from "../api/article.js";
+import { Link } from "react-router-dom";
 
 // component
 const InputField = ({ title, desc, children }) => (
@@ -287,9 +291,11 @@ const EditForm = ({ editMode, initialArticle }) => {
           />
         </InputField>
         <ButtonArray>
-          <Button variant="text" className="button-cancel">
-            취소
-          </Button>
+          <Link to="/archive">
+            <Button variant="text" className="button-cancel">
+              취소
+            </Button>
+          </Link>
           <Button variant="contained" onClick={handleSubmit}>
             등록
           </Button>
