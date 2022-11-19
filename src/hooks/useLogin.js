@@ -1,12 +1,10 @@
 import { useCallback } from 'react';
-import { getKakaoUser } from '../api/user';
 import { setItemToLS } from '../util/localstorage';
 
 function useLogin() {
   const fetchUserInfo = useCallback(async (token) => {
     try {
-      const userInfo = await getKakaoUser(token); //
-
+      // const userInfo = await getKakaoUser(token); //
       // set userAtom
       // const { id, draw, lose, win, nickname, profileImgUrl } = userInfo;
       // dispatch(login({ isLogin: true, id, draw, lose, win, nickname, profileImgUrl }));
