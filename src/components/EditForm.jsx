@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import styled from "styled-components";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import TextEditor from "./TextEditor.jsx";
 import TagInput from "./TagInput.jsx";
@@ -88,7 +88,6 @@ const ButtonArray = styled.div`
 const EditForm = ({ editMode, initialArticle }) => {
   // Editor DOM 선택용
   const editorRef = useRef();
-
   const navigate = useNavigate();
 
   // states
@@ -291,11 +290,15 @@ const EditForm = ({ editMode, initialArticle }) => {
           />
         </InputField>
         <ButtonArray>
-          <Link to="/archive">
-            <Button variant="text" className="button-cancel">
-              취소
-            </Button>
-          </Link>
+          <Button
+            variant="text"
+            className="button-cancel"
+            onClick={() => {
+              navigate(-1);
+            }}
+          >
+            취소
+          </Button>
           <Button variant="contained" onClick={handleSubmit}>
             등록
           </Button>
