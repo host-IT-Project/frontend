@@ -4,6 +4,7 @@ import React from "react";
 import styled from "styled-components";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import PersonIcon from "@mui/icons-material/Person";
+import style from "../styles/style.js";
 
 const ProjectInfoBox = ({ article, user }) => {
   /**
@@ -20,7 +21,7 @@ const ProjectInfoBox = ({ article, user }) => {
 
   return (
     <InfoContainer>
-      <Box>
+      <Box className="container-info">
         <h1 className={"title"}>{article.title}</h1>
         <p className="info-text">
           <PersonIcon fontSize="large" sx={{ mr: 0.7 }} />{" "}
@@ -38,7 +39,7 @@ const ProjectInfoBox = ({ article, user }) => {
           ))}
         </ul>
       </Box>
-      <Box>
+      <Box className="container-button">
         <Button className="button" variant="outlined" disabled sx={{ mr: 1 }}>
           작가에게 연락하기
         </Button>
@@ -87,6 +88,18 @@ const InfoContainer = styled.div`
   }
   .button {
     font-size: 1.4rem;
+  }
+
+  @media only screen and (max-width: 550px) {
+    flex-direction: column;
+
+    .container-button {
+      align-self: flex-end;
+    }
+
+    .button:nth-child(2) {
+      display: none;
+    }
   }
 `;
 
