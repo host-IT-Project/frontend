@@ -1,10 +1,17 @@
 import React, { useRef, useState } from "react";
-import { Button, Chip, Paper, TextField } from "@mui/material";
+import { Button, Paper, TextField } from "@mui/material";
 import TextEditor from "./TextEditor.jsx";
+import TagInput from "./TagInput.jsx";
 import styled from "styled-components";
 
 // 유효성검사 함수 import
-import { checkTitleValid, checkContentValid } from "./EditFormValidator";
+import {
+  checkTitleValid,
+  checkContentValid,
+  checkDescriptionValid,
+  checkThumbnailValid,
+} from "./EditFormValidator";
+import uploadImage from "../api/uploadImage.js";
 
 // component
 const InputField = ({ title, desc, children }) => (
@@ -69,78 +76,11 @@ const ButtonArray = styled.div`
   }
 `;
 
-const TagListItem = styled.li`
-  margin-right: 10px;
-`;
-
-const TagListContainer = styled.ul`
-  display: flex;
-  flex-wrap: wrap;
-  list-style: none;
-`;
-
-const TagInput = ({ tagList, setTagList }) => {
-  // 해시태그 제거
-  const handleTagRemove = (tagToDelete) => () => {
-    setTagList((tags) => tags.filter((tag) => tag.key !== tagToDelete.key));
-  };
-
-  // 해시태그 엔터로 추가
-  const handleTagKeyDown = (e) => {
-    const value = e.target.value;
-    if (tagList.length > 10) {
-      window.alert("태그는 10개까지 추가 가능합니다.");
-      return;
-    }
-    if (e.key === "Enter" && value) {
-      if (tagList.find((tag) => tag === value)) {
-        return;
-      }
-      setTagList([...tagList, { key: tagList.length, label: value }]);
-      console.log(tagList);
-      e.target.value = null;
-    }
-  };
-
-  return (
-    <>
-      <TextField
-        placeholder="태그를 입력하세요."
-        variant="outlined"
-        size="small"
-        hiddenLabel
-        inputProps={{
-          style: {
-            fontSize: 16,
-            backgroundColor: "#f7f9fc",
-          },
-          maxLength: 10,
-        }}
-        sx={{ mb: 2 }}
-        onKeyDown={handleTagKeyDown}
-      />
-      <TagListContainer>
-        {tagList.map((data) => {
-          return (
-            <TagListItem key={data.key + 999}>
-              <Chip
-                sx={{ fontSize: 14 }}
-                label={data.label}
-                color={"primary"}
-                onDelete={handleTagRemove(data)}
-              />
-            </TagListItem>
-          );
-        })}
-      </TagListContainer>
-    </>
-  );
-};
-
 const EditForm = ({ editMode, initialArticle }) => {
   // Editor DOM 선택용
   const editorRef = useRef();
 
+  // { key: 0, label: "string" },
   const initialTagList =
     editMode === "update"
       ? initialArticle.hashtagList.map((tagName, index) => {
@@ -148,20 +88,37 @@ const EditForm = ({ editMode, initialArticle }) => {
         })
       : [{ key: 0, label: "컴공 전시회" }];
 
+  // states
   const [title, setTitle] = useState("");
   const [titleError, setTitleError] = useState({
     error: false,
     message: "",
   });
-  // { key: 0, label: "string" },
+  const [description, setDescription] = useState("");
+  const [descriptionError, setDescriptionError] = useState({
+    error: false,
+    message: "",
+  });
+  const [thumbnailURL, setThumbnailURL] = useState();
   const [tagList, setTagList] = useState(initialTagList);
 
   // 등록 버튼 핸들러
   const handleSubmit = () => {
     const isTitleValid = checkTitleValid(title, titleError, setTitleError);
+    const isDescriptionValid = checkDescriptionValid(
+      description,
+      descriptionError,
+      setDescriptionError
+    );
     const isContentValid = checkContentValid(editorRef);
+    const isThumbnailValid = checkThumbnailValid(thumbnailURL);
 
-    if (isTitleValid && isContentValid) {
+    if (
+      isTitleValid &&
+      isContentValid &&
+      isDescriptionValid &&
+      isThumbnailValid
+    ) {
       // DB에 업로드
       alert("저장되었습니다.");
       return;
@@ -173,6 +130,25 @@ const EditForm = ({ editMode, initialArticle }) => {
     const value = event.target.value;
     setTitle(value);
     checkTitleValid(title, titleError, setTitleError);
+  };
+
+  // 프로젝트 한줄소개 input 핸들러
+  const handleDescriptionInput = (event) => {
+    const value = event.target.value;
+    setDescription(value);
+    checkDescriptionValid(description, descriptionError, setDescriptionError);
+  };
+
+  // 썸네일 input 핸들러
+  const handleThumbnailInput = (event) => {
+    if (event.target.files && event.target.files[0]) {
+      const image = event.target.files[0];
+      (async function _uploadImage() {
+        const res = await uploadImage(image);
+        console.log(res.url);
+        setThumbnailURL(res.url);
+      })();
+    }
   };
 
   return (
@@ -207,6 +183,8 @@ const EditForm = ({ editMode, initialArticle }) => {
             hiddenLabel
             fullWidth
             required
+            error={descriptionError.error}
+            helperText={descriptionError.message}
             defaultValue={initialArticle && initialArticle.title}
             inputProps={{
               style: {
@@ -214,8 +192,9 @@ const EditForm = ({ editMode, initialArticle }) => {
                 fontFamily: `${({ theme }) => theme.font.gmarketSans}`,
                 backgroundColor: "#f7f9fc",
               },
-              maxLength: 40,
+              maxLength: 60,
             }}
+            onInput={handleDescriptionInput}
           />
         </InputField>
         <InputField
@@ -239,7 +218,13 @@ const EditForm = ({ editMode, initialArticle }) => {
           title={"썸네일 이미지"}
           desc={"프로젝트를 대표하는 이미지를 첨부해주세요."}
         >
-          <input type={"file"} className={"input-file"} />
+          <input
+            type={"file"}
+            className={"input-file"}
+            required
+            onChange={handleThumbnailInput}
+            accept="image/gif, image/jpeg, image/jpg, image/png, image/webp"
+          />
         </InputField>
         <ButtonArray>
           <Button variant="text" className="button-cancel">
