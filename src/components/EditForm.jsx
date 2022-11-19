@@ -66,6 +66,7 @@ const StyledInputField = styled.div`
 `;
 
 const ButtonArray = styled.div`
+  margin-top: 80px;
   display: flex;
   justify-content: flex-end;
   width: 100%;
