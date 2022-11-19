@@ -66,7 +66,11 @@ const Header = (props) => {
         <ListItem
           disablePadding
           onClick={() => {
-            navigate('/login');
+            if (!user.isLogin) {
+              navigate('/login');
+            } else {
+              navigate('/logout');
+            }
           }}
         >
           <ListItemButton>

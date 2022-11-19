@@ -4,7 +4,7 @@ import { v1 } from 'uuid';
 const userAtom = atom({
   key: `userAtom/${v1()}`,
   default: {
-    isLogin: true,
+    isLogin: false,
     userId: 'hoit',
     username: '호잇',
     email: 'hoit@gmail.com',
