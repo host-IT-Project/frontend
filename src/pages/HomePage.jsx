@@ -1,6 +1,7 @@
 import React from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
+
 import { articleSelector } from '../atom/articleAtom';
 import BannerCarousel, { itemsForHomePage } from '../components/BannerCarousel';
 import ProductCardList from '../components/ProductCardList';

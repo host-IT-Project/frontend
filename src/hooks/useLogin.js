@@ -1,33 +1,11 @@
 import { useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { apis } from '../../apis';
-import { AxiosError } from 'axios';
+import { getKakaoUser } from '../api/user';
 import { setItemToLS } from '../util/localstorage';
 
 function useLogin() {
-  const navigate = useNavigate();
-
-  const handleLogin = async (data) => {
+  const fetchUserInfo = useCallback(async (token) => {
     try {
-      const result = await apis.signIn(data);
-      const accessToken = result.data.accessToken.split(' ')[1];
-      const refreshToken = result.data.refreshToken;
-      setTokens(accessToken, refreshToken);
-
-      await fetchUserInfo();
-      navigate('/home');
-    } catch (e) {
-      if (e instanceof AxiosError) {
-        alert(e.response?.data);
-      }
-    }
-  };
-
-  const fetchUserInfo = useCallback(async () => {
-    try {
-      const userInfo = await apis
-        .getUser() //
-        .then((res) => res.data);
+      const userInfo = await getKakaoUser(token); //
 
       // set userAtom
       // const { id, draw, lose, win, nickname, profileImgUrl } = userInfo;
@@ -43,7 +21,7 @@ function useLogin() {
     setItemToLS('refreshToken', refreshToken);
   }, []);
 
-  return { handleLogin, fetchUserInfo, setTokens };
+  return { setTokens, fetchUserInfo };
 }
 
 export default useLogin;
