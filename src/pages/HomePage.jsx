@@ -92,7 +92,6 @@ const StyledHomePage = styled.div`
   }
 `;
 const ScrollList = styled.div`
-  height: 355px;
   width: 100%;
   overflow-x: scroll;
   .ProductCardList-root {
