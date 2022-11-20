@@ -38,6 +38,7 @@ export const getArticle = (articleId) => {
     console.log(error.response.data);
     console.log(error.response.status);
     console.log(error.response.headers);
+    window.location.href = "/error";
     return {
       article: {
         id: 0,
@@ -95,7 +96,8 @@ export const postArticle = ({
       console.log(error.response.status);
       console.log(error.response.headers);
       window.alert("게시물 등록에 실패했습니다.");
-      return "failed";
+      window.location.href = "/error";
+      return;
     });
 };
 
@@ -112,6 +114,7 @@ export const deleteArticle = (articleId) => {
       console.log(error.response.status);
       console.log(error.response.headers);
       window.alert("게시물 삭제에 실패했습니다.");
+      window.location.href = "/error";
     });
 };
 
@@ -148,5 +151,6 @@ export const patchArticle = (
       console.log(error.response.status);
       console.log(error.response.headers);
       window.alert("게시물 수정에 실패했습니다.");
+      window.location.href = "/error";
     });
 };

@@ -1,10 +1,11 @@
 import React from "react";
+import PageTemplate from "../template/PageTemplate";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import styled from "styled-components";
 
 const StyledContainer = styled.div`
   margin: 0px auto;
-  margin-top: 100px;
+  margin-top: 70px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -16,7 +17,7 @@ const StyledContainer = styled.div`
     margin: 20px 0;
   }
 
-  .text-title {
+  .text-message {
     font-size: 2.4rem;
     margin-bottom: 10px;
   }
@@ -28,12 +29,25 @@ const StyledContainer = styled.div`
   }
 `;
 
-const AnnounceForm = ({ title, description }) => (
+const AnnounceForm = ({ message, description }) => (
   <StyledContainer>
     <ErrorOutlineIcon className="icon-announce" color="disabled" />
-    <p className="text-title">{title}</p>
+    <p className="text-message">{message}</p>
     {description && <p className="text-description">{description}</p>}
   </StyledContainer>
 );
 
-export default AnnounceForm;
+const ErrorPage = ({ message, description }) => (
+  <PageTemplate
+    contents={
+      <AnnounceForm message={message} description={description}></AnnounceForm>
+    }
+  ></PageTemplate>
+);
+
+ErrorPage.defaultProps = {
+  message: "요청에 실패했습니다.",
+  description: "새로고침 후 다시 시도해보세요.",
+};
+
+export default ErrorPage;
