@@ -4,10 +4,10 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import TagArray from "./TagArray";
-import { Link } from "@mui/material";
 import styled from "styled-components";
 import MoreMenu from "./MoreMenu";
 import { Box } from "@mui/system";
+import { useNavigate } from "react-router-dom";
 
 const StyledCard = styled(Card)`
   display: flex;
@@ -24,25 +24,6 @@ const StyledCard = styled(Card)`
     img {
       max-width: 100%;
     }
-  }
-`;
-
-const StyledLink = styled(Link)`
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  color: inherit;
-  &:focus,
-  &:hover,
-  &:visited,
-  &:link,
-  &:active {
-    text-decoration: none;
-    color: inherit;
-  }
-
-  &:hover {
-    cursor: pointer;
   }
 `;
 
@@ -66,9 +47,10 @@ const ProductCardHoriz = ({
   title,
   description,
   tags,
-  id,
+  articleId,
   createdAt,
 }) => {
+  const navigate = useNavigate();
   const date = {
     year: createdAt.substr(0, 4),
     month: createdAt.substr(5, 2),
@@ -77,14 +59,27 @@ const ProductCardHoriz = ({
 
   return (
     <StyledCard sx={{ display: "flex" }}>
-      <StyledLink to={`/project/${id}`}>
-        <CardMedia component="img" image={image} alt={alt} />
-      </StyledLink>
+      <CardMedia
+        component="img"
+        image={image}
+        alt={alt}
+        onClick={() => navigate(`/project/${articleId}`)}
+      />
       <StyledCardContent>
         <StyledBox>
           <Box>
-            <Typography gutterBottom variant="h4" component="h3">
-              <StyledLink to={`/project/${id}`}>{title}</StyledLink>
+            <Typography
+              gutterBottom
+              variant="h4"
+              component="h3"
+              sx={{
+                "&:hover": {
+                  cursor: "pointer",
+                },
+              }}
+              onClick={() => navigate(`/project/${articleId}`)}
+            >
+              {title}
             </Typography>
             <Typography
               variant="h6"
@@ -103,7 +98,7 @@ const ProductCardHoriz = ({
               {description}
             </Typography>
           </Box>
-          <MoreMenu articleId={id} />
+          <MoreMenu articleId={articleId} />
         </StyledBox>
         <TagArray
           tags={tags.length > 5 ? tags.slice(0, 5) : tags}
