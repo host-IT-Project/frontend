@@ -1,20 +1,22 @@
-import { Button, Chip } from "@mui/material";
-import { Box } from "@mui/system";
 import React from "react";
 import styled from "styled-components";
+import { createSearchParams, useNavigate } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { selectedArticleSelector } from "../atom/articleAtom";
+import { userSelector } from "../atom/userAtom";
+
+//components
+import { Button, Chip } from "@mui/material";
+import { Box } from "@mui/system";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import PersonIcon from "@mui/icons-material/Person";
-import style from "../styles/style.js";
-import { createSearchParams, useNavigate } from "react-router-dom";
 
-const ProjectInfoBox = ({ article, user }) => {
+const ProjectInfoBox = ({ articleId }) => {
+  const user = useRecoilValue(userSelector);
+  const article = useRecoilValue(selectedArticleSelector(articleId));
   const navigate = useNavigate();
 
-  /**
-   * @Todo 유저 식별 -> 작성자일 경우 수정하기 버튼 활성화
-   * // const isAuthor = user == article.username;
-   */
-  const isAuthor = true;
+  const isAuthor = user.id === article.user.id;
 
   const date = {
     year: article.createdAt.substr(0, 4),
