@@ -165,7 +165,6 @@ const EditForm = ({ editMode, initialArticle }) => {
       isThumbnailValid
     ) {
       const data = createStateMap();
-      // DB에 업로드
       const articleId = updateArticle(
         editMode,
         data,
