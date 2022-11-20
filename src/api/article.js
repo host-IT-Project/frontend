@@ -117,25 +117,28 @@ export const deleteArticle = (articleId) => {
  *
  * @param {string} articleId
  * @param {string} title
+ * @param {string} description
  * @param {string} content
- * @param {string} [articleCategory='질문']
  * @param {Array<string>} [hashtagList]
+ * @param {string} thumbnail
  */
 export const patchArticle = (
   articleId,
-  { title, content, articleCategory, hashtagList } = {}
+  { title, description, content, hashtagList, thumbnail } = {}
 ) => {
   articleId && checkType(articleId, "string");
   title && checkType(title, "string");
+  description && checkType(description, "string");
   content && checkType(content, "string");
-  articleCategory && checkType(articleCategory, "string");
   hashtagList && checkType(hashtagList, "object");
+  thumbnail && checkType(thumbnail, "string");
   return http
     .patch(`/api/article/${articleId}`, {
       title,
+      description,
       content,
-      articleCategory,
       hashtagList,
+      thumbnail,
     })
     .catch((error) => {
       console.log(error.response.data);
