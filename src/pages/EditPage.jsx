@@ -1,7 +1,8 @@
-import React from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { selectedArticleSelector } from "../atom/articleAtom";
+import { userSelector } from "../atom/userAtom";
 import BackButton from "../components/BackButton";
 import EditForm from "../components/EditForm";
 
@@ -9,9 +10,20 @@ import PageTemplate from "../template/PageTemplate";
 
 const EditPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
+
   const id = searchParams.get("id");
   const editMode = id ? "patch" : "post";
+
   const article = useRecoilValue(selectedArticleSelector(id));
+  const user = useRecoilValue(userSelector);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!user.isLogin) {
+      window.alert("로그인이 필요합니다.");
+      navigate("/login");
+    }
+  });
 
   return (
     <PageTemplate
@@ -31,9 +43,7 @@ const EditPageContents = ({ editMode, article }) => {
 
   return (
     <>
-      {/* <Link to="/archive"> */}
       <BackButton />
-      {/* </Link> */}
       <EditForm editMode={editMode} initialArticle={article} />
     </>
   );
