@@ -1,6 +1,6 @@
-import { cardDemoData } from '../components/ProductCardList';
-import { checkType } from '../util/type';
-import { http } from './http';
+import { cardDemoData } from "../components/ProductCardList";
+import { checkType } from "../util/type";
+import { http } from "./http";
 
 /**
  * @param {number} [page=0]
@@ -9,10 +9,10 @@ import { http } from './http';
  * @param {Array<string>} [hashtag]
  */
 export const getArticles = ({ page, order, keyword, hashtag } = {}) => {
-  page && checkType(page, 'number');
-  order && checkType(order, 'string');
-  keyword && checkType(keyword, 'string');
-  hashtag && checkType(hashtag, 'object');
+  page && checkType(page, "number");
+  order && checkType(order, "string");
+  keyword && checkType(keyword, "string");
+  hashtag && checkType(hashtag, "object");
   return http
     .get(`/api/board/1/articles`, {
       page,
@@ -33,24 +33,27 @@ export const getArticles = ({ page, order, keyword, hashtag } = {}) => {
  * @param {string} articleId
  */
 export const getArticle = (articleId) => {
-  articleId && checkType(articleId, 'string');
+  articleId && checkType(articleId, "string");
   return http.get(`/api/article/${articleId}`).catch((error) => {
     console.log(error.response.data);
     console.log(error.response.status);
     console.log(error.response.headers);
     return {
       article: {
-        id: 1,
-        title: '게시글1 제목입니다!!',
-        content: '게겍게겍ㄲ',
-        likesCount: 10,
+        id: 0,
+        title: "",
+        description: "",
+        thumbnail: "",
+        content: "",
+        likesCount: 0,
         dislikesCount: 0,
-        articleCategory: '잡담',
-        createdAt: '2022-10-14T05:21:13',
+        articleCategory: "잡담",
+        createdAt: [2000, 0, 0, 0, 0, 0],
         user: {
-          id: 1,
-          username: '게시글 작성자',
-          profileImgUrl: 'tester photo',
+          id: 0,
+          username: "",
+          profileImgUrl:
+            "http://k.kakaocdn.net/dn/bv2Nll/btrQTWzKF6E/i7Tuy0mHvzkik8RSYvTIF0/img_110x110.jpg",
         },
         hashtagList: [],
       },
@@ -71,10 +74,10 @@ export const postArticle = ({
   articleCategory,
   hashtagList,
 } = {}) => {
-  title && checkType(title, 'string');
-  content && checkType(content, 'string');
-  articleCategory && checkType(articleCategory, 'string');
-  hashtagList && checkType(hashtagList, 'object');
+  title && checkType(title, "string");
+  content && checkType(content, "string");
+  articleCategory && checkType(articleCategory, "string");
+  hashtagList && checkType(hashtagList, "object");
   return http
     .post(`/api/board/1/articles`, {
       title,
@@ -86,7 +89,7 @@ export const postArticle = ({
       console.log(error.response.data);
       console.log(error.response.status);
       console.log(error.response.headers);
-      window.alert('게시물 등록에 실패했습니다.');
+      window.alert("게시물 등록에 실패했습니다.");
     });
 };
 
@@ -95,14 +98,14 @@ export const postArticle = ({
  * @param {string} articleId
  */
 export const deleteArticle = (articleId) => {
-  articleId && checkType(articleId, 'string');
+  articleId && checkType(articleId, "string");
   return http
     .delete(`/api/article/${articleId}`) //
     .catch((error) => {
       console.log(error.response.data);
       console.log(error.response.status);
       console.log(error.response.headers);
-      window.alert('게시물 삭제에 실패했습니다.');
+      window.alert("게시물 삭제에 실패했습니다.");
     });
 };
 
@@ -118,11 +121,11 @@ export const patchArticle = (
   articleId,
   { title, content, articleCategory, hashtagList } = {}
 ) => {
-  articleId && checkType(articleId, 'string');
-  title && checkType(title, 'string');
-  content && checkType(content, 'string');
-  articleCategory && checkType(articleCategory, 'string');
-  hashtagList && checkType(hashtagList, 'object');
+  articleId && checkType(articleId, "string");
+  title && checkType(title, "string");
+  content && checkType(content, "string");
+  articleCategory && checkType(articleCategory, "string");
+  hashtagList && checkType(hashtagList, "object");
   return http
     .patch(`/api/article/${articleId}`, {
       title,
@@ -134,6 +137,6 @@ export const patchArticle = (
       console.log(error.response.data);
       console.log(error.response.status);
       console.log(error.response.headers);
-      window.alert('게시물 수정에 실패했습니다.');
+      window.alert("게시물 수정에 실패했습니다.");
     });
 };
