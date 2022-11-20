@@ -133,6 +133,7 @@ ProjectInfoBox.defaultProps = {
 
 const ColoredButton = styled(Button)`
   background-color: ${({ theme }) => theme.colors.primary};
+  word-break: keep-all;
 `;
 
 export default ProjectInfoBox;
