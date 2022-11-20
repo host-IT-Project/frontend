@@ -7,7 +7,6 @@ import PageTemplate from "../template/PageTemplate";
 import { Button } from "@mui/material";
 
 const LoginPage = (props) => {
-  const socialType = "google";
   const BACKEND_URL = process.env.REACT_APP_BASE_URL;
   const FRONTEND_PORT =
     process.env.REACT_APP_FRONTEND_PORT === null
@@ -22,12 +21,15 @@ const LoginPage = (props) => {
           <img className={"logo"} src={logo} alt="호잇" />
           <LoginButton
             className={"kakaoLogin"}
-            href={`${BACKEND_URL}/oauth2/authorization/${socialType}?redirect_uri=${REDIRECT_URI}`}
+            href={`${BACKEND_URL}/oauth2/authorization/kakao?redirect_uri=${REDIRECT_URI}`}
           >
             <img className={"login"} src={kakaoLogin} alt="카카오로그인" />
             <span>카카오톡 계정으로 로그인</span>
           </LoginButton>
-          <LoginButton className={"googleLogin"}>
+          <LoginButton
+            className={"googleLogin"}
+            href={`${BACKEND_URL}/oauth2/authorization/google?redirect_uri=${REDIRECT_URI}`}
+          >
             <img className={"login"} src={googleLogin} alt="구글로그인" />
             <span>구글 계정으로 로그인</span>
           </LoginButton>

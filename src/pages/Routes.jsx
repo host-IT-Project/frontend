@@ -7,7 +7,7 @@ import ContestPage from "./ContestPage";
 import MyPage from "./MyPage";
 import LoginPage from "./LoginPage";
 import LogoutPage from "./LogoutPage";
-import RedirectKakao from "../components/login/RedirectKakao";
+import RedirectLogin from "../components/login/RedirectLogin";
 
 const Routes = () => {
   return (
@@ -20,7 +20,7 @@ const Routes = () => {
       <Route path="/mypage" element={<MyPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/logout" element={<LogoutPage />} />
-      <Route path="/oauth/redirect" element={<RedirectKakao />} />
+      <Route path="/oauth/redirect" element={<RedirectLogin />} />
       <Route path="*" element={<Navigate replace to="/home" />} />
     </ReactRouterRoutes>
   );
