@@ -2,6 +2,8 @@ import React from "react";
 import Header from "../components/Header";
 import styled from "styled-components";
 import Footer from "../components/Footer";
+import { useLocation } from "react-router-dom";
+import NewArticleButton from "../components/NewArticleButton";
 
 const PageTemplateContainer = styled.div`
   box-sizing: border-box;
@@ -22,6 +24,9 @@ const ContentsWrapper = styled.div`
 `;
 
 const PageTemplate = ({ children, contents }) => {
+  const location = useLocation();
+  const isEditPage = location.pathname.includes("/edit");
+
   return (
     <>
       <PageTemplateContainer>
@@ -30,6 +35,11 @@ const PageTemplate = ({ children, contents }) => {
         {contents && <ContentsWrapper>{contents}</ContentsWrapper>}
       </PageTemplateContainer>
       <Footer />
+      {!isEditPage && (
+        <aside className="button-new">
+          <NewArticleButton />
+        </aside>
+      )}
     </>
   );
 };
