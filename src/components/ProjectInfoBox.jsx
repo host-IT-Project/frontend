@@ -45,9 +45,6 @@ const ProjectInfoBox = ({ articleId }) => {
         </ul>
       </Box>
       <Box className="container-button">
-        <Button className="button" variant="outlined" disabled sx={{ mr: 1 }}>
-          작가에게 연락하기
-        </Button>
         {isAuthor && (
           <ColoredButton
             className="button"
