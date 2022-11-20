@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import TagArray from "./TagArray";
 
 const ProductCard = ({ thumbnailUrl, title, description, tags }) => (
-  <Card sx={{ maxWidth: 345, borderRadius: "15px" }}>
+  <Card sx={{ maxWidth: 345, borderRadius: "15px", position: "relative" }}>
     <CardMedia component="img" alt={title} height="200" image={thumbnailUrl} />
     <CardContent>
       <Typography gutterBottom variant="h5" component="div">
