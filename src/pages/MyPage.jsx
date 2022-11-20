@@ -5,23 +5,32 @@ import { userSelector } from "../atom/userAtom";
 import PageTemplate from "../template/PageTemplate";
 import ProductCardList from "../components/ProductCardList";
 import styled from "styled-components";
+import { useState } from "react";
+import { getArticles } from "../api/article";
 
 const MyPage = (props) => {
   const user = useRecoilValue(userSelector);
   const navigate = useNavigate();
 
+  const [myArticles, setMyArticles] = useState();
+
   useEffect(() => {
     if (!user.isLogin) {
       navigate("/login");
     }
-  }, []);
+    (async function _getArticles() {
+      const articles = await getArticles({ keyword: user.username });
+      setMyArticles(articles);
+      console.log(myArticles);
+    })();
+  }, [user]);
 
   return (
     <PageTemplate
       contents={
         <>
           <StyledHeading>My Porfolio</StyledHeading>
-          <ProductCardList horiz={true} />
+          {myArticles && <ProductCardList cardData={myArticles} horiz={true} />}
         </>
       }
     ></PageTemplate>
