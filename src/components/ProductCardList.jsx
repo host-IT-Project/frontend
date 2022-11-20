@@ -130,7 +130,6 @@ const ProductCardList = ({ cardData, horiz = false }) => {
             sx={{
               width: horiz && "100%",
               minWidth: !horiz && "345px",
-              height: !horiz && "320px",
               "&:hover": {
                 cursor: "pointer",
               },

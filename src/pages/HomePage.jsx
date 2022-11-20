@@ -83,16 +83,17 @@ const HomePage = (props) => {
 
 const StyledHomePage = styled.div`
   .title {
+    margin-left: 1.7rem;
+    margin-bottom: 8px;
     font-size: 2.5em;
     font-weight: bolder;
-    margin-left: 1.7rem;
+    word-break: keep-all;
   }
   .ScollList-container {
-    margin-bottom: 3rem;
+    margin-bottom: 3.4rem;
   }
 `;
 const ScrollList = styled.div`
-  height: 355px;
   width: 100%;
   overflow-x: scroll;
   .ProductCardList-root {
