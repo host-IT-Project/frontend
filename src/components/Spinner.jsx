@@ -1,7 +1,7 @@
 import { ChaoticOrbit } from "@uiball/loaders";
 import styled from "styled-components";
 
-const SpinerContainer = styled.div`
+const SpinnerContainer = styled.div`
   position: fixed;
   top: 0;
   left: 0;
@@ -20,10 +20,10 @@ const SpinerContainer = styled.div`
   padding-bottom: 5vh;
 `;
 
-const Spiner = (props) => (
-  <SpinerContainer>
+const Spinner = (props) => (
+  <SpinnerContainer>
     <ChaoticOrbit className="spiner" size={40} speed={1.8} color="#8c52ff" />
-  </SpinerContainer>
+  </SpinnerContainer>
 );
 
-export default Spiner;
+export default Spinner;
