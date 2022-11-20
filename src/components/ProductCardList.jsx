@@ -121,6 +121,9 @@ const ProductCardList = ({ cardData, horiz = false }) => {
       component="ul"
     >
       {cardData.map((data) => {
+        const tags = data.hashtagList.map((tag, i) => {
+          return { key: i, label: tag, href: "#" };
+        });
         return (
           <ListItem
             key={data.id}
@@ -138,21 +141,19 @@ const ProductCardList = ({ cardData, horiz = false }) => {
           >
             {horiz ? (
               <ProductCardHoriz
-                image={data.image}
-                alt={data.alt}
+                thumbnailUrl={data.thumbnail}
                 title={data.title}
                 description={data.description}
-                tags={data.tags}
+                tags={tags}
                 articleId={data.id}
                 createdAt={data.createdAt}
               />
             ) : (
               <ProductCard
-                image={data.image}
-                alt={data.alt}
+                thumbnailUrl={data.thumbnail}
                 title={data.title}
                 description={data.description}
-                tags={data.tags}
+                tags={tags}
               />
             )}
           </ListItem>
