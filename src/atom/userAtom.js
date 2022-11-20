@@ -1,17 +1,17 @@
-import { atom, selector } from 'recoil';
-import { v1 } from 'uuid';
+import { atom, selector } from "recoil";
+import { v1 } from "uuid";
 
 const userAtom = atom({
   key: `userAtom/${v1()}`,
   default: {
     isLogin: false,
-    userId: 'hoit',
-    username: '호잇',
-    email: 'hoit@gmail.com',
+    userId: "hoit",
+    username: "호잇",
+    email: "hoit@gmail.com",
     profileImageUrl:
-      'https://i.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U',
-    providerType: '',
-    roleType: '',
+      "https://i.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U",
+    providerType: "",
+    roleType: "",
   },
 });
 
@@ -23,13 +23,13 @@ const userSelector = selector({
   set: ({ set }, { isLogin }) => {
     // 추후 api.getUser(token)의 response로 변경될 예정입니다.
     const tmpUserInfo = {
-      userId: 'hoit',
-      username: '호잇',
-      email: 'hoit@gmail.com',
+      userId: "141",
+      username: "호잇",
+      email: "hoit@gmail.com",
       profileImageUrl:
-        'https://i.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U',
-      providerType: '',
-      roleType: '',
+        "https://i.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U",
+      providerType: "",
+      roleType: "",
     };
     set(userAtom, { isLogin, ...tmpUserInfo });
   },

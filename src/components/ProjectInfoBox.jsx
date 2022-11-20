@@ -16,7 +16,7 @@ const ProjectInfoBox = ({ articleId }) => {
   const article = useRecoilValue(selectedArticleSelector(articleId));
   const navigate = useNavigate();
 
-  const isAuthor = user.id === article.user.id;
+  const isAuthor = user.userId === article.user.id + "";
 
   const date = {
     year: article && article.createdAt[0],
