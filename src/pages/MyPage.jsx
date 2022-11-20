@@ -20,8 +20,8 @@ const MyPage = (props) => {
       navigate("/login");
     }
     (async function _getArticles() {
-      const articles = await getArticles({ keyword: user.username });
-      setMyArticles(articles);
+      const { data } = await getArticles({ keyword: user.username });
+      setMyArticles(data);
     })();
   }, [user]);
 
