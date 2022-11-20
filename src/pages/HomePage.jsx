@@ -1,8 +1,8 @@
 import React from "react";
-import { useRecoilValue } from "recoil";
+import { useNavigate } from "react-router-dom";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import styled from "styled-components";
-
-import { articleSelector } from "../atom/articleAtom";
+import { articleSelector, filteredArticlesAtom } from "../atom/articleAtom";
 import BannerCarousel, { itemsForHomePage } from "../components/BannerCarousel";
 import ProductCardList from "../components/ProductCardList";
 import SearchForm from "../components/search/SearchForm";
@@ -10,12 +10,35 @@ import PageTemplate from "../template/PageTemplate";
 
 const HomePage = (props) => {
   const articles = useRecoilValue(articleSelector);
+  const setFilteredArticles = useSetRecoilState(filteredArticlesAtom);
+  const navigate = useNavigate();
+
+  // ArchivePage의 handleSubmitInput와 중복됨
+  const handleSubmitInput = (newInputValue) => {
+    const filteredArticles = articles.filter(({ title }) =>
+      title.includes(newInputValue)
+    );
+    if (newInputValue && newInputValue.trim() !== "") {
+      setFilteredArticles((oldState) => ({
+        ...oldState,
+        keyword: newInputValue,
+        articles: filteredArticles,
+      }));
+    } else {
+      setFilteredArticles((oldState) => ({
+        ...oldState,
+        keyword: null,
+        articles: [],
+      }));
+    }
+    navigate("/archive");
+  };
 
   return (
     <PageTemplate
       contents={
         <StyledHomePage>
-          <SearchForm />
+          <SearchForm onSubmitInput={handleSubmitInput} />
           <div className="ScollList-container">
             <h1 className={"title"}>
               컴퓨터 공학과 전시회: 11월 23일까지 제출이에요⏰
