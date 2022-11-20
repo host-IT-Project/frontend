@@ -5,8 +5,11 @@ import styled from "styled-components";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import PersonIcon from "@mui/icons-material/Person";
 import style from "../styles/style.js";
+import { createSearchParams, useNavigate } from "react-router-dom";
 
 const ProjectInfoBox = ({ article, user }) => {
+  const navigate = useNavigate();
+
   /**
    * @Todo 유저 식별 -> 작성자일 경우 수정하기 버튼 활성화
    * // const isAuthor = user == article.username;
@@ -48,6 +51,14 @@ const ProjectInfoBox = ({ article, user }) => {
             className="button"
             variant="contained"
             sx={{ boxShadow: 0 }}
+            onClick={() => {
+              navigate({
+                pathname: "/edit",
+                search: `?${createSearchParams({
+                  id: article.id,
+                })}`,
+              });
+            }}
           >
             수정하기
           </ColoredButton>

@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { getArticle } from "../api/article";
+import { useRecoilValue } from "recoil";
+import { selectedArticleSelector } from "../atom/articleAtom";
 import BackButton from "../components/BackButton";
 import EditForm from "../components/EditForm";
 
@@ -10,18 +11,7 @@ const EditPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const id = searchParams.get("id");
   const editMode = id ? "patch" : "post";
-
-  const [article, setArticle] = useState();
-
-  useEffect(() => {
-    if (id !== null) {
-      (async function _getArticles() {
-        const response = await getArticle(id.toString());
-        const result = response.data.article;
-        setArticle(result);
-      })();
-    }
-  }, [id]);
+  const article = useRecoilValue(selectedArticleSelector(id));
 
   return (
     <PageTemplate
@@ -41,10 +31,10 @@ const EditPageContents = ({ editMode, article }) => {
 
   return (
     <>
-      <Link to="/archive">
-        <BackButton />
-      </Link>
-      <EditForm editMode={editMode} />
+      {/* <Link to="/archive"> */}
+      <BackButton />
+      {/* </Link> */}
+      <EditForm editMode={editMode} initialArticle={article} />
     </>
   );
 };
