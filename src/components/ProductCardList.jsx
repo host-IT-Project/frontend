@@ -2,6 +2,7 @@ import React from "react";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import ProductCard from "./ProductCard";
+import ProductCardHoriz from "./ProductCardHoriz";
 import { useNavigate } from "react-router-dom";
 
 const ListItem = styled("li")(({ theme }) => ({
@@ -101,7 +102,7 @@ export const cardDemoData = [
   },
 ];
 
-const ProductCardList = ({ cardData }) => {
+const ProductCardList = ({ cardData, horiz = false }) => {
   const navigate = useNavigate();
 
   return (
@@ -124,23 +125,36 @@ const ProductCardList = ({ cardData }) => {
           <ListItem
             key={data.id}
             sx={{
-              minWidth: "345px",
-              height: "320px",
+              width: horiz && "100%",
+              minWidth: !horiz && "345px",
+              height: !horiz && "320px",
               "&:hover": {
                 cursor: "pointer",
               },
             }}
             onClick={() => {
-              navigate(`/project/${data.id}`);
+              !horiz && navigate(`/project/${data.id}`);
             }}
           >
-            <ProductCard
-              thumbnailUrl={data.thumbnailUrl}
-              alt={data.alt}
-              title={data.title}
-              description={data.description}
-              tags={data.tags}
-            />
+            {horiz ? (
+              <ProductCardHoriz
+                image={data.image}
+                alt={data.alt}
+                title={data.title}
+                description={data.description}
+                tags={data.tags}
+                articleId={data.id}
+                createdAt={data.createdAt}
+              />
+            ) : (
+              <ProductCard
+                image={data.image}
+                alt={data.alt}
+                title={data.title}
+                description={data.description}
+                tags={data.tags}
+              />
+            )}
           </ListItem>
         );
       })}
