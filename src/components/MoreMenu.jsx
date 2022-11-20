@@ -75,7 +75,7 @@ const MoreMenu = ({ articleId }) => {
     );
     if (confirmDelete === true) {
       (async function _deleteArticle() {
-        await deleteArticle(articleId);
+        await deleteArticle(articleId.toString());
       })();
       window.alert("삭제되었습니다.");
       window.location.replace("/mypage");
