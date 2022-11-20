@@ -56,7 +56,6 @@ const ProductCardHoriz = ({
     month: createdAt.substr(5, 2),
     day: createdAt.substr(8, 2),
   };
-  const navigate = useNavigate();
 
   return (
     <StyledCard sx={{ display: "flex", borderRadius: 5 }}>
