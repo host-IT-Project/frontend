@@ -11,8 +11,8 @@ const checkfileSize = (file) => {
 // cloudynary 이미지 스토리지에 image upload
 const uploadImage = async (file) => {
   if (!checkfileSize(file)) {
-    window.alert("이미지 용량은 2MB를 초과할 수 없습니다.");
-    return;
+    window.alert("이미지 용량은 2MB를 초과할 수 없습니다. 다시 등록해주세요.");
+    return null;
   }
   const formData = new FormData();
   formData.append("file", file);
