@@ -10,6 +10,7 @@ import ProjectInfoBox from "../components/ProjectInfoBox";
 import TextViewer from "../components/TextViewer";
 import { Paper } from "@mui/material";
 import BackButton from "../components/BackButton";
+import Spinner from "../components/Spinner";
 
 const ProjectDetailPage = (props) => {
   let { id } = useParams();
@@ -17,7 +18,9 @@ const ProjectDetailPage = (props) => {
 
   return (
     <PageTemplate
-      contents={article && <MainContents article={article} />}
+      contents={
+        <>{article ? <MainContents article={article} /> : <Spinner />}</>
+      }
     ></PageTemplate>
   );
 };

@@ -8,6 +8,7 @@ import styled from "styled-components";
 import { useState } from "react";
 import { getArticles } from "../api/article";
 import { Divider } from "@mui/material";
+import Spinner from "../components/Spinner";
 
 const MyPage = (props) => {
   const user = useRecoilValue(userSelector);
@@ -29,6 +30,7 @@ const MyPage = (props) => {
     <PageTemplate
       contents={
         <>
+          {!myArticles && <Spinner />}
           <StyledHeading>My Porfolio</StyledHeading>
           <Divider variant="middle" sx={{ mb: 2 }} />
           {myArticles && <Content articles={myArticles} />}

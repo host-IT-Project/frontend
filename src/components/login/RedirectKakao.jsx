@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
-import useKakoAuth from '../../hooks/useKakaoAuth';
-import LoadingSpinner from '../LoadingSpinner';
+import { useEffect } from "react";
+import useKakoAuth from "../../hooks/useKakaoAuth";
+import Spinner from "../Spinner";
 
 const RedirectLogin = () => {
   const { handleLogin } = useKakoAuth();
@@ -8,7 +8,7 @@ const RedirectLogin = () => {
     handleLogin();
   }, []);
 
-  return <LoadingSpinner />;
+  return <Spinner />;
 };
 
 export default RedirectLogin;
