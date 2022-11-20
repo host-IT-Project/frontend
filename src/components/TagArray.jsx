@@ -13,22 +13,6 @@ const StyledPaper = styled(Paper)`
   overflow: auto;
   list-style: none;
 
-  &::after {
-    content: "";
-    position: absolute;
-    z-index: 1;
-    bottom: 0;
-    right: 0;
-    pointer-events: none;
-    background-image: linear-gradient(
-      to right,
-      rgba(255, 255, 255, 0),
-      rgba(255, 255, 255, 1) 70%
-    );
-    width: 60px;
-    height: 48px;
-  }
-
   &::-webkit-scrollbar {
     display: none;
   }
