@@ -1,12 +1,12 @@
-import Axios from 'axios';
-import { getItemFromLS } from '../util/localstorage';
+import Axios from "axios";
+import { getItemFromLS } from "../util/localstorage";
 
 const axios = Axios.create({
   baseURL: `${process.env.REACT_APP_BASE_URL}`,
 });
 
 const appendAuth = (config) => {
-  const accessToken = getItemFromLS('accessToken');
+  const accessToken = getItemFromLS("accessToken");
   if (accessToken) {
     if (!config) config = { headers: {} };
     if (!config.headers) config.headers = {};
@@ -20,7 +20,7 @@ export const http = {
     return axios.get(url, appendAuth(config)).then((res) => res.data);
   },
   post: function post(url, data, config) {
-    return axios.post(url, appendAuth(config)).then((res) => res.data);
+    return axios.post(url, data, appendAuth(config)).then((res) => res.data);
   },
   delete: function del(url, config) {
     return axios.delete(url, appendAuth(config)).then((res) => res.data);

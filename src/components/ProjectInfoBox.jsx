@@ -19,9 +19,9 @@ const ProjectInfoBox = ({ articleId }) => {
   const isAuthor = user.id === article.user.id;
 
   const date = {
-    year: article.createdAt.substr(0, 4),
-    month: article.createdAt.substr(5, 2),
-    day: article.createdAt.substr(8, 2),
+    year: article && article.createdAt[0],
+    month: article && article.createdAt[1],
+    day: article && article.createdAt[2],
   };
 
   return (
