@@ -82,7 +82,8 @@ export const postArticle = ({
   hashtagList && checkType(hashtagList, "object");
   thumbnail && checkType(thumbnail, "string");
   return http
-    .post(`/api/board/1/articles`, {
+    .post(`/api/board/1/article`, {
+      articleCategory: "질문",
       title,
       description,
       content,
@@ -94,6 +95,7 @@ export const postArticle = ({
       console.log(error.response.status);
       console.log(error.response.headers);
       window.alert("게시물 등록에 실패했습니다.");
+      return "failed";
     });
 };
 
@@ -134,6 +136,7 @@ export const patchArticle = (
   thumbnail && checkType(thumbnail, "string");
   return http
     .patch(`/api/article/${articleId}`, {
+      articleCategory: "질문",
       title,
       description,
       content,
