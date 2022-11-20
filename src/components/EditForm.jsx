@@ -206,7 +206,6 @@ const EditForm = ({ editMode, initialArticle }) => {
       const image = event.target.files[0];
       (async function _uploadImage() {
         const res = await uploadImage(image);
-        console.log(res.url);
         setThumbnailURL(res.url);
       })();
     }

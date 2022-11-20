@@ -30,7 +30,6 @@ const TagInput = ({ tagList, setTagList }) => {
         return;
       }
       setTagList([...tagList, { key: tagList.length, label: value }]);
-      console.log(tagList);
       e.target.value = null;
     }
   };
