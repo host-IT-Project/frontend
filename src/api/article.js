@@ -64,26 +64,30 @@ export const getArticle = (articleId) => {
 /**
  *
  * @param {string} title
+ * @param {string} description
  * @param {string} content
- * @param {string} [articleCategory='질문']
  * @param {Array<string>} [hashtagList]
+ * @param {string} thumbnail
  */
 export const postArticle = ({
   title,
+  description,
   content,
-  articleCategory,
   hashtagList,
+  thumbnail,
 } = {}) => {
   title && checkType(title, "string");
+  description && checkType(description, "string");
   content && checkType(content, "string");
-  articleCategory && checkType(articleCategory, "string");
   hashtagList && checkType(hashtagList, "object");
+  thumbnail && checkType(thumbnail, "string");
   return http
     .post(`/api/board/1/articles`, {
       title,
+      description,
       content,
-      articleCategory,
       hashtagList,
+      thumbnail,
     })
     .catch((error) => {
       console.log(error.response.data);
