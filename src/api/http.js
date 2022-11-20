@@ -1,12 +1,12 @@
-import Axios from 'axios';
-import { getItemFromLS } from '../util/localstorage';
+import Axios from "axios";
+import { getItemFromLS } from "../util/localstorage";
 
 const axios = Axios.create({
   baseURL: `${process.env.REACT_APP_BASE_URL}`,
 });
 
 const appendAuth = (config) => {
-  const accessToken = getItemFromLS('accessToken');
+  const accessToken = getItemFromLS("accessToken");
   if (accessToken) {
     if (!config) config = { headers: {} };
     if (!config.headers) config.headers = {};
