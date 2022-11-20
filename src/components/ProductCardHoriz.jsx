@@ -8,13 +8,12 @@ import styled from "styled-components";
 import MoreMenu from "./MoreMenu";
 import { Box } from "@mui/system";
 import { useNavigate } from "react-router-dom";
+import { Divider } from "@mui/material";
 
 const StyledCard = styled(Card)`
   display: flex;
 
   img {
-    padding: 20px;
-    border-radius: 30px;
     max-width: 250px;
   }
 
@@ -28,6 +27,7 @@ const StyledCard = styled(Card)`
 `;
 
 const StyledCardContent = styled(CardContent)`
+  padding: 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -58,7 +58,7 @@ const ProductCardHoriz = ({
   };
 
   return (
-    <StyledCard sx={{ display: "flex" }}>
+    <StyledCard sx={{ display: "flex", borderRadius: 5 }}>
       <CardMedia
         component="img"
         image={image}
@@ -82,7 +82,7 @@ const ProductCardHoriz = ({
               {title}
             </Typography>
             <Typography
-              variant="h6"
+              variant="h5"
               component="p"
               mb={1}
               color="text.secondary"
@@ -90,16 +90,17 @@ const ProductCardHoriz = ({
               {date.year}.{date.month}. {date.day}
             </Typography>
             <Typography
-              variant="h6"
+              variant="h5"
               component="p"
               color="text.secondary"
-              mb={2}
+              mb={1}
             >
               {description}
             </Typography>
           </Box>
           <MoreMenu articleId={articleId} />
         </StyledBox>
+        <Divider variant="fullWidth" sx={{ mb: 1 }} />
         <TagArray
           tags={tags.length > 5 ? tags.slice(0, 5) : tags}
           p={0}

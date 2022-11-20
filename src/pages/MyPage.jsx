@@ -30,7 +30,7 @@ const MyPage = (props) => {
       contents={
         <>
           <StyledHeading>My Porfolio</StyledHeading>
-          <Divider variant="middle" sx={{ mb: 4 }} />
+          <Divider variant="middle" sx={{ mb: 2 }} />
           {myArticles && <Content articles={myArticles} />}
         </>
       }
@@ -47,6 +47,7 @@ const StyledHeading = styled.h1`
 `;
 
 const Announce = styled.p`
+  margin-top: 80px;
   text-align: center;
   font-family: ${({ theme }) => theme.font.gmarketSans};
   font-size: 1.8rem;
