@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { useRecoilValue } from "recoil";
 import { selectedArticleSelector } from "../atom/articleAtom.js";
-import { userSelector } from "../atom/userAtom";
 
 // components import
 import PageTemplate from "../template/PageTemplate";
