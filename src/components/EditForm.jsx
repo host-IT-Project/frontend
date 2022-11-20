@@ -276,7 +276,9 @@ const EditForm = ({ editMode, initialArticle }) => {
         </InputField>
         <InputField
           title={"썸네일 이미지"}
-          desc={"프로젝트를 대표하는 이미지를 첨부해주세요."}
+          desc={
+            "프로젝트를 대표하는 이미지를 첨부해주세요. 645x400 비율의 사이즈를 권장합니다. (2MB 이하)"
+          }
         >
           <input
             type={"file"}
