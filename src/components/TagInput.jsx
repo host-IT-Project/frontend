@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 const TagListItem = styled.li`
   margin-right: 10px;
+  margin-bottom: 10px;
 `;
 
 const TagListContainer = styled.ul`
@@ -30,7 +31,6 @@ const TagInput = ({ tagList, setTagList }) => {
         return;
       }
       setTagList([...tagList, { key: tagList.length, label: value }]);
-      console.log(tagList);
       e.target.value = null;
     }
   };

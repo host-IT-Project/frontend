@@ -128,7 +128,7 @@ export const patchArticle = (
   articleId,
   { title, description, content, hashtagList, thumbnail } = {}
 ) => {
-  articleId && checkType(articleId, "string");
+  // articleId && checkType(articleId, "string");
   title && checkType(title, "string");
   description && checkType(description, "string");
   content && checkType(content, "string");

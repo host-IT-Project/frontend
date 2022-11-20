@@ -20,6 +20,7 @@ import {
   checkTagListValid,
   checkThumbnailValid,
 } from "./EditFormValidator";
+import { useCallback } from "react";
 
 // component
 const InputField = ({ title, desc, children }) => (
@@ -105,24 +106,21 @@ const EditForm = ({ editMode, initialArticle }) => {
   const [tagList, setTagList] = useState([{ key: 0, label: "컴공 전시회" }]);
 
   // 수정모드에서 기존값으로 state set
-  /**
-   * @Todo Article 데이터구조 수정되면 주석 해제
-   */
-  const setInitialContent = () => {
+  const setInitialContent = useCallback(() => {
     const initialTagList = initialArticle.hashtagList.map((tagName, index) => {
       return { key: index, label: tagName };
     });
     setTitle(initialArticle.title);
-    // setDescription(initialArticle.description);
-    // setThumbnailURL(initialArticle.thumbnail);
+    setDescription(initialArticle.description);
+    setThumbnailURL(initialArticle.thumbnail);
     setTagList(initialTagList);
-  };
+  }, [setTitle, setDescription, setThumbnailURL, setTagList]);
 
   useEffect(() => {
     if (editMode === "patch") {
       setInitialContent();
     }
-  }, []);
+  }, [setInitialContent]);
 
   // state들로 구성된 객체 반환
   const createStateMap = () => {
@@ -168,13 +166,13 @@ const EditForm = ({ editMode, initialArticle }) => {
     ) {
       const data = createStateMap();
       // DB에 업로드
-      // const articleId = updateArticle(
-      //   editMode,
-      //   data,
-      //   initialArticle && initialArticle.id
-      // );
+      const articleId = updateArticle(
+        editMode,
+        data,
+        initialArticle && initialArticle.id
+      );
       window.alert("저장되었습니다.");
-      // navigate(`/proejct/${articleId}`);
+      navigate(`/proejct/${articleId}`);
     } else {
       console.log("업로드할 수 없습니다");
       console.log(
@@ -208,7 +206,6 @@ const EditForm = ({ editMode, initialArticle }) => {
       const image = event.target.files[0];
       (async function _uploadImage() {
         const res = await uploadImage(image);
-        console.log(res.url);
         setThumbnailURL(res.url);
       })();
     }
@@ -248,7 +245,7 @@ const EditForm = ({ editMode, initialArticle }) => {
             required
             error={descriptionError.error}
             helperText={descriptionError.message}
-            defaultValue={initialArticle && initialArticle.title}
+            defaultValue={initialArticle && initialArticle.description}
             inputProps={{
               style: {
                 fontSize: 16,

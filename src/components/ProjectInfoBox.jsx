@@ -16,7 +16,7 @@ const ProjectInfoBox = ({ articleId }) => {
   const article = useRecoilValue(selectedArticleSelector(articleId));
   const navigate = useNavigate();
 
-  const isAuthor = user.id === article.user.id;
+  const isAuthor = user.userId === article.user.id + "";
 
   const date = {
     year: article && article.createdAt[0],
@@ -45,9 +45,6 @@ const ProjectInfoBox = ({ articleId }) => {
         </ul>
       </Box>
       <Box className="container-button">
-        <Button className="button" variant="outlined" disabled sx={{ mr: 1 }}>
-          작가에게 연락하기
-        </Button>
         {isAuthor && (
           <ColoredButton
             className="button"

@@ -5,9 +5,9 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import TagArray from "./TagArray";
 
-const ProductCard = ({ thumbnailUrl, alt, title, description, tags }) => (
-  <Card sx={{ maxWidth: 345, borderRadius: "15px" }}>
-    <CardMedia component="img" alt={alt} height="200" image={thumbnailUrl} />
+const ProductCard = ({ thumbnailUrl, title, description, tags }) => (
+  <Card sx={{ maxWidth: 345, borderRadius: "15px", position: "relative" }}>
+    <CardMedia component="img" alt={title} height="200" image={thumbnailUrl} />
     <CardContent>
       <Typography gutterBottom variant="h5" component="div">
         {title}
@@ -21,7 +21,7 @@ const ProductCard = ({ thumbnailUrl, alt, title, description, tags }) => (
 );
 
 ProductCard.defaultProps = {
-  thumbnailUrl: "https://via.placeholder.com/345x200",
+  thumbnail: "https://via.placeholder.com/345x200",
   alt: "비어있는 이미지",
   title: "프로젝트 제목",
   description: "설명",
