@@ -42,8 +42,7 @@ const StyledBox = styled(Box)`
 `;
 
 const ProductCardHoriz = ({
-  image,
-  alt,
+  thumbnailUrl,
   title,
   description,
   tags,
@@ -61,8 +60,8 @@ const ProductCardHoriz = ({
     <StyledCard sx={{ display: "flex", borderRadius: 5 }}>
       <CardMedia
         component="img"
-        image={image}
-        alt={alt}
+        image={thumbnailUrl}
+        alt={title}
         onClick={() => navigate(`/project/${articleId}`)}
       />
       <StyledCardContent>

@@ -27,7 +27,7 @@ const MainContents = ({ article }) => {
     <>
       <BackButton />
       <ThumbnailImage
-        src={article.thumbnailUrl || `https://via.placeholder.com/690x400`}
+        src={article.thumbnail || `https://via.placeholder.com/690x400`}
         alt="post-thumbnail"
       />
       <ProjectInfoBox articleId={article.id} />
