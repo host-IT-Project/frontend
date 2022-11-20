@@ -245,7 +245,7 @@ const EditForm = ({ editMode, initialArticle }) => {
             required
             error={descriptionError.error}
             helperText={descriptionError.message}
-            defaultValue={initialArticle && initialArticle.title}
+            defaultValue={initialArticle && initialArticle.description}
             inputProps={{
               style: {
                 fontSize: 16,
