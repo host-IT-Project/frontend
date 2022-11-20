@@ -5,14 +5,28 @@ import googleLogin from "../assets/img/login/Google__G__Logo 1.png";
 import logo from "../assets/img/logo.png";
 import PageTemplate from "../template/PageTemplate";
 import { Button } from "@mui/material";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { userSelector } from "../atom/userAtom";
 
 const LoginPage = (props) => {
+  const navigate = useNavigate();
+  const { isLogin } = useRecoilValue(userSelector);
   const BACKEND_URL = process.env.REACT_APP_BASE_URL;
   const FRONTEND_PORT =
     process.env.REACT_APP_FRONTEND_PORT === null
       ? ""
       : `:${process.env.REACT_APP_FRONTEND_PORT}`;
   const REDIRECT_URI = `${window.location.protocol}//${window.location.hostname}${FRONTEND_PORT}/oauth/redirect`;
+
+  useEffect(() => {
+    if (isLogin) {
+      navigate(-1, {
+        replace: true,
+      });
+    }
+  }, []);
 
   return (
     <PageTemplate>
