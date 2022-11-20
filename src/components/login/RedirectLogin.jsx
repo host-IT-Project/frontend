@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import useAuth from "../../hooks/useAuth";
-import LoadingSpinner from "../LoadingSpinner";
+import Spinner from "../Spinner";
 
 const RedirectLogin = () => {
   const { handleLogin } = useAuth();
@@ -8,7 +8,7 @@ const RedirectLogin = () => {
     handleLogin();
   }, []);
 
-  return <LoadingSpinner />;
+  return <Spinner />;
 };
 
 export default RedirectLogin;
