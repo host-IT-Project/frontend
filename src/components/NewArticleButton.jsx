@@ -5,13 +5,14 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 const StyledButton = styled(Button)`
-  width: fit-content;
   margin-left: auto;
+  width: fit-content;
   position: fixed;
   right: 10px;
   bottom: 10px;
   left: 10px;
   z-index: 99999;
+  border-radius: 100px;
   font-size: 1.6rem;
   background-color: ${({ theme }) => theme.colors.primary};
 `;
