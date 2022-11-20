@@ -52,9 +52,9 @@ const ProductCardHoriz = ({
 }) => {
   const navigate = useNavigate();
   const date = {
-    year: createdAt.substr(0, 4),
-    month: createdAt.substr(5, 2),
-    day: createdAt.substr(8, 2),
+    year: createdAt && createdAt[0],
+    month: createdAt && createdAt[1],
+    day: createdAt && createdAt[2],
   };
 
   return (
