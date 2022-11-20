@@ -25,7 +25,8 @@ const ContentsWrapper = styled.div`
 
 const PageTemplate = ({ children, contents }) => {
   const location = useLocation();
-  const isEditPage = location.pathname.includes("/edit");
+  const buttonExceptionPath = ["/edit", "/login", "/logout", "/redirect"];
+  const isButtonVaild = !buttonExceptionPath.includes(location.pathname);
 
   return (
     <>
@@ -35,7 +36,7 @@ const PageTemplate = ({ children, contents }) => {
         {contents && <ContentsWrapper>{contents}</ContentsWrapper>}
       </PageTemplateContainer>
       <Footer />
-      {!isEditPage && (
+      {isButtonVaild && (
         <aside className="button-new">
           <NewArticleButton />
         </aside>
