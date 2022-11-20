@@ -1,26 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 import kakaoLogin from "../assets/img/login/message-circle.png";
-import naverLogin from "../assets/img/login/btnG_아이콘사각.png";
 import googleLogin from "../assets/img/login/Google__G__Logo 1.png";
 import logo from "../assets/img/logo.png";
-
 import PageTemplate from "../template/PageTemplate";
 import { Button } from "@mui/material";
 
 const LoginPage = (props) => {
-  const socialType = "google";
-  // const REDIRECT_URI = `http://localhost:3000/oauth/redirect`;
-  // const REDIRECT_URI = `${process.env.REACT_APP_BASE_URL}/oauth/redirect`;
-  // const REDIRECT_URI = `https://www.spadeworker.site/oauth/redirect`;
-
-  const BACKEND_URL =
-    // `https://spadeworker.site`
-    process.env.REACT_APP_BASE_URL;
-  const FRONTEND_PORT = 3000;
-  // process.env.FRONTEND_PORT === null ? '' : `:${process.env.FRONTEND_PORT}`;
-  // const REDIRECT_URI = `${window.location.protocol}//${window.location.hostname}:${FRONTEND_PORT}/oauth/redirect`;
-  const REDIRECT_URI = `http://localhost:3000/redirectKakao`;
+  const BACKEND_URL = process.env.REACT_APP_BASE_URL;
+  const FRONTEND_PORT =
+    process.env.REACT_APP_FRONTEND_PORT === null
+      ? ""
+      : `:${process.env.REACT_APP_FRONTEND_PORT}`;
+  const REDIRECT_URI = `${window.location.protocol}//${window.location.hostname}${FRONTEND_PORT}/oauth/redirect`;
 
   return (
     <PageTemplate>
@@ -29,19 +21,15 @@ const LoginPage = (props) => {
           <img className={"logo"} src={logo} alt="호잇" />
           <LoginButton
             className={"kakaoLogin"}
-            href={
-              // `${process.env.REACT_APP_BASE_URL}/oauth2/authorization/${socialType}?redirect_uri=${REDIRECT_URI}`
-              `${BACKEND_URL}/oauth2/authorization/${socialType}?redirect_uri=${REDIRECT_URI}`
-            }
+            href={`${BACKEND_URL}/oauth2/authorization/kakao?redirect_uri=${REDIRECT_URI}`}
           >
             <img className={"login"} src={kakaoLogin} alt="카카오로그인" />
             <span>카카오톡 계정으로 로그인</span>
           </LoginButton>
-          <LoginButton className={"naverLogin"}>
-            <img className={"login"} src={naverLogin} alt="네이버로그인" />
-            <span>네이버 계정으로 로그인</span>
-          </LoginButton>
-          <LoginButton className={"googleLogin"}>
+          <LoginButton
+            className={"googleLogin"}
+            href={`${BACKEND_URL}/oauth2/authorization/google?redirect_uri=${REDIRECT_URI}`}
+          >
             <img className={"login"} src={googleLogin} alt="구글로그인" />
             <span>구글 계정으로 로그인</span>
           </LoginButton>
