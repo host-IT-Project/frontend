@@ -1,12 +1,12 @@
-import React from 'react';
-import PageTemplate from '../template/PageTemplate';
-import SearchForm from '../components/search/SearchForm';
+import React from "react";
+import PageTemplate from "../template/PageTemplate";
+import SearchForm from "../components/search/SearchForm";
 import BannerCarousel, {
   itemsForArchivePage,
-} from '../components/BannerCarousel';
-import ListWithTabs from '../components/ListWithTabs';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { articleSelector, filteredArticlesAtom } from '../atom/articleAtom.js';
+} from "../components/BannerCarousel";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { articleSelector, filteredArticlesAtom } from "../atom/articleAtom.js";
+import ProductCardList from "../components/ProductCardList";
 
 const ArchivePage = (props) => {
   const articles = useRecoilValue(articleSelector);
@@ -17,7 +17,7 @@ const ArchivePage = (props) => {
     const filteredArticles = articles.filter(({ title }) =>
       title.includes(newInputValue)
     );
-    if (newInputValue && newInputValue.trim() !== '') {
+    if (newInputValue && newInputValue.trim() !== "") {
       setFilteredArticles((oldState) => ({
         ...oldState,
         keyword: newInputValue,
@@ -61,7 +61,7 @@ const ArchivePage = (props) => {
         <>
           <SearchForm
             articles={articles.articles}
-            tagList={['컴퓨터공학과', '태그1', '태그2']}
+            tagList={["컴퓨터공학과", "태그1", "태그2"]}
             onSubmitInput={handleSubmitInput}
             onSubmitTag={handleSubmitTag}
           />
@@ -73,9 +73,9 @@ const ArchivePage = (props) => {
               </h3>
             )}
           {filteredArticles.articles.length !== 0 ? (
-            <ListWithTabs cardData={filteredArticles.articles} />
+            <ProductCardList cardData={filteredArticles.articles} />
           ) : (
-            <ListWithTabs cardData={articles.articles} />
+            <ProductCardList cardData={articles} />
           )}
         </>
       }
