@@ -9,12 +9,14 @@ import PageTemplate from "../template/PageTemplate";
 import { Button } from "@mui/material";
 
 const LoginPage = (props) => {
-  const socialType = "kakao";
+  const socialType = "google";
   // const REDIRECT_URI = `http://localhost:3000/oauth/redirect`;
   // const REDIRECT_URI = `${process.env.REACT_APP_BASE_URL}/oauth/redirect`;
   // const REDIRECT_URI = `https://www.spadeworker.site/oauth/redirect`;
 
-  const BACKEND_URL = `https://spadeworker.site`;
+  const BACKEND_URL =
+    // `https://spadeworker.site`
+    process.env.REACT_APP_BASE_URL;
   const FRONTEND_PORT = 3000;
   // process.env.FRONTEND_PORT === null ? '' : `:${process.env.FRONTEND_PORT}`;
   // const REDIRECT_URI = `${window.location.protocol}//${window.location.hostname}:${FRONTEND_PORT}/oauth/redirect`;
