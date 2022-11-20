@@ -3,8 +3,8 @@ import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import styled from "styled-components";
 
 const StyledContainer = styled.div`
+  margin: 0px auto;
   margin-top: 100px;
-  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
