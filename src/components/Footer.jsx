@@ -10,15 +10,6 @@ const Footer = (props) => (
       <li>
         <a href="#">개인정보처리방침</a>
       </li>
-      <li>
-        <a href="#">이용자 약관</a>
-      </li>
-      <li>
-        <a href="#">담당자 안내</a>
-      </li>
-      <li>
-        <a href="#">시스템 오류 신고</a>
-      </li>
     </ul>
     <ul className="footer-logoList">
       <li>
