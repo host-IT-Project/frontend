@@ -20,7 +20,7 @@ const LoginPage = (props) => {
   const FRONTEND_PORT = 3000;
   // process.env.FRONTEND_PORT === null ? '' : `:${process.env.FRONTEND_PORT}`;
   // const REDIRECT_URI = `${window.location.protocol}//${window.location.hostname}:${FRONTEND_PORT}/oauth/redirect`;
-  const REDIRECT_URI = `http://localhost:3000/redirectKakao`;
+  const REDIRECT_URI = `${window.location.protocol}//${window.location.hostname}:${FRONTEND_PORT}/redirectKakao`;
 
   return (
     <PageTemplate>

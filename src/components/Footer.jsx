@@ -11,12 +11,6 @@ const Footer = (props) => (
         <a href="#">개인정보처리방침</a>
       </li>
       <li>
-        <a href="#">이용자 약관</a>
-      </li>
-      <li>
-        <a href="#">담당자 안내</a>
-      </li>
-      <li>
         <a href="#">시스템 오류 신고</a>
       </li>
     </ul>
@@ -39,13 +33,10 @@ const Footer = (props) => (
       <p>
         <small>제작: 호스트잇</small>
         <small>담당: 제 40대 컴퓨터공학과 학생회 드림</small>
-        <small>문의: 컴퓨터공학과</small>
+        <small>문의: 컴퓨터공학과 학생회</small>
       </p>
       <p>
-        <small>
-          Copyright 2022. Host-it All pictures cannot be copied without
-          permission.
-        </small>
+        <small>Copyright 2022. Host-it all rights reserved. </small>
       </p>
     </div>
   </StyledFooter>
