@@ -136,8 +136,9 @@ const ProductCardList = ({ cardData, horiz = false }) => {
                 },
               }}
               onClick={() => {
-                navigate("/yet");
-                // !horiz && navigate(`/project/${data.id}`);
+                if (!horiz) {
+                  navigate("/yet");
+                }
               }}
             >
               {horiz ? (
