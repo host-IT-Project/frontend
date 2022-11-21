@@ -21,6 +21,8 @@ import {
   checkThumbnailValid,
 } from "./EditFormValidator";
 import { useCallback } from "react";
+import { useRecoilValue } from "recoil";
+import { userSelector } from "../atom/userAtom.js";
 
 // component
 const InputField = ({ title, desc, children }) => (
@@ -106,6 +108,8 @@ const EditForm = ({ editMode, initialArticle }) => {
   const [thumbnailURL, setThumbnailURL] = useState();
   const [tagList, setTagList] = useState([{ key: 0, label: "컴공 전시회" }]);
 
+  const user = useRecoilValue(userSelector);
+
   // 수정모드에서 기존값으로 state set
   const setInitialContent = useCallback(() => {
     const initialTagList = initialArticle.hashtagList.map((tagName, index) => {
@@ -136,6 +140,17 @@ const EditForm = ({ editMode, initialArticle }) => {
 
   // editMode에 따라 API request 요청
   const updateArticle = async (editMode, data, id) => {
+    /**
+     * Admin
+     */
+    if (
+      user.username === "김선화" ||
+      user.username === "양성욱" ||
+      user.username === "Hyun" ||
+      user.username === "희"
+    ) {
+      data = { ...data, articleCategory: "공지" };
+    }
     const response =
       editMode === "post"
         ? await postArticle(data)

@@ -76,6 +76,7 @@ export const postArticle = ({
   content,
   hashtagList,
   thumbnail,
+  articleCategory,
 } = {}) => {
   title && checkType(title, "string");
   description && checkType(description, "string");
@@ -85,7 +86,7 @@ export const postArticle = ({
   return http
     .post(`/api/board/1/article`, {
       title,
-      articleCategory: "질문",
+      articleCategory,
       description,
       content,
       hashtagList,
