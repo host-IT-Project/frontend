@@ -84,8 +84,8 @@ export const postArticle = ({
   thumbnail && checkType(thumbnail, "string");
   return http
     .post(`/api/board/1/article`, {
-      articleCategory: "질문",
       title,
+      articleCategory: "질문",
       description,
       content,
       hashtagList,
