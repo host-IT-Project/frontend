@@ -9,6 +9,7 @@ import LoginPage from "./LoginPage";
 import LogoutPage from "./LogoutPage";
 import RedirectLogin from "../components/login/RedirectLogin";
 import ErrorPage from "./ErrorPage";
+import PolicyPage from "./PolicyPage";
 
 const Routes = () => {
   return (
@@ -22,6 +23,7 @@ const Routes = () => {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/logout" element={<LogoutPage />} />
       <Route path="/error" element={<ErrorPage />} />
+      <Route path="/policy" element={<PolicyPage />} />
       <Route path="/oauth/redirect" element={<RedirectLogin />} />
       <Route path="*" element={<Navigate replace to="/home" />} />
     </ReactRouterRoutes>
