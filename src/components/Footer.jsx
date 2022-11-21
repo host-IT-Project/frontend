@@ -11,7 +11,7 @@ const Footer = (props) => (
         <a href="/policy">개인정보처리방침</a>
       </li>
       <li>
-        <a href="#">시스템 오류 신고</a>
+        <a href="mailto:seonhwakei@gmail.com">시스템 오류 신고</a>
       </li>
     </ul>
     <ul className="footer-logoList">
