@@ -8,7 +8,7 @@ const Footer = (props) => (
   <StyledFooter>
     <ul className="footer-linklist">
       <li>
-        <a href="#">개인정보처리방침</a>
+        <a href="/policy">개인정보처리방침</a>
       </li>
       <li>
         <a href="#">시스템 오류 신고</a>
