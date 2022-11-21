@@ -25,6 +25,17 @@ const Routes = () => {
       <Route path="/error" element={<ErrorPage />} />
       <Route path="/policy" element={<PolicyPage />} />
       <Route path="/oauth/redirect" element={<RedirectLogin />} />
+      <Route
+        path="/yet"
+        element={
+          <ErrorPage
+            message={
+              "등록된 게시물은 11월 24일 오프라인 전시회 이후 열람이 가능합니다"
+            }
+            description={""}
+          />
+        }
+      />
       <Route path="*" element={<Navigate replace to="/home" />} />
     </ReactRouterRoutes>
   );

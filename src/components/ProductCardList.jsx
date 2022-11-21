@@ -121,7 +121,17 @@ const ProductCardList = ({ cardData, horiz = false }) => {
       component="ul"
     >
       {cardData &&
-        cardData.map((data) => {
+        [
+          ...cardData,
+          {
+            title: "이거 되는ㅓ 맞ㅛ...?",
+            description: "이거 한줄 소개 입니다!",
+            thumbnail: "썸네일 이미지 링크",
+            content: "날 찾아줘!!!",
+            articleCategory: "질문",
+            hashtagList: ["findme", "second", "chickenboy", "test", "ddd"],
+          },
+        ].map((data) => {
           const tags = data.hashtagList.map((tag, i) => {
             return { key: i, label: tag, href: "#" };
           });
@@ -136,7 +146,8 @@ const ProductCardList = ({ cardData, horiz = false }) => {
                 },
               }}
               onClick={() => {
-                !horiz && navigate(`/project/${data.id}`);
+                navigate("/yet");
+                // !horiz && navigate(`/project/${data.id}`);
               }}
             >
               {horiz ? (
