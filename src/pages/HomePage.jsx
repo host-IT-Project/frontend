@@ -53,12 +53,6 @@ const HomePage = (props) => {
               <ProductCardList cardData={articles} />
             </ScrollList>
           </div>
-          <div className="ScollList-container">
-            <h1 className={"title"}>참여할 수 있는 또 다른 행사가 있어요👀</h1>
-            <ScrollList>
-              <ProductCardList cardData={articles} />
-            </ScrollList>
-          </div>
         </StyledHomePage>
       }
     >
