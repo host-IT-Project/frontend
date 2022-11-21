@@ -21,7 +21,7 @@ const TextEditor = ({ editorRef, initialContent }) => {
     height: "auto",
     initialEditType: "wysiwyg",
     language: "ko",
-    useCommandShortcut: false, // 키보드 입력 컨트롤 방지
+    useCommandShortcut: true,
     toolbarItems: [
       // 툴바 옵션
       ["bold", "italic", "strike"],
