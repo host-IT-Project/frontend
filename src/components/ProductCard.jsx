@@ -9,7 +9,17 @@ const ProductCard = ({ thumbnailUrl, title, description, tags }) => (
   <Card sx={{ maxWidth: 345, borderRadius: "15px", position: "relative" }}>
     <CardMedia component="img" alt={title} height="200" image={thumbnailUrl} />
     <CardContent>
-      <Typography gutterBottom variant="h5" component="div">
+      <Typography
+        gutterBottom
+        variant="h5"
+        component="div"
+        sx={{
+          display: "block",
+          whiteSpace: "nowrap",
+          overflow: "hidden",
+          textOverflow: "ellipsis",
+        }}
+      >
         {title}
       </Typography>
       <Typography variant="body2" color="text.secondary">
