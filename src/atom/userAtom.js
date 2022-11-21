@@ -17,7 +17,7 @@ const userSelector = selector({
     return get(userAtom);
   },
   set: ({ set }, data) => {
-    if (data) set(userAtom, { ...userAtom, data });
+    if (data) set(userAtom, data);
   },
 });
 
