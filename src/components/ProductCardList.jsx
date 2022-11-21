@@ -120,44 +120,45 @@ const ProductCardList = ({ cardData, horiz = false }) => {
       }}
       component="ul"
     >
-      {cardData.map((data) => {
-        const tags = data.hashtagList.map((tag, i) => {
-          return { key: i, label: tag, href: "#" };
-        });
-        return (
-          <ListItem
-            key={data.id}
-            sx={{
-              width: horiz && "100%",
-              minWidth: !horiz && "345px",
-              "&:hover": {
-                cursor: "pointer",
-              },
-            }}
-            onClick={() => {
-              !horiz && navigate(`/project/${data.id}`);
-            }}
-          >
-            {horiz ? (
-              <ProductCardHoriz
-                thumbnailUrl={data.thumbnail}
-                title={data.title}
-                description={data.description}
-                tags={tags}
-                articleId={data.id}
-                createdAt={data.createdAt}
-              />
-            ) : (
-              <ProductCard
-                thumbnailUrl={data.thumbnail}
-                title={data.title}
-                description={data.description}
-                tags={tags}
-              />
-            )}
-          </ListItem>
-        );
-      })}
+      {cardData &&
+        cardData.map((data) => {
+          const tags = data.hashtagList.map((tag, i) => {
+            return { key: i, label: tag, href: "#" };
+          });
+          return (
+            <ListItem
+              key={data.id}
+              sx={{
+                width: horiz && "100%",
+                minWidth: !horiz && "345px",
+                "&:hover": {
+                  cursor: "pointer",
+                },
+              }}
+              onClick={() => {
+                !horiz && navigate(`/project/${data.id}`);
+              }}
+            >
+              {horiz ? (
+                <ProductCardHoriz
+                  thumbnailUrl={data.thumbnail}
+                  title={data.title}
+                  description={data.description}
+                  tags={tags}
+                  articleId={data.id}
+                  createdAt={data.createdAt}
+                />
+              ) : (
+                <ProductCard
+                  thumbnailUrl={data.thumbnail}
+                  title={data.title}
+                  description={data.description}
+                  tags={tags}
+                />
+              )}
+            </ListItem>
+          );
+        })}
     </Paper>
   );
 };
