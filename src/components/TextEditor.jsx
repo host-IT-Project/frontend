@@ -87,6 +87,8 @@ TextEditor.defaultProps = {
     "",
     "[깃허브](https://github.com/)에 프로젝트 전체 코드를 올려 repository url을 제출해주세요.",
     "앱인벤터, 스크래치 프로젝트의 경우 해당 프로젝트의 url을 제출하시면 됩니다.",
+    "",
+    "> <strong>깃허브가 처음이신가요? > [GitHub에 프로젝트 올리는 법](https://hoit.netlify.app/project/15)</strong>❓",
   ].join("\n"),
 };
 
