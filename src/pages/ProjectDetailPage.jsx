@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { useRecoilValue } from "recoil";
 import { selectedArticleSelector } from "../atom/articleAtom.js";
@@ -20,11 +20,19 @@ const ProjectDetailPage = (props) => {
   const { fetchUserInfo } = useLogin();
   const user = useRecoilValue(userSelector);
   const article = useRecoilValue(selectedArticleSelector(id));
+  const navigate = useNavigate();
 
   useEffect(() => {
     (async () => {
       await fetchUserInfo();
     })();
+
+    /**
+     * 전시회 이후 공개됩니다.
+     */
+    if (article.articleCategory !== "공지") {
+      navigate("/yet", { replace: true });
+    }
   }, []);
 
   return (
