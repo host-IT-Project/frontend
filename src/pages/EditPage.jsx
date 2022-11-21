@@ -5,11 +5,13 @@ import { selectedArticleSelector } from "../atom/articleAtom";
 import { userSelector } from "../atom/userAtom";
 import BackButton from "../components/BackButton";
 import EditForm from "../components/EditForm";
+import useLogin from "../hooks/useLogin";
 
 import PageTemplate from "../template/PageTemplate";
 
 const EditPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const { fetchUserInfo } = useLogin();
 
   const id = searchParams.get("id");
   const editMode = id ? "patch" : "post";
@@ -20,10 +22,14 @@ const EditPage = () => {
 
   useEffect(() => {
     if (!user.isLogin) {
-      window.alert("로그인이 필요합니다.");
-      navigate("/login");
+      (async () => {
+        await fetchUserInfo();
+      })();
+      if (!user.isLogin) {
+        navigate("/login");
+      }
     }
-  });
+  }, []);
 
   return (
     <PageTemplate

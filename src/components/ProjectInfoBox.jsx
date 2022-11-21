@@ -16,7 +16,7 @@ const ProjectInfoBox = ({ articleId }) => {
   const article = useRecoilValue(selectedArticleSelector(articleId));
   const navigate = useNavigate();
 
-  const isAuthor = user.userId === article.user.id + "";
+  const isAuthor = user.data.id + "" === article.user.id + "";
 
   const date = {
     year: article && article.createdAt[0],
@@ -133,6 +133,7 @@ ProjectInfoBox.defaultProps = {
 
 const ColoredButton = styled(Button)`
   background-color: ${({ theme }) => theme.colors.primary};
+  word-break: keep-all;
 `;
 
 export default ProjectInfoBox;

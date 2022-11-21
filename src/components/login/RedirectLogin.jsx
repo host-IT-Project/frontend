@@ -4,6 +4,7 @@ import Spinner from "../Spinner";
 
 const RedirectLogin = () => {
   const { handleLogin } = useAuth();
+
   useEffect(() => {
     handleLogin();
   }, []);

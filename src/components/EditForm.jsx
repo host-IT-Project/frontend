@@ -165,7 +165,6 @@ const EditForm = ({ editMode, initialArticle }) => {
       isThumbnailValid
     ) {
       const data = createStateMap();
-      // DB에 업로드
       const articleId = updateArticle(
         editMode,
         data,
@@ -206,7 +205,9 @@ const EditForm = ({ editMode, initialArticle }) => {
       const image = event.target.files[0];
       (async function _uploadImage() {
         const res = await uploadImage(image);
-        setThumbnailURL(res.url);
+        if (res) {
+          setThumbnailURL(res.url);
+        }
       })();
     }
   };
@@ -276,7 +277,9 @@ const EditForm = ({ editMode, initialArticle }) => {
         </InputField>
         <InputField
           title={"썸네일 이미지"}
-          desc={"프로젝트를 대표하는 이미지를 첨부해주세요."}
+          desc={
+            "프로젝트를 대표하는 이미지를 첨부해주세요. 645x400 비율의 사이즈를 권장합니다. (2MB 이하)"
+          }
         >
           <input
             type={"file"}

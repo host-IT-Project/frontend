@@ -7,20 +7,20 @@ import {
   List,
   ListItem,
   ListItemButton,
-} from '@mui/material';
-import { Box } from '@mui/system';
-import MenuIcon from '@mui/icons-material/Menu';
-import React from 'react';
-import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
-import logo from '../assets/img/logo.png';
-import { useRecoilValue } from 'recoil';
-import { userSelector } from '../atom/userAtom';
+} from "@mui/material";
+import { Box } from "@mui/system";
+import MenuIcon from "@mui/icons-material/Menu";
+import React from "react";
+import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+import logo from "../assets/img/logo.png";
+import { useRecoilValue } from "recoil";
+import { userSelector } from "../atom/userAtom";
 
 const navItems = [
   // { name: '공모전', url: '/contest' },
-  { name: '아카이브', url: '/archive' },
-  { name: '마이페이지', url: '/mypage' },
+  { name: "아카이브", url: "/archive" },
+  { name: "마이페이지", url: "/mypage" },
 ];
 
 const Header = (props) => {
@@ -37,14 +37,14 @@ const Header = (props) => {
     <StyledDrawer
       onClick={handleDrawerToggle}
       sx={{
-        textAlign: 'center',
+        textAlign: "center",
       }}
     >
       <Logo
         onClick={() => {
-          navigate('/home');
+          navigate("/home");
         }}
-        style={{ margin: '2rem auto' }}
+        style={{ margin: "2rem auto" }}
       >
         <img src={logo} alt="호잇" />
       </Logo>
@@ -67,9 +67,9 @@ const Header = (props) => {
           disablePadding
           onClick={() => {
             if (!user.isLogin) {
-              navigate('/login');
+              navigate("/login");
             } else {
-              navigate('/logout');
+              navigate("/logout");
             }
           }}
         >
@@ -98,7 +98,7 @@ const Header = (props) => {
           sx={{
             ml: 1,
             display: {
-              sm: 'none',
+              sm: "none",
             },
           }}
           size="large"
@@ -107,14 +107,14 @@ const Header = (props) => {
         </IconButton>
         <Logo
           onClick={() => {
-            navigate('/home');
+            navigate("/home");
           }}
         >
           <img src={logo} alt="호잇" />
         </Logo>
         <Box
           sx={{
-            display: { xs: 'none', sm: 'block' },
+            display: { xs: "none", sm: "block" },
             flexGrow: 1,
           }}
         >
@@ -132,14 +132,14 @@ const Header = (props) => {
         {!user.isLogin ? (
           <NavButton
             style={{
-              fontSize: '0.8em',
-              fontWeight: 'lighter',
+              fontSize: "0.8em",
+              fontWeight: "lighter",
             }}
             sx={{
-              display: { xs: 'none', sm: 'inline-block' },
+              display: { xs: "none", sm: "inline-block" },
             }}
             onClick={() => {
-              navigate('/login');
+              navigate("/login");
             }}
           >
             로그인
@@ -147,14 +147,14 @@ const Header = (props) => {
         ) : (
           <NavButton
             style={{
-              fontSize: '0.8em',
-              fontWeight: 'lighter',
+              fontSize: "0.8em",
+              fontWeight: "lighter",
             }}
             sx={{
-              display: { xs: 'none', sm: 'inline-block' },
+              display: { xs: "none", sm: "inline-block" },
             }}
             onClick={() => {
-              navigate('/logout');
+              navigate("/logout");
             }}
           >
             로그아웃
@@ -174,9 +174,9 @@ const Header = (props) => {
             keepMounted: true,
           }}
           sx={{
-            display: { xs: 'block', sm: 'none' },
-            '& .MuiDrawer-paper': {
-              boxSizing: 'border-box',
+            display: { xs: "block", sm: "none" },
+            "& .MuiDrawer-paper": {
+              boxSizing: "border-box",
               width: 240,
             },
           }}

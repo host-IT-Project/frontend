@@ -6,9 +6,9 @@ import PageTemplate from "../template/PageTemplate";
 import ProductCardList from "../components/ProductCardList";
 import styled from "styled-components";
 import { useState } from "react";
-import { getArticles } from "../api/article";
 import { Divider } from "@mui/material";
 import Spinner from "../components/Spinner";
+import { getMyArticles } from "../api/user";
 
 const MyPage = (props) => {
   const user = useRecoilValue(userSelector);
@@ -20,9 +20,9 @@ const MyPage = (props) => {
     if (!user.isLogin) {
       navigate("/login");
     }
-    (async function _getArticles() {
-      const { data } = await getArticles({ keyword: user.username });
-      setMyArticles(data);
+    (async function _getMyArticles() {
+      const response = await getMyArticles();
+      setMyArticles(response.data);
     })();
   }, [user]);
 

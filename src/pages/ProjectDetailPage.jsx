@@ -11,10 +11,21 @@ import TextViewer from "../components/TextViewer";
 import { Paper } from "@mui/material";
 import BackButton from "../components/BackButton";
 import Spinner from "../components/Spinner";
+import { useEffect } from "react";
+import useLogin from "../hooks/useLogin.js";
+import { userSelector } from "../atom/userAtom.js";
 
 const ProjectDetailPage = (props) => {
   let { id } = useParams();
+  const { fetchUserInfo } = useLogin();
+  const user = useRecoilValue(userSelector);
   const article = useRecoilValue(selectedArticleSelector(id));
+
+  useEffect(() => {
+    (async () => {
+      await fetchUserInfo();
+    })();
+  }, []);
 
   return (
     <PageTemplate
