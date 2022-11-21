@@ -1,7 +1,7 @@
 import { http } from "./http";
 
 export const getUserInfo = () => {
-  return http.get(`/api/article/user-info`).catch((error) => {
+  return http.get(`/api/user-info`).catch((error) => {
     console.log(error.response.data);
     console.log(error.response.status);
     console.log(error.response.headers);
