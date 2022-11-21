@@ -31,7 +31,7 @@ const MyPage = (props) => {
       contents={
         <>
           {!myArticles && <Spinner />}
-          <StyledHeading>My Porfolio</StyledHeading>
+          <StyledHeading>My Portfolio</StyledHeading>
           <Divider variant="middle" sx={{ mb: 2 }} />
           {myArticles && <Content articles={myArticles} />}
         </>
