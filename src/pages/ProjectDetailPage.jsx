@@ -30,7 +30,7 @@ const ProjectDetailPage = (props) => {
     /**
      * 전시회 이후 공개됩니다.
      */
-    if (article.articleCategory !== "공지") {
+    if (article.articleCategory !== "공지" && article.user.id !== user.id) {
       navigate("/yet", { replace: true });
     }
   }, []);
