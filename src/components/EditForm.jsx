@@ -150,6 +150,8 @@ const EditForm = ({ editMode, initialArticle }) => {
       user.username === "희"
     ) {
       data = { ...data, articleCategory: "공지" };
+    } else {
+      data = { ...data, articleCategory: "질문" };
     }
     const response =
       editMode === "post"
