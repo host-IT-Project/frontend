@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { createSearchParams, useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
@@ -10,13 +10,16 @@ import { Button, Chip } from "@mui/material";
 import { Box } from "@mui/system";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import PersonIcon from "@mui/icons-material/Person";
+import { useEffect } from "react";
 
 const ProjectInfoBox = ({ articleId }) => {
   const user = useRecoilValue(userSelector);
   const article = useRecoilValue(selectedArticleSelector(articleId));
   const navigate = useNavigate();
-
-  const isAuthor = user.data.id + "" === article.user.id + "";
+  const [isAuthor, setIsAuthor] = useState(false);
+  useEffect(() => {
+    setIsAuthor(() => user.id + "" === article.user.id + "");
+  }, []);
 
   const date = {
     year: article && article.createdAt[0],

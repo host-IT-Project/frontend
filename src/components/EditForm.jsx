@@ -52,6 +52,7 @@ const StyledInputField = styled.div`
     font-weight: 300;
     font-family: ${({ theme }) => theme.font.gmarketSans};
     color: ${({ theme }) => theme.colors.darkgray};
+    word-break: keep-all;
   }
 
   .input-file {
@@ -277,13 +278,13 @@ const EditForm = ({ editMode, initialArticle }) => {
         </InputField>
         <InputField
           title={"썸네일 이미지"}
-          desc={
-            "프로젝트를 대표하는 이미지를 첨부해주세요. 645x400 비율의 사이즈를 권장합니다. (2MB 이하)"
-          }
+          desc={`프로젝트를 대표하는 이미지를 첨부해주세요. 645x400 비율의 사이즈를 권장합니다. (2MB 이하)
+            ⚠️이전에 추가한 적이 있다면 다시 업로드 하지 않아도 됩니다⚠️`}
         >
           <input
             type={"file"}
             className={"input-file"}
+            name={"titles"}
             required
             onChange={handleThumbnailInput}
             accept="image/gif, image/jpeg, image/jpg, image/png, image/webp"
