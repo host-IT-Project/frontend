@@ -5,13 +5,9 @@ const userAtom = atom({
   key: `userAtom/${v1()}`,
   default: {
     isLogin: false,
-    userId: "hoit",
-    username: "호잇",
-    email: "hoit@gmail.com",
-    profileImageUrl:
-      "https://i.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U",
-    providerType: "",
-    roleType: "",
+    userId: "",
+    username: "",
+    profileImgUrl: "",
   },
 });
 
@@ -20,18 +16,8 @@ const userSelector = selector({
   get: ({ get }) => {
     return get(userAtom);
   },
-  set: ({ set }, { isLogin }) => {
-    // 추후 api.getUser(token)의 response로 변경될 예정입니다.
-    const tmpUserInfo = {
-      userId: "141",
-      username: "호잇",
-      email: "hoit@gmail.com",
-      profileImageUrl:
-        "https://i.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U",
-      providerType: "",
-      roleType: "",
-    };
-    set(userAtom, { isLogin, ...tmpUserInfo });
+  set: ({ set }, data) => {
+    if (data) set(userAtom, { ...userAtom, data });
   },
 });
 
