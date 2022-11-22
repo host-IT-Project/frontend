@@ -14,6 +14,7 @@ import Spinner from "../components/Spinner";
 import { useEffect } from "react";
 import useLogin from "../hooks/useLogin.js";
 import { userSelector } from "../atom/userAtom.js";
+import { isAdmin } from "../util/admin.js";
 
 const ProjectDetailPage = (props) => {
   let { id } = useParams();
@@ -30,7 +31,11 @@ const ProjectDetailPage = (props) => {
     /**
      * 전시회 이후 공개됩니다.
      */
-    if (article.articleCategory !== "공지" && article.user.id !== user.id) {
+    if (
+      article.articleCategory !== "공지" &&
+      article.user.id !== user.id &&
+      !isAdmin(user.username)
+    ) {
       navigate("/yet", { replace: true });
     }
   }, []);

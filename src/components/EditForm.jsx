@@ -23,6 +23,7 @@ import {
 import { useCallback } from "react";
 import { useRecoilValue } from "recoil";
 import { userSelector } from "../atom/userAtom.js";
+import { isAdmin } from "../util/admin.js";
 
 // component
 const InputField = ({ title, desc, children }) => (
@@ -143,12 +144,7 @@ const EditForm = ({ editMode, initialArticle }) => {
     /**
      * Admin
      */
-    if (
-      user.username === "김선화" ||
-      user.username === "양성욱" ||
-      user.username === "Hyun" ||
-      user.username === "희"
-    ) {
+    if (isAdmin(user.username)) {
       data = { ...data, articleCategory: "공지" };
     } else {
       data = { ...data, articleCategory: "질문" };
