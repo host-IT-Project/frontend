@@ -1,6 +1,6 @@
 import { atom, selector, selectorFamily } from "recoil";
 import { v1 } from "uuid";
-import { getArticle, getArticles } from "../api/article";
+import { getAllArticles, getArticle, getArticles } from "../api/article";
 import { cardDemoData } from "../components/ProductCardList";
 
 export const articleAtom = atom({
@@ -28,9 +28,9 @@ export const filteredArticlesAtom = atom({
 export const articleSelector = selector({
   key: `articleSelector/${v1()}`,
   get: async ({ get }) => {
-    const { data } = await getArticles();
+    const { data } = await getAllArticles();
     if (!data) {
-      return [];
+      return [...cardDemoData];
     } else {
       return data;
     }
