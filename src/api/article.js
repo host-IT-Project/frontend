@@ -2,6 +2,38 @@ import { cardDemoData } from "../components/ProductCardList";
 import { checkType } from "../util/type";
 import { http } from "./http";
 
+export const getAllArticles = async ({
+  page,
+  order,
+  keyword,
+  hashtag,
+} = {}) => {
+  // page && checkType(page, "number");
+  // order && checkType(order, "string");
+  // keyword && checkType(keyword, "string");
+  // hashtag && checkType(hashtag, "object");
+  // return http
+  //   .get(`/api/board/1/articles`, {
+  //     // uri 수정
+  //     page,
+  //     order,
+  //     keyword,
+  //     hashtag,
+  //   })
+  //   .catch((error) => {
+  //     console.log(error.response.data);
+  //     console.log(error.response.status);
+  //     console.log(error.response.headers);
+  //     return cardDemoData;
+  //   });
+  let allArticles = [];
+  for (let i = 0; i <= 3; i++) {
+    const { data } = await getArticles({ page: i });
+    allArticles = [...allArticles, ...data];
+  }
+  return { data: allArticles };
+};
+
 /**
  * @param {number} [page=0]
  * @param {'recent' | 'likes' | 'comment'} [order='recent']
@@ -14,12 +46,15 @@ export const getArticles = ({ page, order, keyword, hashtag } = {}) => {
   keyword && checkType(keyword, "string");
   hashtag && checkType(hashtag, "object");
   return http
-    .get(`/api/board/1/articles`, {
-      page,
-      order,
-      keyword,
-      hashtag,
-    })
+    .get(
+      `/api/board/1/articles${page ? `?page=${page}` : ""}`
+      // {
+      //   page,
+      //   order,
+      //   keyword,
+      //   hashtag,
+      // }
+    )
     .catch((error) => {
       console.log(error.response.data);
       console.log(error.response.status);

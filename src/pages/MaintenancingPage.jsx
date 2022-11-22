@@ -42,9 +42,9 @@ const ErrorPage = ({ message, description }) => (
     contents={
       <AnnounceForm
         message={"긴급 점검 안내"}
-        description={
-          "현재 게시글 불러오기에 오류가 발생하여 긴급 점검 중입니다. 예정 시간: 11월 22일(화) 19:00 ~ 19:30"
-        }
+        description={`불편을 드려 죄송합니다.
+          업데이트 사항을 배포 중입니다! 예정 시간 이내에 빠르게 완료될 예정입니다.
+          예정 시간: 11월 22일(화) 19:00 ~ 19:30`}
       ></AnnounceForm>
     }
   ></PageTemplate>

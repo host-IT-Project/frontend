@@ -4,6 +4,7 @@ import Paper from "@mui/material/Paper";
 import ProductCard from "./ProductCard";
 import ProductCardHoriz from "./ProductCardHoriz";
 import { useNavigate } from "react-router-dom";
+import ssib from "../assets/img/scratch.png";
 
 const ListItem = styled("li")(({ theme }) => ({
   margin: theme.spacing(0.8),
@@ -12,87 +13,14 @@ const ListItem = styled("li")(({ theme }) => ({
 export const cardDemoData = [
   {
     id: 24,
-    title: "게시글1 제목입니다!!",
-    content: "게겍게겍ㄲ",
+    title: "새로고침이 필요합니다 🥲",
+    description: "",
+    content: "",
     likesCount: 100,
     dislikesCount: 0,
     articleCategory: "잡담",
     createdAt: "2022-11-16T10:19:03",
-    user: {
-      id: 1,
-      username: "게시글 작성자",
-      profileImgUrl: "tester photo",
-    },
-    hashtagList: [],
-  },
-  {
-    id: 3,
-    title: "게시글2 제목입니다!!",
-    content: "게겍게겍ㄲ",
-    likesCount: 100,
-    dislikesCount: 0,
-    articleCategory: "잡담",
-    createdAt: "2022-10-14T05:21:13",
-    user: {
-      id: 1,
-      username: "게시글 작성자",
-      profileImgUrl: "tester photo",
-    },
-    hashtagList: [],
-  },
-  {
-    id: 19,
-    title: "게시글3 제목입니다!!",
-    content: "게겍게겍ㄲ",
-    likesCount: 100,
-    dislikesCount: 0,
-    articleCategory: "잡담",
-    createdAt: "2022-11-16T10:17:38",
-    user: {
-      id: 1,
-      username: "게시글 작성자",
-      profileImgUrl: "tester photo",
-    },
-    hashtagList: [],
-  },
-  {
-    id: 14,
-    title: "게시글4 제목입니다!!",
-    content: "게겍게겍ㄲ",
-    likesCount: 100,
-    dislikesCount: 0,
-    articleCategory: "잡담",
-    createdAt: "2022-11-16T09:42:30",
-    user: {
-      id: 1,
-      username: "게시글 작성자",
-      profileImgUrl: "tester photo",
-    },
-    hashtagList: [],
-  },
-  {
-    id: 9,
-    title: "게시글5 제목입니다!!",
-    content: "게겍게겍ㄲ",
-    likesCount: 100,
-    dislikesCount: 0,
-    articleCategory: "잡담",
-    createdAt: "2022-11-04T11:25:27",
-    user: {
-      id: 1,
-      username: "게시글 작성자",
-      profileImgUrl: "tester photo",
-    },
-    hashtagList: [],
-  },
-  {
-    id: 26,
-    title: "게시글 제목입니다6!!",
-    content: "게겍게겍ㄲ",
-    likesCount: 54,
-    dislikesCount: 0,
-    articleCategory: "잡담",
-    createdAt: "2022-11-16T10:19:03",
+    thumbnail: ssib,
     user: {
       id: 1,
       username: "게시글 작성자",
