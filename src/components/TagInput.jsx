@@ -47,7 +47,7 @@ const TagInput = ({ tagList, setTagList }) => {
             fontSize: 16,
             backgroundColor: "#f7f9fc",
           },
-          maxLength: 10,
+          maxLength: 15,
         }}
         sx={{ mb: 2 }}
         onKeyDown={handleTagKeyDown}
