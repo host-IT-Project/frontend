@@ -27,7 +27,6 @@ function App() {
     <ThemeProvider theme={theme.light}>
       <GlobalStyles />
       <div className="App">
-        {/* <MaintenancingPage /> */}
         <Routes />
       </div>
     </ThemeProvider>
