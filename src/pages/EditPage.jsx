@@ -35,9 +35,9 @@ const EditPage = () => {
   };
 
   useEffect(() => {
-    if (!isAdmin(user.username)) {
-      checkTimeLimit();
-    }
+    // if (!isAdmin(user.username)) {
+    //   checkTimeLimit();
+    // }
     if (!user.isLogin) {
       (async () => {
         await fetchUserInfo();
