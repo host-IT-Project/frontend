@@ -15,6 +15,7 @@ import { useEffect } from "react";
 import useLogin from "../hooks/useLogin.js";
 import { userSelector } from "../atom/userAtom.js";
 import { isAdmin } from "../util/admin.js";
+import { isAvailable } from "../util/open.js";
 
 const ProjectDetailPage = (props) => {
   let { id } = useParams();
@@ -34,7 +35,8 @@ const ProjectDetailPage = (props) => {
     if (
       article.articleCategory !== "공지" &&
       article.user.id !== user.id &&
-      !isAdmin(user.username)
+      !isAdmin(user.username) &&
+      !isAvailable()
     ) {
       navigate("/yet", { replace: true });
     }
