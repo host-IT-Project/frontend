@@ -8,6 +8,7 @@ import EditForm from "../components/EditForm";
 import useLogin from "../hooks/useLogin";
 
 import PageTemplate from "../template/PageTemplate";
+import checkTime from "../util/uploadLimit";
 
 const EditPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -20,7 +21,20 @@ const EditPage = () => {
   const user = useRecoilValue(userSelector);
   const navigate = useNavigate();
 
+  const checkTimeLimit = () => {
+    const now = new Date();
+
+    if (!checkTime(now)) {
+      window.alert(
+        "2022년 11월 23일 오전 11시 이후부터 글을 수정하거나 등록할 수 없습니다."
+      );
+      navigate(-1);
+      return;
+    }
+  };
+
   useEffect(() => {
+    checkTimeLimit();
     if (!user.isLogin) {
       (async () => {
         await fetchUserInfo();
