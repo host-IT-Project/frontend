@@ -4,8 +4,9 @@ import { ThemeProvider } from "styled-components";
 import "./App.css";
 import { userSelector } from "./atom/userAtom";
 import Routes from "./pages/Routes";
-import { GlobalStyles } from "./styles/global";
 import theme from "./styles/theme";
+import MaintenancingPage from "./pages/MaintenancingPage";
+import { GlobalStyles } from "./styles/global";
 import { getItemFromLS } from "./util/localstorage";
 
 function App() {
@@ -26,7 +27,8 @@ function App() {
     <ThemeProvider theme={theme.light}>
       <GlobalStyles />
       <div className="App">
-        <Routes />
+        <MaintenancingPage />
+        {/* <Routes /> */}
       </div>
     </ThemeProvider>
   );
