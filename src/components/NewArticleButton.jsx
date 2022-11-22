@@ -4,6 +4,9 @@ import CreateIcon from "@mui/icons-material/Create";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import checkTime from "../util/uploadLimit";
+import { useRecoilValue } from "recoil";
+import { userSelector } from "../atom/userAtom";
+import { isAdmin } from "../util/admin";
 
 const StyledButton = styled(Button)`
   margin-left: auto;
@@ -20,11 +23,12 @@ const StyledButton = styled(Button)`
 `;
 
 const NewArticleButton = (props) => {
+  const user = useRecoilValue(userSelector);
   const navigate = useNavigate();
   const onClick = (e) => {
     const now = new Date();
 
-    if (checkTime(now)) {
+    if (isAdmin(user.username) && checkTime(now)) {
       navigate("/edit");
     } else {
       window.alert(

@@ -8,6 +8,7 @@ import EditForm from "../components/EditForm";
 import useLogin from "../hooks/useLogin";
 
 import PageTemplate from "../template/PageTemplate";
+import { isAdmin } from "../util/admin";
 import checkTime from "../util/uploadLimit";
 
 const EditPage = () => {
@@ -34,7 +35,9 @@ const EditPage = () => {
   };
 
   useEffect(() => {
-    checkTimeLimit();
+    if (!isAdmin(user.username)) {
+      checkTimeLimit();
+    }
     if (!user.isLogin) {
       (async () => {
         await fetchUserInfo();
