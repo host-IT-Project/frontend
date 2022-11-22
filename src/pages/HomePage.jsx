@@ -86,18 +86,25 @@ const StyledHomePage = styled.div`
 `;
 const ScrollList = styled.div`
   width: 100%;
-  overflow-x: scroll;
+  overflow-x: auto;
   .ProductCardList-root {
     flex-wrap: nowrap;
     justify-content: flex-start;
   }
-  /* Hide scrollbar for Chrome, Safari and Opera */
+
   &::-webkit-scrollbar {
-    display: none;
+    height: 15px;
   }
-  /* Hide scrollbar for IE, Edge and Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+
+  &::-webkit-scrollbar-track {
+    background-color: #e4e4e4;
+    border-radius: 100px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 100px;
+    background-color: #b5b5b5;
+  }
 `;
 
 export default HomePage;
