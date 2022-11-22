@@ -52,14 +52,14 @@ const HomePage = (props) => {
           <SearchForm onSubmitInput={handleSubmitInput} />
           <div className="ScollList-container">
             <h1 className={"title"}>
-              컴퓨터 공학과 전시회: 11월 23일까지 제출이에요⏰
+              컴퓨터 공학과 전시회: 11월 23일 오전 11까지 제출이에요 ⏰
             </h1>
             <ScrollList>
               <ProductCardList cardData={normal} />
             </ScrollList>
           </div>
           <div className="ScollList-container">
-            <h1 className={"title"}>작품 제출 가이드를 확인할 수 있어요👇🏻</h1>
+            <h1 className={"title"}>작품 제출 가이드를 확인할 수 있어요 👇🏻</h1>
             <ScrollList>
               <ProductCardList cardData={notice} />
             </ScrollList>

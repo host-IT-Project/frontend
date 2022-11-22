@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { useRecoilValue } from "recoil";
 import { selectedArticleSelector } from "../atom/articleAtom.js";
@@ -14,17 +14,30 @@ import Spinner from "../components/Spinner";
 import { useEffect } from "react";
 import useLogin from "../hooks/useLogin.js";
 import { userSelector } from "../atom/userAtom.js";
+import { isAdmin } from "../util/admin.js";
 
 const ProjectDetailPage = (props) => {
   let { id } = useParams();
   const { fetchUserInfo } = useLogin();
   const user = useRecoilValue(userSelector);
   const article = useRecoilValue(selectedArticleSelector(id));
+  const navigate = useNavigate();
 
   useEffect(() => {
     (async () => {
       await fetchUserInfo();
     })();
+
+    /**
+     * 전시회 이후 공개됩니다.
+     */
+    if (
+      article.articleCategory !== "공지" &&
+      article.user.id !== user.id &&
+      !isAdmin(user.username)
+    ) {
+      navigate("/yet", { replace: true });
+    }
   }, []);
 
   return (

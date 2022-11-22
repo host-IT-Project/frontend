@@ -130,7 +130,7 @@ export const deleteArticle = (articleId) => {
  */
 export const patchArticle = (
   articleId,
-  { title, description, content, hashtagList, thumbnail } = {}
+  { title, description, content, hashtagList, thumbnail, articleCategory } = {}
 ) => {
   // articleId && checkType(articleId, "string");
   title && checkType(title, "string");
@@ -140,7 +140,7 @@ export const patchArticle = (
   thumbnail && checkType(thumbnail, "string");
   return http
     .patch(`/api/article/${articleId}`, {
-      articleCategory: "질문",
+      articleCategory,
       title,
       description,
       content,
