@@ -26,18 +26,13 @@ const NewArticleButton = (props) => {
   const user = useRecoilValue(userSelector);
   const navigate = useNavigate();
 
-  const onClick = (e) => {
-    navigate("/edit");
-
-    // const now = new Date();
-
-    // if (isAdmin(user.username) && checkTime(now)) {
-    //   navigate("/edit");
-    // } else {
-    //   window.alert(
-    //     "2022년 11월 23일 오전 11시 이후부터 글을 수정하거나 등록할 수 없습니다."
-    //   );
-    // }
+    if (isAdmin(user.username) || checkTime(now)) {
+      navigate("/edit");
+    } else {
+      window.alert(
+        "2022년 11월 23일 오전 11시 이후부터 글을 수정하거나 등록할 수 없습니다."
+      );
+    }
   };
 
   return (
