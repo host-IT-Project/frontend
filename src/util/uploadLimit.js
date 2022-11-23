@@ -1,5 +1,5 @@
 const checkTime = (now) => {
-  const limitTime = new Date(2022, 10, 24, 11);
+  const limitTime = new Date(2022, 10, 23, 11);
 
   if (now > limitTime) {
     return false;
