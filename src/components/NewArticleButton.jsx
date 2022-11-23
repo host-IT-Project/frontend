@@ -25,10 +25,11 @@ const StyledButton = styled(Button)`
 const NewArticleButton = (props) => {
   const user = useRecoilValue(userSelector);
   const navigate = useNavigate();
+
   const onClick = (e) => {
     const now = new Date();
 
-    if (isAdmin(user.username) && checkTime(now)) {
+    if (isAdmin(user.username) || checkTime(now)) {
       navigate("/edit");
     } else {
       window.alert(
