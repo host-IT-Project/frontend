@@ -16,7 +16,7 @@ const EditPage = () => {
   const { fetchUserInfo } = useLogin();
 
   const id = searchParams.get("id");
-  const editMode = id ? "patch" : "post";
+  const EDIT_MODE = id ? "patch" : "post";
 
   const article = useRecoilValue(selectedArticleSelector(id));
   const user = useRecoilValue(userSelector);
@@ -27,7 +27,7 @@ const EditPage = () => {
 
     if (!checkTime(now)) {
       window.alert(
-        "2022년 11월 23일 오전 11시 이후부터 글을 수정하거나 등록할 수 없습니다."
+        "2022년 11월 23일 오전 11시 이후부터 글을 등록할 수 없습니다."
       );
       navigate(-1);
       return;
@@ -36,7 +36,7 @@ const EditPage = () => {
 
   useEffect(() => {
     if (!isAdmin(user.username)) {
-      checkTimeLimit();
+      if (EDIT_MODE === "post") checkTimeLimit();
     }
     if (!user.isLogin) {
       (async () => {
@@ -50,24 +50,24 @@ const EditPage = () => {
 
   return (
     <PageTemplate
-      contents={<EditPageContents editMode={editMode} article={article} />}
+      contents={<EditPageContents EDIT_MODE={EDIT_MODE} article={article} />}
     ></PageTemplate>
   );
 };
 
-const EditPageContents = ({ editMode, article }) => {
+const EditPageContents = ({ EDIT_MODE, article }) => {
   const formSetting = {
-    editMode: editMode,
+    EDIT_MODE: EDIT_MODE,
   };
 
-  if (editMode === "patch") {
+  if (EDIT_MODE === "patch") {
     formSetting.article = article;
   }
 
   return (
     <>
       <BackButton />
-      <EditForm editMode={editMode} initialArticle={article} />
+      <EditForm EDIT_MODE={EDIT_MODE} initialArticle={article} />
     </>
   );
 };
