@@ -1,8 +1,7 @@
 import React from "react";
-import { Button } from "@mui/material";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { StyledBackButton } from "./BackButtonStyle";
 
 const BackButton = (props) => {
   const navigate = useNavigate();
@@ -19,16 +18,5 @@ const BackButton = (props) => {
     </StyledBackButton>
   );
 };
-
-const StyledBackButton = styled(Button)`
-  margin-bottom: 1rem;
-  transition: all 0.5s;
-  font-size: 1.4rem;
-  color: ${({ theme }) => theme.colors.darkgray};
-
-  &:hover {
-    transform: scale(1.05);
-  }
-`;
 
 export default BackButton;

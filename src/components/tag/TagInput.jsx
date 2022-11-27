@@ -1,17 +1,6 @@
 import React from "react";
 import { Chip, TextField } from "@mui/material";
-import styled from "styled-components";
-
-const TagListItem = styled.li`
-  margin-right: 10px;
-  margin-bottom: 10px;
-`;
-
-const TagListContainer = styled.ul`
-  display: flex;
-  flex-wrap: wrap;
-  list-style: none;
-`;
+import { StyledTagListContainer, StyledTagListItem } from "./TagInputStyle";
 
 const TagInput = ({ tagList, setTagList }) => {
   // 해시태그 제거
@@ -52,20 +41,20 @@ const TagInput = ({ tagList, setTagList }) => {
         sx={{ mb: 2 }}
         onKeyDown={handleTagKeyDown}
       />
-      <TagListContainer>
+      <StyledTagListContainer>
         {tagList.map((data) => {
           return (
-            <TagListItem key={data.key + 999}>
+            <StyledTagListItem key={data.key + 999}>
               <Chip
                 sx={{ fontSize: 14 }}
                 label={data.label}
                 color={"primary"}
                 onDelete={handleTagRemove(data)}
               />
-            </TagListItem>
+            </StyledTagListItem>
           );
         })}
-      </TagListContainer>
+      </StyledTagListContainer>
     </>
   );
 };

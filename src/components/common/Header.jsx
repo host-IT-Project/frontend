@@ -1,12 +1,9 @@
 import React from "react";
-import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { userSelector } from "../../atom/userAtom";
 
 import {
-  AppBar,
-  Button,
   Divider,
   Drawer,
   IconButton,
@@ -17,6 +14,14 @@ import {
 import { Box } from "@mui/system";
 import MenuIcon from "@mui/icons-material/Menu";
 import logo from "../../assets/img/logo.png";
+
+import {
+  StyledLogo,
+  StyledNavButton,
+  StyledAppBar,
+  StyledDrawer,
+  StyledHeader,
+} from "./HeaderStyle";
 
 const navItems = [
   { name: "아카이브", url: "/archive" },
@@ -40,14 +45,14 @@ const Header = (props) => {
         textAlign: "center",
       }}
     >
-      <Logo
+      <StyledLogo
         onClick={() => {
           navigate("/home");
         }}
         style={{ margin: "2rem auto" }}
       >
         <img src={logo} alt="호잇" />
-      </Logo>
+      </StyledLogo>
       <Divider />
       <List>
         {navItems.map((item) => (
@@ -105,13 +110,13 @@ const Header = (props) => {
         >
           <MenuIcon fontSize="inherit" />
         </IconButton>
-        <Logo
+        <StyledLogo
           onClick={() => {
             navigate("/home");
           }}
         >
           <img src={logo} alt="호잇" />
-        </Logo>
+        </StyledLogo>
         <Box
           sx={{
             display: { xs: "none", sm: "block" },
@@ -119,18 +124,18 @@ const Header = (props) => {
           }}
         >
           {navItems.map((item) => (
-            <NavButton
+            <StyledNavButton
               key={Math.random() + Date.now()}
               onClick={() => {
                 navigate(`${item.url}`);
               }}
             >
               {item.name}
-            </NavButton>
+            </StyledNavButton>
           ))}
         </Box>
         {!user.isLogin ? (
-          <NavButton
+          <StyledNavButton
             style={{
               fontSize: "0.8em",
               fontWeight: "lighter",
@@ -143,9 +148,9 @@ const Header = (props) => {
             }}
           >
             로그인
-          </NavButton>
+          </StyledNavButton>
         ) : (
-          <NavButton
+          <StyledNavButton
             style={{
               fontSize: "0.8em",
               fontWeight: "lighter",
@@ -158,7 +163,7 @@ const Header = (props) => {
             }}
           >
             로그아웃
-          </NavButton>
+          </StyledNavButton>
         )}
       </StyledAppBar>
       <Box component="nav">
@@ -187,56 +192,5 @@ const Header = (props) => {
     </StyledHeader>
   );
 };
-
-const StyledHeader = styled.div`
-  width: 100%;
-  height: 64px;
-  min-height: 80px;
-  background-color: white;
-  color: ${({ theme }) => theme.colors.text};
-  font-size: 1.6em;
-  font-weight: bold;
-`;
-
-const StyledAppBar = styled(AppBar)`
-  background-color: ${({ theme }) => theme.colors.body};
-  color: inherit;
-  box-shadow: 0 2px 4px 0 hsl(0deg 0% 81% / 50%);
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  padding-left: 16px;
-  padding-right: 16px;
-  min-height: inherit;
-`;
-
-const NavButton = styled(Button)`
-  color: inherit;
-  font-size: inherit;
-  font-weight: inherit;
-`;
-
-const Logo = styled.div`
-  margin: 0 2em;
-  width: 7rem;
-  &:hover {
-    cursor: pointer;
-  }
-  img {
-    width: 100%;
-    height: 100%;
-  }
-`;
-
-const StyledDrawer = styled(Box)`
-  .drawer-nav {
-    margin: 1.5rem auto;
-    color: ${({ theme }) => theme.colors.text};
-    font-size: 1.6em;
-    font-weight: bold;
-  }
-`;
 
 export default Header;

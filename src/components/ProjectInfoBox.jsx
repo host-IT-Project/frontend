@@ -1,16 +1,16 @@
 import React, { useState } from "react";
-import styled from "styled-components";
 import { createSearchParams, useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { selectedArticleSelector } from "../atom/articleAtom";
 import { userSelector } from "../atom/userAtom";
 
 //components
-import { Button, Chip } from "@mui/material";
+import { Chip } from "@mui/material";
 import { Box } from "@mui/system";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import PersonIcon from "@mui/icons-material/Person";
 import { useEffect } from "react";
+import { StyledButton, StyledInfoContainer } from "./ProjectInfoBoxStyle";
 
 const ProjectInfoBox = ({ articleId }) => {
   const user = useRecoilValue(userSelector);
@@ -28,7 +28,7 @@ const ProjectInfoBox = ({ articleId }) => {
   };
 
   return (
-    <InfoContainer>
+    <StyledInfoContainer>
       <Box className="container-info">
         <h1 className={"title"}>{article.title}</h1>
         <p className="info-text">
@@ -49,7 +49,7 @@ const ProjectInfoBox = ({ articleId }) => {
       </Box>
       <Box className="container-button">
         {isAuthor && (
-          <ColoredButton
+          <StyledButton
             className="button"
             variant="contained"
             sx={{ boxShadow: 0 }}
@@ -63,58 +63,12 @@ const ProjectInfoBox = ({ articleId }) => {
             }}
           >
             수정하기
-          </ColoredButton>
+          </StyledButton>
         )}
       </Box>
-    </InfoContainer>
+    </StyledInfoContainer>
   );
 };
-
-const InfoContainer = styled.div`
-  margin-top: 2rem;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-
-  color: ${({ theme }) => theme.colors.text};
-  display: flex;
-  justify-content: space-between;
-
-  .title {
-    margin-bottom: 1.6rem;
-    font-weight: bold;
-    font-size: 2.5rem;
-  }
-  .info-text {
-    display: flex;
-    align-items: center;
-    margin-bottom: 1rem;
-    font-size: 1.6rem;
-    color: ${({ theme }) => theme.colors.darkgray};
-  }
-  .info-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    span {
-      font-size: 1.4rem;
-    }
-  }
-  .button {
-    font-size: 1.4rem;
-  }
-
-  @media only screen and (max-width: 550px) {
-    flex-direction: column;
-
-    .container-button {
-      align-self: flex-end;
-    }
-
-    .button:nth-child(2) {
-      display: none;
-    }
-  }
-`;
 
 ProjectInfoBox.defaultProps = {
   article: {
@@ -133,10 +87,5 @@ ProjectInfoBox.defaultProps = {
     hashtagList: ["로딩중..."],
   },
 };
-
-const ColoredButton = styled(Button)`
-  background-color: ${({ theme }) => theme.colors.primary};
-  word-break: keep-all;
-`;
 
 export default ProjectInfoBox;

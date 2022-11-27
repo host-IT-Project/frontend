@@ -1,47 +1,17 @@
 import * as React from "react";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
+
+import { useNavigate } from "react-router-dom";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import TagArray from "../tag/TagArray";
-import styled from "styled-components";
-import MoreMenu from "../common/MoreMenu";
 import { Box } from "@mui/system";
-import { useNavigate } from "react-router-dom";
 import { Divider } from "@mui/material";
-
-const StyledCard = styled(Card)`
-  display: flex;
-
-  img {
-    max-height: 183px;
-    max-width: 250px;
-  }
-
-  @media only screen and (max-width: 600px) {
-    flex-direction: column;
-
-    img {
-      max-height: 300px;
-      max-width: 100%;
-    }
-  }
-`;
-
-const StyledCardContent = styled(CardContent)`
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  flex-grow: 1;
-  flex-shrink: 1;
-`;
-
-const StyledBox = styled(Box)`
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-`;
+import TagArray from "../tag/TagArray";
+import MoreMenu from "../common/MoreMenu";
+import {
+  StyledBox,
+  StyledCard,
+  StyledCardContent,
+} from "./ProductCardHorizStyle";
 
 const ProductCardHoriz = ({
   thumbnailUrl,

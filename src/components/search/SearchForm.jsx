@@ -1,6 +1,5 @@
 import React from "react";
-import styled from "styled-components";
-import TagSearch from "./TagSearch";
+import { SearchFormContainer } from "./SearchFormStyle";
 import TitleSearch from "./TitleSearch";
 
 const SearchForm = ({
@@ -16,13 +15,5 @@ const SearchForm = ({
     </SearchFormContainer>
   );
 };
-
-const SearchFormContainer = styled.div`
-  margin: 30px auto;
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
 
 export default SearchForm;

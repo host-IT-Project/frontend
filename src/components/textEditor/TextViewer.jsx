@@ -9,11 +9,7 @@ import "@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin
 import codeSyntaxHighlight from "@toast-ui/editor-plugin-code-syntax-highlight";
 
 const TextViewer = ({ data }) => {
-  return (
-    <>
-      <Viewer initialValue={data} plugins={[codeSyntaxHighlight]} />
-    </>
-  );
+  return <Viewer initialValue={data} plugins={[codeSyntaxHighlight]} />;
 };
 
 export default TextViewer;

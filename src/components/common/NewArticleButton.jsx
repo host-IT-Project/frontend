@@ -1,26 +1,11 @@
 import React from "react";
-import { Button } from "@mui/material";
-import CreateIcon from "@mui/icons-material/Create";
-import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import checkTime from "../../util/uploadLimit";
+import { isAdmin } from "../../util/admin";
 import { useRecoilValue } from "recoil";
 import { userSelector } from "../../atom/userAtom";
-import { isAdmin } from "../../util/admin";
-
-const StyledButton = styled(Button)`
-  margin-left: auto;
-  width: fit-content;
-  position: fixed;
-  right: 20px;
-  bottom: 20px;
-  left: 10px;
-  z-index: 99999;
-  border-radius: 100px;
-  font-size: 1.6rem;
-  border: 0;
-  background-color: ${({ theme }) => theme.colors.primary};
-`;
+import CreateIcon from "@mui/icons-material/Create";
+import { StyledButton } from "./NewArticleButtonStyle";
 
 const NewArticleButton = (props) => {
   const user = useRecoilValue(userSelector);
