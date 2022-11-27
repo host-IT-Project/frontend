@@ -7,10 +7,10 @@ import { selectedArticleSelector } from "../atom/articleAtom.js";
 // components import
 import PageTemplate from "../template/PageTemplate";
 import ProjectInfoBox from "../components/ProjectInfoBox";
-import TextViewer from "../components/TextViewer";
+import TextViewer from "../components/textEditor/TextViewer";
 import { Paper } from "@mui/material";
-import BackButton from "../components/BackButton";
-import Spinner from "../components/Spinner";
+import BackButton from "../components/common/BackButton";
+import Spinner from "../components/common/Spinner";
 import { useEffect } from "react";
 import useLogin from "../hooks/useLogin.js";
 

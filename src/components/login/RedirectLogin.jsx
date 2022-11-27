@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import useAuth from "../../hooks/useAuth";
-import Spinner from "../Spinner";
+import Spinner from "../common/Spinner";
 
 const RedirectLogin = () => {
   const { handleLogin } = useAuth();

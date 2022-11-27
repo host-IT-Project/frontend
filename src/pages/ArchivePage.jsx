@@ -1,12 +1,13 @@
 import React from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { articleSelector, filteredArticlesAtom } from "../atom/articleAtom.js";
+
 import PageTemplate from "../template/PageTemplate";
 import SearchForm from "../components/search/SearchForm";
 import BannerCarousel, {
   itemsForArchivePage,
 } from "../components/BannerCarousel";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { articleSelector, filteredArticlesAtom } from "../atom/articleAtom.js";
-import ProductCardList from "../components/ProductCardList";
+import ProductCardList from "../components/card/ProductCardList";
 
 const ArchivePage = (props) => {
   const articles = useRecoilValue(articleSelector);

@@ -1,7 +1,7 @@
 import { atom, selector, selectorFamily } from "recoil";
 import { v1 } from "uuid";
-import { getAllArticles, getArticle, getArticles } from "../api/article";
-import { cardDemoData } from "../components/ProductCardList";
+import { getAllArticles, getArticle } from "../api/article";
+import { cardDemoData } from "../components/card/ProductCardList";
 
 export const articleAtom = atom({
   key: `articleAtom/${v1()}`,

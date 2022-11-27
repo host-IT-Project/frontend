@@ -1,14 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { getMyArticles } from "../api/user";
+import styled from "styled-components";
 import { useRecoilValue } from "recoil";
 import { userSelector } from "../atom/userAtom";
-import PageTemplate from "../template/PageTemplate";
-import ProductCardList from "../components/ProductCardList";
-import styled from "styled-components";
-import { useState } from "react";
+
 import { Divider } from "@mui/material";
-import Spinner from "../components/Spinner";
-import { getMyArticles } from "../api/user";
+import PageTemplate from "../template/PageTemplate";
+import ProductCardList from "../components/card/ProductCardList";
+import Spinner from "../components/common/Spinner";
 
 const MyPage = (props) => {
   const user = useRecoilValue(userSelector);

@@ -1,4 +1,4 @@
-import { cardDemoData } from "../components/ProductCardList";
+import { cardDemoData } from "../components/card/ProductCardList";
 import { checkType } from "../util/type";
 import { http } from "./http";
 

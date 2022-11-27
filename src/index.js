@@ -7,7 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 import { StyledEngineProvider } from "@mui/styled-engine";
 import { Suspense } from "react";
 import { RecoilRoot } from "recoil";
-import Spinner from "./components/Spinner";
+import Spinner from "./components/common/Spinner";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

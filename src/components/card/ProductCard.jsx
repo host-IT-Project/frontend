@@ -3,7 +3,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import TagArray from "./TagArray";
+import TagArray from "../tag/TagArray";
 
 const ProductCard = ({ thumbnailUrl, title, description, tags }) => (
   <Card sx={{ maxWidth: 345, borderRadius: "15px", position: "relative" }}>

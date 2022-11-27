@@ -3,8 +3,8 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { selectedArticleSelector } from "../atom/articleAtom";
 import { userSelector } from "../atom/userAtom";
-import BackButton from "../components/BackButton";
-import EditForm from "../components/EditForm";
+import BackButton from "../components/common/BackButton";
+import EditForm from "../components/edit/EditForm";
 import useLogin from "../hooks/useLogin";
 
 import PageTemplate from "../template/PageTemplate";
