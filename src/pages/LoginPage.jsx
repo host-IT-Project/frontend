@@ -14,10 +14,10 @@ const LoginPage = (props) => {
   const navigate = useNavigate();
   const { isLogin } = useRecoilValue(userSelector);
   const BACKEND_URL = process.env.REACT_APP_BASE_URL;
-  const FRONTEND_PORT = "";
-  // process.env.REACT_APP_FRONTEND_PORT === null
-  //   ? ""
-  //   : `:${process.env.REACT_APP_FRONTEND_PORT}`;
+  const FRONTEND_PORT =
+    process.env.REACT_APP_FRONTEND_PORT === undefined
+      ? ""
+      : `:${process.env.REACT_APP_FRONTEND_PORT}`;
   const REDIRECT_URI = `${window.location.protocol}//${window.location.hostname}${FRONTEND_PORT}/oauth/redirect`;
 
   useEffect(() => {

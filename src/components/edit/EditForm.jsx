@@ -2,15 +2,15 @@ import React, { useRef, useState, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
-import TextEditor from "./TextEditor.jsx";
-import TagInput from "./TagInput.jsx";
+import TextEditor from "../textEditor/TextEditor.jsx";
+import TagInput from "../tag/TagInput.jsx";
 import { Button, Paper, TextField } from "@mui/material";
 
 // 이미지 업로드 API
-import uploadImage from "../api/uploadImage.js";
+import uploadImage from "../../api/uploadImage.js";
 
 // article API
-import { patchArticle, postArticle } from "../api/article.js";
+import { patchArticle, postArticle } from "../../api/article.js";
 
 // 유효성검사 함수 import
 import {
@@ -22,8 +22,8 @@ import {
 } from "./EditFormValidator";
 import { useCallback } from "react";
 import { useRecoilValue } from "recoil";
-import { userSelector } from "../atom/userAtom.js";
-import { isAdmin } from "../util/admin.js";
+import { userSelector } from "../../atom/userAtom.js";
+import { isAdmin } from "../../util/admin.js";
 
 // component
 const InputField = ({ title, desc, children }) => (

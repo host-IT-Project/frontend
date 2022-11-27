@@ -7,7 +7,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { IconButton } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { deleteArticle } from "../api/article";
+import { deleteArticle } from "../../api/article";
 
 const StyledMenu = styled((props) => (
   <Menu

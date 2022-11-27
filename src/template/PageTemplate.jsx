@@ -1,9 +1,10 @@
 import React from "react";
-import Header from "../components/Header";
-import styled from "styled-components";
-import Footer from "../components/Footer";
 import { useLocation } from "react-router-dom";
-import NewArticleButton from "../components/NewArticleButton";
+import styled from "styled-components";
+
+import Header from "../components/common/Header";
+import Footer from "../components/common/Footer";
+import NewArticleButton from "../components/common/NewArticleButton";
 
 const PageTemplateContainer = styled.div`
   box-sizing: border-box;

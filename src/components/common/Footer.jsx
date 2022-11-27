@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import logoHostIt from "../assets/img/logo-host-it.png";
-import logoDepartment from "../assets/img/logo-department.png";
-import style from "../styles/style.js";
+import logoHostIt from "../../assets/img/logo-host-it.png";
+import logoDepartment from "../../assets/img/logo-department.png";
+import style from "../../styles/style.js";
 
 const Footer = (props) => (
   <StyledFooter>

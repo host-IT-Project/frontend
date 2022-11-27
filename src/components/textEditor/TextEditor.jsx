@@ -1,5 +1,5 @@
 import React from "react";
-import uploadImage from "../api/uploadImage";
+import uploadImage from "../../api/uploadImage";
 
 // Toast UI Editor Import
 import { Editor } from "@toast-ui/react-editor";

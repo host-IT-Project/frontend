@@ -4,7 +4,7 @@ import Paper from "@mui/material/Paper";
 import ProductCard from "./ProductCard";
 import ProductCardHoriz from "./ProductCardHoriz";
 import { useNavigate } from "react-router-dom";
-import ssib from "../assets/img/scratch.png";
+import ssib from "../../assets/img/scratch.png";
 
 const ListItem = styled("li")(({ theme }) => ({
   margin: theme.spacing(0.8),

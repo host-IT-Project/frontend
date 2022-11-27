@@ -2,9 +2,11 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import styled from "styled-components";
+
 import { articleSelector, filteredArticlesAtom } from "../atom/articleAtom";
+
 import BannerCarousel, { itemsForHomePage } from "../components/BannerCarousel";
-import ProductCardList from "../components/ProductCardList";
+import ProductCardList from "../components/card/ProductCardList";
 import SearchForm from "../components/search/SearchForm";
 import PageTemplate from "../template/PageTemplate";
 

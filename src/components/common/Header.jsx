@@ -1,3 +1,9 @@
+import React from "react";
+import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { userSelector } from "../../atom/userAtom";
+
 import {
   AppBar,
   Button,
@@ -10,15 +16,9 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/system";
 import MenuIcon from "@mui/icons-material/Menu";
-import React from "react";
-import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
-import logo from "../assets/img/logo.png";
-import { useRecoilValue } from "recoil";
-import { userSelector } from "../atom/userAtom";
+import logo from "../../assets/img/logo.png";
 
 const navItems = [
-  // { name: '공모전', url: '/contest' },
   { name: "아카이브", url: "/archive" },
   { name: "마이페이지", url: "/mypage" },
 ];

@@ -1,8 +1,9 @@
-import { Divider, Paper } from "@mui/material";
 import React from "react";
 import styled from "styled-components";
-import TextViewer from "../components/TextViewer";
+
 import PageTemplate from "../template/PageTemplate";
+import { Paper } from "@mui/material";
+import TextViewer from "../components/textEditor/TextViewer";
 
 const StyledHeading = styled.h1`
   margin-bottom: 30px;

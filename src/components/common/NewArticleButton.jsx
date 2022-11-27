@@ -3,10 +3,10 @@ import { Button } from "@mui/material";
 import CreateIcon from "@mui/icons-material/Create";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import checkTime from "../util/uploadLimit";
+import checkTime from "../../util/uploadLimit";
 import { useRecoilValue } from "recoil";
-import { userSelector } from "../atom/userAtom";
-import { isAdmin } from "../util/admin";
+import { userSelector } from "../../atom/userAtom";
+import { isAdmin } from "../../util/admin";
 
 const StyledButton = styled(Button)`
   margin-left: auto;
