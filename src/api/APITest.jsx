@@ -9,6 +9,7 @@ import {
 import { getUserInfo, getMyArticles } from "./user";
 
 console.log("여다희");
+console.log("김종진");
 
 const APITest = (props) => {
   useEffect(() => {
