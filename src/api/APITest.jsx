@@ -8,6 +8,8 @@ import {
 } from "./article";
 import { getUserInfo, getMyArticles } from "./user";
 
+console.log("김준환");
+
 const APITest = (props) => {
   useEffect(() => {
     // user
@@ -15,7 +17,6 @@ const APITest = (props) => {
     //   const info = await getUserInfo();
     //   info && console.log(info);
     // })();
-
     (async function _getMyArticles() {
       const articles = await getMyArticles();
       articles && console.log(articles);
