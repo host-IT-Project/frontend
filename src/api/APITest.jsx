@@ -8,6 +8,8 @@ import {
 } from "./article";
 import { getUserInfo, getMyArticles } from "./user";
 
+console.log("김종진");
+
 const APITest = (props) => {
   useEffect(() => {
     // user
