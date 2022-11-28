@@ -21,6 +21,7 @@ const APITest = (props) => {
       articles && console.log(articles);
     })();
 
+    console.log('집 에 가 자 !');
     // article
     // (async function _getArticles() {
     //   const articles = await getArticles({ page: 2, order: "likes" });
