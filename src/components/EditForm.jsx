@@ -90,7 +90,7 @@ const ButtonArray = styled.div`
   }
 `;
 
-const EditForm = ({ editMode, initialArticle }) => {
+const EditForm = ({ EDIT_MODE, initialArticle }) => {
   // Editor DOM 선택용
   const editorRef = useRef();
   const navigate = useNavigate();
@@ -123,7 +123,8 @@ const EditForm = ({ editMode, initialArticle }) => {
   }, [setTitle, setDescription, setThumbnailURL, setTagList]);
 
   useEffect(() => {
-    if (editMode === "patch") {
+    console.log(EDIT_MODE);
+    if (EDIT_MODE === "patch") {
       setInitialContent();
     }
   }, [setInitialContent]);
@@ -180,7 +181,7 @@ const EditForm = ({ editMode, initialArticle }) => {
     ) {
       const data = createStateMap();
       const articleId = updateArticle(
-        editMode,
+        EDIT_MODE,
         data,
         initialArticle && initialArticle.id
       );
