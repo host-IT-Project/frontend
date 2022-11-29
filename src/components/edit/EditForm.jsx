@@ -140,8 +140,8 @@ const EditForm = ({ EDIT_MODE, initialArticle }) => {
     };
   };
 
-  // editMode에 따라 API request 요청
-  const updateArticle = async (editMode, data, id) => {
+  // EDIT_MODE에 따라 API request 요청
+  const updateArticle = async (EDIT_MODE, data, id) => {
     /**
      * Admin
      */
@@ -151,7 +151,7 @@ const EditForm = ({ EDIT_MODE, initialArticle }) => {
       data = { ...data, articleCategory: "질문" };
     }
     const response =
-      editMode === "post"
+        EDIT_MODE === "post"
         ? await postArticle(data)
         : await patchArticle(id, data);
     return response.data.articleId;
