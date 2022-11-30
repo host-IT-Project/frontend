@@ -52,13 +52,13 @@ const HomePage = (props) => {
       contents={
         <StyledHomePage>
           <SearchForm onSubmitInput={handleSubmitInput} />
-          <div className="ScollList-container">
+          <div className="ScrollList-container">
             <h1 className={"title"}>컴퓨터 공학과 전시회</h1>
             <ScrollList>
               <ProductCardList cardData={normal} />
             </ScrollList>
           </div>
-          <div className="ScollList-container">
+          <div className="ScrollList-container">
             <h1 className={"title"}>작품 제출 가이드를 확인할 수 있어요 👇🏻</h1>
             <ScrollList>
               <ProductCardList cardData={notice} />
