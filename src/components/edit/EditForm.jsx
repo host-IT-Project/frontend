@@ -90,7 +90,22 @@ const ButtonArray = styled.div`
   }
 `;
 
+const StyledButton = styled(Button)`
+  margin-left: auto;
+  width: fit-content;
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  left: 10px;
+  z-index: 99999;
+  border-radius: 100px;
+  font-size: 1.6rem;
+  border: 0;
+  background-color: ${({ theme }) => theme.colors.primary};
+`;
+
 const EditForm = ({ EDIT_MODE, initialArticle }) => {
+
   // Editor DOM 선택용
   const editorRef = useRef();
   const navigate = useNavigate();
@@ -112,22 +127,29 @@ const EditForm = ({ EDIT_MODE, initialArticle }) => {
   const user = useRecoilValue(userSelector);
 
   // 수정모드에서 기존값으로 state set
-  const setInitialContent = useCallback(() => {
-    const initialTagList = initialArticle.hashtagList.map((tagName, index) => {
+  const setInitialContent = useCallback((article) => {
+    console.log(article)
+    const initialTagList = article.hashtagList.map((tagName, index) => {
       return { key: index, label: tagName };
     });
-    setTitle(initialArticle.title);
-    setDescription(initialArticle.description);
-    setThumbnailURL(initialArticle.thumbnail);
+    setTitle(article.title);
+    setDescription(article.description);
+    setThumbnailURL(article.thumbnail);
     setTagList(initialTagList);
   }, [setTitle, setDescription, setThumbnailURL, setTagList]);
 
   useEffect(() => {
     console.log(EDIT_MODE);
     if (EDIT_MODE === "patch") {
-      setInitialContent();
+      setInitialContent(initialArticle);
+
+    } else if(EDIT_MODE === "post") {
+      const article = JSON.parse(localStorage.getItem("article"));
+      setInitialContent(article);
     }
   }, [setInitialContent]);
+
+
 
   // state들로 구성된 객체 반환
   const createStateMap = () => {
@@ -227,6 +249,11 @@ const EditForm = ({ EDIT_MODE, initialArticle }) => {
     }
   };
 
+  //임시저장
+  const onClick = (e) => {
+    localStorage.setItem("article", JSON.stringify(createStateMap()));
+  };
+
   return (
     <Paper sx={{ p: 2, pl: 3, pr: 3 }}>
       <form>
@@ -304,6 +331,12 @@ const EditForm = ({ EDIT_MODE, initialArticle }) => {
             accept="image/gif, image/jpeg, image/jpg, image/png, image/webp"
           />
         </InputField>
+        <StyledButton
+          variant="contained"
+          onClick={onClick}
+        >
+          임시저장
+        </StyledButton>
         <ButtonArray>
           <Button
             variant="text"
