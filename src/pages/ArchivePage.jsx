@@ -47,7 +47,7 @@ const ArchivePage = (props) => {
         <>
           <SearchForm />
           {filteredArticles.length !== 0 ? (
-            <ProductCardList cardData={filteredArticles.articles} />
+            <ProductCardList cardData={filteredArticles} />
           ) : (
             <>
               <h3>

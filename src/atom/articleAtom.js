@@ -17,7 +17,7 @@ export const selectedArticleAtom = atom({
 
 // 검색창에 input 바뀔 때 이 state를 변경함
 export const articlesFilterState = atom({
-  key: "articlesFilterState",
+  key: `articlesFilterState/${v1()}`,
   default: "",
 });
 
@@ -26,9 +26,9 @@ export const filteredArticlesSelector = selector({
   key: `filteredArticlesSelector/${v1()}`,
   get: ({ get }) => {
     const filter = get(articlesFilterState);
-    const articles = get(articlesState);
+    const articles = get(articlesSelector);
 
-    return articles.filter(({ title }) => title.incluedes(filter));
+    return articles.filter(({ title }) => title.includes(filter));
   },
 });
 
