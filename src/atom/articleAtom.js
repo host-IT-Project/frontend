@@ -36,9 +36,10 @@ export const filteredArticlesSelector = selector({
 export const curruntArticleSelector = selectorFamily({
   key: `curruntArticleSelector/${v1()}`,
   get: (id) => async () => {
-    if (id === undefined) return;
+    if (id === undefined) return {};
 
     const { data } = await getArticle(id);
+    if (!data) return {};
     return data.article;
   },
 });
