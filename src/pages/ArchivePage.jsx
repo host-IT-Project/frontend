@@ -1,9 +1,9 @@
 import React from "react";
 import { useRecoilValue } from "recoil";
 import {
-  articleSelector,
+  articlesSelector,
   articlesFilterState,
-  filteredArtcilesSelector,
+  filteredArticlesSelector,
 } from "../atom/articleAtom.js";
 
 import PageTemplate from "../template/PageTemplate";
@@ -14,9 +14,9 @@ import BannerCarousel, {
 import ProductCardList from "../components/card/ProductCardList";
 
 const ArchivePage = (props) => {
-  const articles = useRecoilValue(articleSelector);
+  const articles = useRecoilValue(articlesSelector);
   const filter = useRecoilValue(articlesFilterState);
-  const filteredArticles = useRecoilValue(filteredArtcilesSelector);
+  const filteredArticles = useRecoilValue(filteredArticlesSelector);
 
   // const handleSubmitTag = (newTagList) => {
   //   /**
