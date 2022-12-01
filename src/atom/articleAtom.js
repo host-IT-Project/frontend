@@ -3,11 +3,9 @@ import { v1 } from "uuid";
 import { getAllArticles, getArticle } from "../api/article";
 import { cardDemoData } from "../components/card/ProductCardList";
 
-export const articleAtom = atom({
-  key: `articleAtom/${v1()}`,
-  default: {
-    articles: [],
-  },
+export const articlesState = atom({
+  key: `articlesState/${v1()}`,
+  default: [],
 });
 
 export const selectedArticleAtom = atom({
@@ -17,16 +15,25 @@ export const selectedArticleAtom = atom({
   },
 });
 
-export const filteredArticlesAtom = atom({
-  key: `filteredArticlesAtom/${v1()}`,
-  default: {
-    keyword: null,
-    articles: [],
+// 검색창에 input 바뀔 때 이 state를 변경함
+export const articlesFilterState = atom({
+  key: "articlesFilterState",
+  default: "",
+});
+
+// selector가 filter state를 이용해 필터링된 결과를 반환
+export const filteredArticlesSelector = selector({
+  key: `filteredArticlesSelector/${v1()}`,
+  get: ({ get }) => {
+    const filter = get(articlesFilterState);
+    const articles = get(articlesState);
+
+    return articles.filter(({ title }) => title.incluedes(filter));
   },
 });
 
-export const articleSelector = selector({
-  key: `articleSelector/${v1()}`,
+export const articlesSelector = selector({
+  key: `articlesSelector/${v1()}`,
   get: async ({ get }) => {
     const { data } = await getAllArticles();
     if (!data) {
