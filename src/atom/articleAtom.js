@@ -18,13 +18,11 @@ export const articlesAtom = atom({
   ],
 });
 
-// 검색창에 input 바뀔 때 이 state를 변경함
 export const articlesFilterAtom = atom({
   key: `articlesFilterAtom/${v1()}`,
   default: "",
 });
 
-// selector가 filter state를 이용해 필터링된 결과를 반환
 export const filteredArticlesSelector = selector({
   key: `filteredArticlesSelector/${v1()}`,
   get: ({ get }) => {
