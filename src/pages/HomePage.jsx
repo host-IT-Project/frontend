@@ -2,7 +2,7 @@ import React from "react";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 
-import { articlesState } from "../atom/articleAtom";
+import { articlesAtom } from "../atom/articleAtom";
 
 import BannerCarousel, { itemsForHomePage } from "../components/BannerCarousel";
 import ProductCardList from "../components/card/ProductCardList";
@@ -10,7 +10,7 @@ import SearchForm from "../components/search/SearchForm";
 import PageTemplate from "../template/PageTemplate";
 
 const HomePage = (props) => {
-  const articles = useRecoilValue(articlesState);
+  const articles = useRecoilValue(articlesAtom);
 
   /**
    * 공지는 가이드로 분류합니다.

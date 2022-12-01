@@ -4,11 +4,11 @@ import styled from "styled-components";
 import StyledForm from "./StyledForm";
 import { useSetRecoilState } from "recoil";
 import { useLocation, useNavigate } from "react-router-dom";
-import { articlesFilterState } from "../../atom/articleAtom";
+import { articlesFilterAtom } from "../../atom/articleAtom";
 
 const TitleSearch = (props) => {
   const [input, setInput] = useState();
-  const setFilter = useSetRecoilState(articlesFilterState);
+  const setFilter = useSetRecoilState(articlesFilterAtom);
   const navigate = useNavigate();
 
   const location = useLocation();
