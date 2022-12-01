@@ -6,6 +6,16 @@ import { cardDemoData } from "../components/card/ProductCardList";
 export const articlesState = atom({
   key: `articlesState/${v1()}`,
   default: [],
+  effects: [
+    async ({ setSelf }) => {
+      const articles = await getAllArticles();
+      if (!articles) {
+        setSelf(cardDemoData);
+      } else {
+        setSelf(articles.data);
+      }
+    },
+  ],
 });
 
 export const selectedArticleAtom = atom({
@@ -26,21 +36,9 @@ export const filteredArticlesSelector = selector({
   key: `filteredArticlesSelector/${v1()}`,
   get: ({ get }) => {
     const filter = get(articlesFilterState);
-    const articles = get(articlesSelector);
+    const articles = get(articlesState);
 
     return articles.filter(({ title }) => title.includes(filter));
-  },
-});
-
-export const articlesSelector = selector({
-  key: `articlesSelector/${v1()}`,
-  get: async ({ get }) => {
-    const { data } = await getAllArticles();
-    if (!data) {
-      return [...cardDemoData];
-    } else {
-      return data;
-    }
   },
 });
 
