@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { createSearchParams, useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
-import { selectedArticleSelector } from "../atom/articleAtom";
+import { curruntArticleSelector } from "../atom/articleAtom";
 import { userSelector } from "../atom/userAtom";
 
 //components
@@ -12,9 +12,8 @@ import PersonIcon from "@mui/icons-material/Person";
 import { useEffect } from "react";
 import { StyledButton, StyledInfoContainer } from "./ProjectInfoBoxStyle";
 
-const ProjectInfoBox = ({ articleId }) => {
+const ProjectInfoBox = ({ article }) => {
   const user = useRecoilValue(userSelector);
-  const article = useRecoilValue(selectedArticleSelector(articleId));
   const navigate = useNavigate();
   const [isAuthor, setIsAuthor] = useState(false);
   useEffect(() => {

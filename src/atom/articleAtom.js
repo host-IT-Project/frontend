@@ -35,23 +35,12 @@ export const filteredArticlesSelector = selector({
   },
 });
 
-export const selectedArticleSelector = selectorFamily({
-  key: `selectedArticleSelector/${v1()}`,
-  get:
-    (articleId) =>
-    async ({ get }) => {
-      /**
-       * @TODO
-       * articlesAtom에 존재한다면 api를 호출하지 않습니다.
-       */
-      if (!articleId) {
-        return;
-      }
-      const { data } = await getArticle(articleId.toString());
-      if (!data) {
-        return {};
-      } else {
-        return data.article;
-      }
-    },
+export const curruntArticleSelector = selectorFamily({
+  key: `curruntArticleSelector/${v1()}`,
+  get: (id) => async () => {
+    if (id === undefined) return;
+
+    const { data } = await getArticle(id);
+    return data.article;
+  },
 });
