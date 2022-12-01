@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { createSearchParams, useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
-import { curruntArticleSelector } from "../atom/articleAtom";
 import { userSelector } from "../atom/userAtom";
 
 //components
