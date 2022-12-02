@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
-import { selectedArticleSelector } from "../atom/articleAtom";
+import { curruntArticleSelector } from "../atom/articleAtom";
 import { userSelector } from "../atom/userAtom";
 import BackButton from "../components/common/BackButton";
 import EditForm from "../components/edit/EditForm";
@@ -18,7 +18,7 @@ const EditPage = () => {
   const id = searchParams.get("id");
   const EDIT_MODE = id ? "patch" : "post";
 
-  const article = useRecoilValue(selectedArticleSelector(id));
+  const article = useRecoilValue(curruntArticleSelector(id));
   const user = useRecoilValue(userSelector);
   const navigate = useNavigate();
 
