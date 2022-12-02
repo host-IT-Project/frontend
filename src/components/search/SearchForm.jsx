@@ -2,15 +2,10 @@ import React from "react";
 import { SearchFormContainer } from "./SearchFormStyle";
 import TitleSearch from "./TitleSearch";
 
-const SearchForm = ({
-  articles = [],
-  tagList = [],
-  onSubmitInput,
-  onSubmitTag,
-}) => {
+const SearchForm = (props) => {
   return (
     <SearchFormContainer>
-      <TitleSearch onSubmitInput={onSubmitInput} />
+      <TitleSearch />
       {/* <TagSearch tagList={tagList} onSubmitTag={onSubmitTag} /> */}
     </SearchFormContainer>
   );

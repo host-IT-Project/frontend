@@ -1,18 +1,18 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
+import { useRecoilValue } from "recoil";
 import { useNavigate } from "react-router-dom";
+import { userSelector } from "../../atom/userAtom.js";
 
+// components
 import TextEditor from "../textEditor/TextEditor.jsx";
 import TagInput from "../tag/TagInput.jsx";
 import { Button, Paper, TextField } from "@mui/material";
 
-// 이미지 업로드 API
+// modules
 import uploadImage from "../../api/uploadImage.js";
-
-// article API
+import { isAdmin } from "../../util/admin.js";
 import { patchArticle, postArticle } from "../../api/article.js";
-
-// 유효성검사 함수 import
 import {
   checkTitleValid,
   checkContentValid,
@@ -20,12 +20,7 @@ import {
   checkTagListValid,
   checkThumbnailValid,
 } from "./EditFormValidator";
-import { useCallback } from "react";
-import { useRecoilValue } from "recoil";
-import { userSelector } from "../../atom/userAtom.js";
-import { isAdmin } from "../../util/admin.js";
 
-// component
 const InputField = ({ title, desc, children }) => (
   <StyledInputField>
     <fieldset>
@@ -96,6 +91,8 @@ const EditForm = ({ EDIT_MODE, initialArticle }) => {
   const navigate = useNavigate();
 
   // states
+  const user = useRecoilValue(userSelector);
+
   const [title, setTitle] = useState("");
   const [titleError, setTitleError] = useState({
     error: false,
@@ -108,8 +105,6 @@ const EditForm = ({ EDIT_MODE, initialArticle }) => {
   });
   const [thumbnailURL, setThumbnailURL] = useState();
   const [tagList, setTagList] = useState([{ key: 0, label: "컴공 전시회" }]);
-
-  const user = useRecoilValue(userSelector);
 
   // 수정모드에서 기존값으로 state set
   const setInitialContent = useCallback(() => {
@@ -140,28 +135,7 @@ const EditForm = ({ EDIT_MODE, initialArticle }) => {
     };
   };
 
-  // EDIT_MODE에 따라 API request 요청
-  const updateArticle = async (EDIT_MODE, data, id) => {
-    /**
-     * Admin
-     */
-    if (isAdmin(user.username)) {
-      data = { ...data, articleCategory: "공지" };
-    } else {
-      data = { ...data, articleCategory: "질문" };
-    }
-    const response =
-        EDIT_MODE === "post"
-        ? await postArticle(data)
-        : await patchArticle(id, data);
-    return response.data.articleId;
-  };
-
-  // 등록 버튼 핸들러
-  /**
-   * @Todo Article 데이터구조 수정되면 주석 해제
-   */
-  const handleSubmit = () => {
+  const checkValidation = () => {
     const isTitleValid = checkTitleValid(title, titleError, setTitleError);
     const isDescriptionValid = checkDescriptionValid(
       description,
@@ -179,24 +153,38 @@ const EditForm = ({ EDIT_MODE, initialArticle }) => {
       isTagListValid &&
       isThumbnailValid
     ) {
-      const data = createStateMap();
-      const articleId = updateArticle(
-        EDIT_MODE,
-        data,
-        initialArticle && initialArticle.id
-      );
-      window.alert("저장되었습니다.");
-      navigate(`/proejct/${articleId}`);
+      return true;
     } else {
-      console.log("업로드할 수 없습니다");
-      console.log(
-        isTitleValid,
-        isDescriptionValid,
-        isContentValid,
-        isTagListValid,
-        isThumbnailValid
-      );
+      return false;
     }
+  };
+
+  // EDIT_MODE에 따라 API request 요청
+  const updateArticle = async (EDIT_MODE, data, id) => {
+    if (isAdmin(user.username)) {
+      data = { ...data, articleCategory: "공지" };
+    } else {
+      data = { ...data, articleCategory: "질문" };
+    }
+    const response =
+      EDIT_MODE === "post"
+        ? await postArticle(data)
+        : await patchArticle(id, data);
+    return response.data;
+  };
+
+  const handleSubmit = () => {
+    if (!checkValidation()) return;
+
+    const data = createStateMap();
+    const newArticle = updateArticle(
+      EDIT_MODE,
+      data,
+      initialArticle && initialArticle.id
+    );
+
+    window.alert("저장되었습니다.");
+    navigate(`/proejct/${newArticle.articleId}`);
     return;
   };
 

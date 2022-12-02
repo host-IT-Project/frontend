@@ -2,7 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { useRecoilValue } from "recoil";
-import { selectedArticleSelector } from "../atom/articleAtom.js";
+import { curruntArticleSelector } from "../atom/articleAtom.js";
 
 // components import
 import PageTemplate from "../template/PageTemplate";
@@ -17,7 +17,7 @@ import useLogin from "../hooks/useLogin.js";
 const ProjectDetailPage = (props) => {
   let { id } = useParams();
   const { fetchUserInfo } = useLogin();
-  const article = useRecoilValue(selectedArticleSelector(id));
+  const article = useRecoilValue(curruntArticleSelector(id));
 
   useEffect(() => {
     (async () => {
@@ -42,7 +42,7 @@ const MainContents = ({ article }) => {
         src={article.thumbnail || `https://via.placeholder.com/690x400`}
         alt="post-thumbnail"
       />
-      <ProjectInfoBox articleId={article.id} />
+      <ProjectInfoBox article={article} />
       <Paper elevation={5} sx={{ mt: 3, mb: 8, p: 5, borderRadius: 8 }}>
         <TextViewer data={article.content} />
       </Paper>

@@ -1,6 +1,10 @@
 import React from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { articleSelector, filteredArticlesAtom } from "../atom/articleAtom.js";
+import { useRecoilValue } from "recoil";
+import {
+  articlesAtom,
+  articlesFilterAtom,
+  filteredArticlesSelector,
+} from "../atom/articleAtom.js";
 
 import PageTemplate from "../template/PageTemplate";
 import SearchForm from "../components/search/SearchForm";
@@ -10,73 +14,48 @@ import BannerCarousel, {
 import ProductCardList from "../components/card/ProductCardList";
 
 const ArchivePage = (props) => {
-  const articles = useRecoilValue(articleSelector);
-  const [filteredArticles, setFilteredArticles] =
-    useRecoilState(filteredArticlesAtom);
+  const articles = useRecoilValue(articlesAtom);
+  const filter = useRecoilValue(articlesFilterAtom);
+  const filteredArticles = useRecoilValue(filteredArticlesSelector);
 
-  const handleSubmitInput = (newInputValue) => {
-    const filteredArticles = articles.filter(({ title }) =>
-      title.includes(newInputValue)
-    );
-    if (newInputValue && newInputValue.trim() !== "") {
-      setFilteredArticles((oldState) => ({
-        ...oldState,
-        keyword: newInputValue,
-        articles: filteredArticles,
-      }));
-    } else {
-      setFilteredArticles((oldState) => ({
-        ...oldState,
-        keyword: null,
-        articles: [],
-      }));
-    }
-  };
-
-  const handleSubmitTag = (newTagList) => {
-    /**
-     * @TODO
-     * 태그 검색 구현 필요함
-     */
-    const filteredArticles = articles.filter(({ hashtagList }) => {
-      newTagList.forEach((tag) => {
-        if (!hashtagList.includes(tag)) {
-          return false;
-        }
-      });
-      return true;
-    });
-    if (filteredArticles.length === 0) {
-      setFilteredArticles((oldState) => ({ ...oldState, articles: [] }));
-    } else {
-      setFilteredArticles((oldState) => ({
-        ...oldState,
-        articles: filteredArticles,
-      }));
-    }
-  };
+  // const handleSubmitTag = (newTagList) => {
+  //   /**
+  //    * @TODO
+  //    * 태그 검색 구현 필요함
+  //    */
+  //   const filteredArticles = articles.filter(({ hashtagList }) => {
+  //     newTagList.forEach((tag) => {
+  //       if (!hashtagList.includes(tag)) {
+  //         return false;
+  //       }
+  //     });
+  //     return true;
+  //   });
+  //   if (filteredArticles.length === 0) {
+  //     setFilteredArticles((oldState) => ({ ...oldState, articles: [] }));
+  //   } else {
+  //     setFilteredArticles((oldState) => ({
+  //       ...oldState,
+  //       articles: filteredArticles,
+  //     }));
+  //   }
+  // };
 
   return (
     <PageTemplate
       contents={
         <>
-          <SearchForm
-            articles={articles.articles}
-            tagList={["컴퓨터공학과", "태그1", "태그2"]}
-            onSubmitInput={handleSubmitInput}
-            onSubmitTag={handleSubmitTag}
-          />
-          {filteredArticles.articles.length === 0 &&
-            filteredArticles.keyword !== null && (
-              <h3>
-                '{filteredArticles.keyword}'와(과) 일치하는 검색결과가 없습니다.
-                아래의 게시물들은 어떠신가요?
-              </h3>
-            )}
-          {filteredArticles.articles.length !== 0 ? (
-            <ProductCardList cardData={filteredArticles.articles} />
+          <SearchForm />
+          {filteredArticles.length !== 0 ? (
+            <ProductCardList cardData={filteredArticles} />
           ) : (
-            <ProductCardList cardData={articles} />
+            <>
+              <h3>
+                '{filter}'와(과) 일치하는 검색결과가 없습니다. 아래의 게시물들은
+                어떠신가요?
+              </h3>
+              <ProductCardList cardData={articles} />
+            </>
           )}
         </>
       }
