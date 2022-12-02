@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { useRecoilValue } from "recoil";
@@ -8,11 +8,13 @@ import { curruntArticleSelector } from "../atom/articleAtom.js";
 import PageTemplate from "../template/PageTemplate";
 import ProjectInfoBox from "../components/ProjectInfoBox";
 import TextViewer from "../components/textEditor/TextViewer";
-import { Paper } from "@mui/material";
+import { CircularProgress, Paper } from "@mui/material";
 import BackButton from "../components/common/BackButton";
 import Spinner from "../components/common/Spinner";
 import { useEffect } from "react";
 import useLogin from "../hooks/useLogin.js";
+
+import axios from 'axios';
 
 const ProjectDetailPage = (props) => {
   let { id } = useParams();
@@ -35,11 +37,29 @@ const ProjectDetailPage = (props) => {
 };
 
 const MainContents = ({ article }) => {
+  const [thumbnailImg, setThumbnailImg] = useState();
+
+  useEffect(() => {    
+    (async () => {
+      await axios({
+        method:'GET',
+        url:article.thumbnail,
+        responseType:'blob',}).then((response) => {
+          console.log(response);
+          const url = window.URL.createObjectURL(new Blob([response.data], { type: response.headers['content-type'] } ));
+          console.log("url")
+          console.log(url);
+          setThumbnailImg(url);
+        });  
+    })();
+  }, [])
+
+  
   return (
     <>
       <BackButton />
       <ThumbnailImage
-        src={article.thumbnail || `https://via.placeholder.com/690x400`}
+        src={thumbnailImg}
         alt="post-thumbnail"
       />
       <ProjectInfoBox article={article} />
@@ -51,10 +71,10 @@ const MainContents = ({ article }) => {
 };
 
 const ThumbnailImage = styled.img`
-  max-width: 100%;
-  margin: 0px auto 0px;
-  object-fit: contain;
-  display: block;
+max-width: 100%;
+margin: 0px auto 0px;
+object-fit: contain;
+display: block;
 `;
 
 export default ProjectDetailPage;

@@ -118,7 +118,6 @@ const EditForm = ({ EDIT_MODE, initialArticle }) => {
   }, [setTitle, setDescription, setThumbnailURL, setTagList]);
 
   useEffect(() => {
-    console.log(EDIT_MODE);
     if (EDIT_MODE === "patch") {
       setInitialContent();
     }
